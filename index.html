@@ -135,6 +135,25 @@ header p {
 </div>
 
 <script>
+    function speakAnswer() {
+
+    const text = document.getElementById("answerText").innerText;
+
+    if (!text) {
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(text);
+
+    speech.lang = "ar-EG";
+    speech.rate = 0.9;
+    speech.pitch = 1;
+    speech.volume = 1;
+
+    window.speechSynthesis.speak(speech);
+}
 
 function showAnswer(type) {
 
