@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🌾 دليل مزارع القمح</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Tahoma, sans-serif;
+            background: linear-gradient(135deg, #f4f8f1, #e8f3e5);
+            color: #26351f;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2f6b35, #4f8f3f);
+            color: white;
+            text-align: center;
+            padding: 28px 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 20px 15px 40px;
+        }
+
+        .welcome {
+            text-align: center;
+            margin: 10px 0 25px;
+        }
+
+        .welcome h2 {
+            margin-bottom: 8px;
+            color: #315f31;
+        }
+
+        .welcome p {
+            margin-top: 0;
+            color: #5b6756;
+        }
+
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 22px 12px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .section-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #7eaf69;
+        }
+
+        .section-icon {
+            font-size: 55px;
+            margin-bottom: 8px;
+        }
+
+        .section-card h2 {
+            margin: 5px 0;
+            font-size: 22px;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .back-button {
+            border: none;
+            background: #557d45;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 17px;
+            cursor: pointer;
+            margin-bottom: 18px;
+        }
+
+        .screen-title {
+            background: white;
+            border-radius: 18px;
+            padding: 18px;
+            text-align: center;
+            margin-bottom: 18px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .screen-title h2 {
+            margin: 0;
+            color: #356733;
+        }
+
+        .questions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .question-button {
+            width: 100%;
+            text-align: right;
+            border: none;
+            background: white;
+            padding: 17px 18px;
+            border-radius: 15px;
+            font-size: 18px;
+            color: #26351f;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: 0.2s;
+        }
+
+        .question-button:hover {
+            background: #f1f8ed;
+            transform: translateX(-2px);
+        }
+
+        .answer-box {
+            background: white;
+            margin-top: 20px;
+            padding: 22px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+            border-right: 5px solid #5c9348;
+        }
+
+        .answer-box h3 {
+            margin-top: 0;
+            color: #356733;
+            line-height: 1.6;
+        }
+
+        .answer-text {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #374331;
+        }
+
+        .speak-button {
+            width: 100%;
+            border: none;
+            background: #3f7d32;
+            color: white;
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 19px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .speak-button:hover {
+            background: #326428;
+        }
+
+        .stop-button {
+            width: 100%;
+            border: none;
+            background: #9b4b3d;
+            color: white;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 17px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #6d7868;
+            font-size: 14px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 25px;
+            }
+
+            .sections {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .section-card {
+                padding: 18px 8px;
+            }
+
+            .section-icon {
+                font-size: 45px;
+            }
+
+            .section-card h2 {
+                font-size: 19px;
+            }
+
+            .question-button {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>🌾 دليل مزارع القمح</h1>
+        <p>معًا نحو زراعة أفضل</p>
+    </header>
+
+    <main class="container">
+
+        <!-- الصفحة الرئيسية -->
+        <section id="homeScreen" class="screen active">
+
+            <div class="welcome">
+                <h2>أهلاً بك يا مزارع القمح 🌾</h2>
+                <p>اختر القسم الذي تريد معرفة معلومات عنه</p>
+            </div>
+
+            <div class="sections">
+
+                <div class="section-card" onclick="openSection('الزراعة')">
+                    <div class="section-icon">🌱</div>
+                    <h2>الزراعة</h2>
+                </div>
+
+                <div class="section-card" onclick="openSection('الري')">
+                    <div class="section-icon">💧</div>
+                    <h2>الري</h2>
+                </div>
+
+                <div class="section-card" onclick="openSection('التسميد')">
+                    <div class="section-icon">🧪</div>
+                    <h2>التسميد</h2>
+                </div>
+
+                <div class="section-card" onclick="openSection('الآفات')">
+                    <div class="section-icon">🐛</div>
+                    <h2>الآفات</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- صفحة الأسئلة -->
+        <section id="questionsScreen" class="screen">
+
+            <button class="back-button" onclick="goHome()">
+                ↩️ رجوع
+            </button>
+
+            <div class="screen-title">
+                <h2 id="sectionTitle"></h2>
+            </div>
+
+            <div id="questionsList" class="questions"></div>
+
+            <div id="answerBox" class="answer-box" style="display:none;">
+
+                <h3 id="questionTitle"></h3>
+
+                <div id="answerText" class="answer-text"></div>
+
+                <button class="speak-button" onclick="speakAnswer()">
+                    🔊 اسمع الإجابة
+                </button>
+
+                <button class="stop-button" onclick="stopSpeaking()">
+                    ⏹️ إيقاف الصوت
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <div class="footer">
+            🌾 دليل مزارع القمح — نموذج تجريبي
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const data = {
+
+            "الزراعة": [
+                {
+                    question: "متى يتم زراعة القمح؟",
+                    answer: "يتم تحديد ميعاد زراعة القمح المناسب حسب المنطقة والصنف والظروف الجوية والتوصيات الزراعية المعتمدة."
+                },
+                {
+                    question: "كيف أجهز الأرض قبل زراعة القمح؟",
+                    answer: "يتم تجهيز الأرض جيدًا وتسويتها والتأكد من خلوها من الحشائش وتجهيزها بصورة مناسبة قبل الزراعة."
+                },
+                {
+                    question: "ما أهمية اختيار تقاوي القمح الجيدة؟",
+                    answer: "التقاوي الجيدة تساعد على الحصول على نباتات قوية ومتجانسة، وتساهم في تحسين نمو المحصول والإنتاج."
+                }
+            ],
+
+            "الري": [
+                {
+                    question: "متى يكون أول ري لمحصول القمح؟",
+                    answer: "يتم تحديد موعد الري حسب نوع التربة وميعاد الزراعة والظروف الجوية ومرحلة نمو النبات."
+                },
+                {
+                    question: "لماذا يجب عدم الإسراف في ري القمح؟",
+                    answer: "الإفراط في مياه الري قد يسبب مشكلات في منطقة الجذور ويؤثر على نمو النبات، لذلك يجب تنظيم الري وفق احتياجات المحصول."
+                }
+            ],
+
+            "التسميد": [
+                {
+                    question: "متى تتم إضافة السماد لمحصول القمح؟",
+                    answer: "يتم تحديد مواعيد إضافة الأسمدة وكمياتها وفق نوع التربة ومرحلة نمو المحصول والتوصيات الزراعية المعتمدة."
+                },
+                {
+                    question: "ما أهمية التسميد المتوازن للقمح؟",
+                    answer: "التسميد المتوازن يساعد النبات على النمو بصورة جيدة، ويساهم في تكوين السنابل والحبوب بصورة أفضل."
+                }
+            ],
+
+            "الآفات": [
+                {
+                    question: "كيف أتعرف على وجود إصابة حشرية في القمح؟",
+                    answer: "يجب فحص النباتات بانتظام وملاحظة أي تغيرات غير طبيعية أو وجود حشرات أو أعراض إصابة على النباتات."
+                },
+                {
+                    question: "ماذا أفعل عند ظهور إصابة في الحقل؟",
+                    answer: "يجب أولًا تحديد نوع الإصابة وشدتها، ثم اتباع وسيلة المكافحة المناسبة وفق التوصيات الزراعية المعتمدة."
+                },
+                {
+                    question: "هل يجب استخدام المبيد بمجرد رؤية حشرة؟",
+                    answer: "ليس بالضرورة. يجب أولًا تحديد نوع الآفة وشدة الإصابة والحاجة الفعلية للمكافحة قبل استخدام أي مبيد."
+                }
+            ]
+
+        };
+
+
+        let currentSection = "";
+        let currentAnswer = "";
+
+
+        function openSection(section) {
+
+            currentSection = section;
+
+            document.getElementById("homeScreen").classList.remove("active");
+            document.getElementById("questionsScreen").classList.add("active");
+
+            document.getElementById("sectionTitle").textContent =
+                getSectionIcon(section) + " " + section;
+
+            const list = document.getElementById("questionsList");
+
+            list.innerHTML = "";
+
+            document.getElementById("answerBox").style.display = "none";
+
+            data[section].forEach(function(item, index) {
+
+                const button = document.createElement("button");
+
+                button.className = "question-button";
+
+                button.textContent =
+                    "❓ " + item.question;
+
+                button.onclick = function() {
+                    showAnswer(index);
+                };
+
+                list.appendChild(button);
+
+            });
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        function showAnswer(index) {
+
+            const item = data[currentSection][index];
+
+            currentAnswer = item.answer;
+
+            document.getElementById("questionTitle").textContent =
+                "❓ " + item.question;
+
+            document.getElementById("answerText").textContent =
+                item.answer;
+
+            document.getElementById("answerBox").style.display = "block";
+
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
+        }
+
+
+        function speakAnswer() {
+
+            if (!currentAnswer) {
+                return;
+            }
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("عذرًا، المتصفح لا يدعم تشغيل الصوت.");
+
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+
+            const speech =
+                new SpeechSynthesisUtterance(currentAnswer);
+
+            speech.lang = "ar-EG";
+
+            speech.rate = 0.85;
+
+            speech.pitch = 1;
+
+            speech.volume = 1;
+
+            const voices =
+                window.speechSynthesis.getVoices();
+
+            const arabicVoice =
+                voices.find(function(voice) {
+                    return voice.lang &&
+                           voice.lang.toLowerCase().startsWith("ar");
+                });
+
+            if (arabicVoice) {
+                speech.voice = arabicVoice;
+            }
+
+            window.speechSynthesis.speak(speech);
+        }
+
+
+        function stopSpeaking() {
+
+            if ("speechSynthesis" in window) {
+                window.speechSynthesis.cancel();
+            }
+
+        }
+
+
+        function goHome() {
+
+            stopSpeaking();
+
+            document.getElementById("questionsScreen")
+                .classList.remove("active");
+
+            document.getElementById("homeScreen")
+                .classList.add("active");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function getSectionIcon(section) {
+
+            const icons = {
+                "الزراعة": "🌱",
+                "الري": "💧",
+                "التسميد": "🧪",
+                "الآفات": "🐛"
+            };
+
+            return icons[section] || "🌾";
+        }
+
+
+        // تحميل أصوات الجهاز مبكرًا
+        if ("speechSynthesis" in window) {
+
+            window.speechSynthesis.getVoices();
+
+            window.speechSynthesis.onvoiceschanged =
+                function() {
+                    window.speechSynthesis.getVoices();
+                };
+
+        }
+
+    </script>
+
+</body>
+</html>
