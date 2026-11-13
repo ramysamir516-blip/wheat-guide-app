@@ -540,7 +540,7 @@ function renderAtlas(filter="all"){
  const grid=$("atlasGrid");
  const items=atlasItems.filter(item=>filter==="all"||item.type===filter);
  grid.innerHTML=items.map(item=>
-  '<article class="atlas-card" data-atlas-card="'+item.name+'"><span class="atlas-kind '+(item.type==="disease"?"disease":"")+'">'+(item.type==="disease"?"مرض":item.type==="other"?"آفة أخرى":"حشرة/آفة حشرية")+'</span><h4>'+item.icon+' '+item.name+'</h4>'+(atlasImages[item.name]?'<img class="atlas-photo" src="'+atlasImages[item.name].url+'" alt="'+atlasImages[item.name].alt+'" loading="lazy" data-atlas-image="'+atlasImages[item.name].url+'"><div class="atlas-photo-source">'+اضغط على الصورة للتكبير</div>':'<div class="atlas-photo-note">الصورة التوضيحية لهذا النوع قيد الإضافة</div>')+'<p class="atlas-copy"><strong>علامات الإصابة:</strong> '+item.symptoms+'</p><p class="atlas-copy"><strong>التعامل الإرشادي:</strong> '+item.care+'</p></article>'
+  '<article class="atlas-card" data-atlas-card="'+item.name+'"><span class="atlas-kind '+(item.type==="disease"?"disease":"")+'">'+(item.type==="disease"?"مرض":item.type==="other"?"آفة أخرى":"حشرة/آفة حشرية")+'</span><h4>'+item.icon+' '+item.name+'</h4>'+(atlasImages[item.name]?'<img class="atlas-photo" src="'+atlasImages[item.name].url+'" alt="'+atlasImages[item.name].alt+'" loading="lazy" data-atlas-image="'+atlasImages[item.name].url+'"><div class="atlas-photo-source">اضغط على الصورة للتكبير</div>':'<div class="atlas-photo-note">الصورة التوضيحية لهذا النوع قيد الإضافة</div>')+'<p class="atlas-copy"><strong>علامات الإصابة:</strong> '+item.symptoms+'</p><p class="atlas-copy"><strong>التعامل الإرشادي:</strong> '+item.care+'</p></article>'
  ).join("");
 }
 $("openPestAtlas").addEventListener("click",()=>{
