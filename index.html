@@ -169,6 +169,15 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 .atlas-foot{margin-top:15px;color:#505e53;font-size:15px;line-height:2}
 @media(max-width:649px){.atlas-grid{grid-template-columns:1fr}.atlas-head h3{font-size:21px}.atlas-card h4{font-size:20px}.atlas-copy{font-size:17px}}
 
+
+.atlas-photo{display:block;width:100%;height:190px;object-fit:cover;border-radius:12px;margin:10px 0 12px;background:#eef3ec;cursor:zoom-in;border:1px solid #e1e9df}
+.atlas-photo-note{font-size:13px;color:#6a756c;margin:4px 0 8px}
+.atlas-image-modal{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:18px}
+.atlas-image-modal.open{display:flex}
+.atlas-image-modal img{max-width:96vw;max-height:82vh;object-fit:contain;border-radius:12px;box-shadow:0 8px 32px #0008}
+.atlas-image-close{position:absolute;top:14px;left:14px;border:0;border-radius:50%;width:44px;height:44px;background:#fff;color:#173f2b;font-size:27px;font-weight:bold;cursor:pointer}
+.atlas-photo-source{font-size:12px;color:#66736a;margin-top:5px}
+
 </style>
 </head>
 <body>
@@ -278,6 +287,7 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
    <button class="atlas-filter" type="button" data-atlas-filter="other">الآفات الأخرى</button>
   </div>
   <div id="atlasGrid" class="atlas-grid"></div>
+  <div id="atlasImageModal" class="atlas-image-modal" role="dialog" aria-modal="true" aria-label="عرض صورة الإصابة"><button type="button" class="atlas-image-close" id="atlasImageClose" aria-label="إغلاق">×</button><img id="atlasImageLarge" alt="صورة مكبرة لعلامات الإصابة"></div>
   <div class="atlas-foot">تنبيه: الصور تساعد على التعرّف المبدئي فقط، ولا تُغني عن فحص الحقل. تشابه الأعراض وارد، لذلك لا تبدأ أي معاملة أو استخدام مبيد قبل تأكيد التشخيص والرجوع إلى مهندس الإرشاد الزراعي والتوصيات المسجلة للموسم.</div>
  </div>
 
@@ -512,11 +522,25 @@ const atlasItems=[
  {name:"البياض الدقيقي",type:"disease",icon:"🌾",symptoms:"تظهر بقع أو طبقة بيضاء دقيقية على الأوراق والأغماد، وقد تتسع وتتحد ويتغير لونها مع تقدم الإصابة.",care:"اختيار الصنف المناسب، والالتزام بالتوصيات الزراعية والتسميد المتوازن، ومتابعة الإصابة والرجوع للمهندس عند انتشارها."},
  {name:"فيروس تقزم الشعير الأصفر",type:"disease",icon:"🌾",symptoms:"قد يظهر اصفرار أو احمرار بالأوراق مع تقزم النبات وضعف نموه، وينتقل الفيروس بواسطة حشرات المن.",care:"المتابعة المبكرة لحشرات المن، واستخدام الأصناف الموصى بها، وإزالة النباتات شديدة الإصابة وفق إرشاد المختص، وعدم اعتبار الاصفرار وحده دليلًا قاطعًا."}
 ];
+const atlasImages = {
+ "الصدأ الأصفر":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/yellow_rust_2.jpg",alt:"أعراض الصدأ الأصفر على أوراق القمح",source:"مصدر علمي: جامعة تاميل نادو الزراعية"},
+ "الصدأ البرتقالي":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/brown%20_rust%203.jpg",alt:"أعراض الصدأ البرتقالي على القمح",source:"مصدر علمي: جامعة تاميل نادو الزراعية"},
+ "الصدأ الأسود (صدأ الساق)":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/wheat%20black%20rust%20.JPG",alt:"أعراض الصدأ الأسود على القمح",source:"مصدر علمي: جامعة تاميل نادو الزراعية"},
+ "التفحم السائب":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/Loose_Smut_headcloseup.jpg",alt:"سنبلة قمح مصابة بالتفحم السائب",source:"مصدر علمي: جامعة تاميل نادو الزراعية"},
+ "البياض الدقيقي":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/Powdery_Meldew_leaf_1.jpg",alt:"أعراض البياض الدقيقي على أوراق القمح",source:"مصدر علمي: جامعة تاميل نادو الزراعية"}
+};
+
+const atlasImageModal=$("atlasImageModal");
+function closeAtlasImage(){atlasImageModal.classList.remove("open");$("atlasImageLarge").src="";}
+$("atlasGrid").addEventListener("click",e=>{const pic=e.target.closest("[data-atlas-image]");if(!pic)return;$("atlasImageLarge").src=pic.dataset.atlasImage;$("atlasImageLarge").alt=pic.alt;atlasImageModal.classList.add("open");});
+$("atlasImageClose").addEventListener("click",closeAtlasImage);
+atlasImageModal.addEventListener("click",e=>{if(e.target===atlasImageModal)closeAtlasImage();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&atlasImageModal.classList.contains("open"))closeAtlasImage();});
 function renderAtlas(filter="all"){
  const grid=$("atlasGrid");
  const items=atlasItems.filter(item=>filter==="all"||item.type===filter);
  grid.innerHTML=items.map(item=>
-  '<article class="atlas-card" data-atlas-card="'+item.name+'"><span class="atlas-kind '+(item.type==="disease"?"disease":"")+'">'+(item.type==="disease"?"مرض":item.type==="other"?"آفة أخرى":"حشرة/آفة حشرية")+'</span><h4>'+item.icon+' '+item.name+'</h4><p class="atlas-copy"><strong>علامات الإصابة:</strong> '+item.symptoms+'</p><p class="atlas-copy"><strong>التعامل الإرشادي:</strong> '+item.care+'</p></article>'
+  '<article class="atlas-card" data-atlas-card="'+item.name+'"><span class="atlas-kind '+(item.type==="disease"?"disease":"")+'">'+(item.type==="disease"?"مرض":item.type==="other"?"آفة أخرى":"حشرة/آفة حشرية")+'</span><h4>'+item.icon+' '+item.name+'</h4>'+(atlasImages[item.name]?'<img class="atlas-photo" src="'+atlasImages[item.name].url+'" alt="'+atlasImages[item.name].alt+'" loading="lazy" data-atlas-image="'+atlasImages[item.name].url+'"><div class="atlas-photo-source">'+atlasImages[item.name].source+' · اضغط على الصورة للتكبير</div>':'<div class="atlas-photo-note">الصورة التوضيحية لهذا النوع قيد الإضافة</div>')+'<p class="atlas-copy"><strong>علامات الإصابة:</strong> '+item.symptoms+'</p><p class="atlas-copy"><strong>التعامل الإرشادي:</strong> '+item.care+'</p></article>'
  ).join("");
 }
 $("openPestAtlas").addEventListener("click",()=>{
