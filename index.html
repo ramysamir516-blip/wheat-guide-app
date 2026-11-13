@@ -309,5 +309,15 @@ $("searchHome").addEventListener("input",e=>{
 });
 if("speechSynthesis" in window)window.speechSynthesis.getVoices();
 </script>
+
+<script>
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(error => {
+      console.warn("تعذر تفعيل وضع عدم الاتصال:", error);
+    });
+  });
+}
+</script>
 </body>
 </html>
