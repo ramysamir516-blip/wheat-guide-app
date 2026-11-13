@@ -46,6 +46,24 @@ input[type=search]{width:100%;border:1px solid #d4e2d7;border-radius:12px;paddin
 footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20px 8px 6px}
 .hidden{display:none!important}
 @media(min-width:650px){.section-grid{grid-template-columns:repeat(3,minmax(0,1fr))}main{padding-top:24px}.qbtn{font-size:17px}}
+
+/* ألوان مميزة للأيقونات والأسئلة والإجابات */
+.section-card .ico{width:62px;height:62px;margin:0 auto 10px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 4px 10px #18351c12}
+.section-card:nth-child(1) .ico{background:#e2f6e8}
+.section-card:nth-child(2) .ico{background:#fff2cc}
+.section-card:nth-child(3) .ico{background:#e1f2ff}
+.section-card:nth-child(4) .ico{background:#f1e8ff}
+.section-card:nth-child(5) .ico{background:#e5f5dc}
+.section-card:nth-child(6) .ico{background:#ffe8e5}
+.section-card:nth-child(7) .ico{background:#fff0d9}
+.section-card{transition:transform .18s,border-color .18s,box-shadow .18s}
+.section-card:hover{transform:translateY(-2px);border-color:#9bc9a5;box-shadow:0 7px 16px #18351c18}
+.qbtn{background:#edf5ff;border-color:#c9ddf6;color:#245a91;font-weight:bold}
+.qbtn:hover,.qbtn:focus{background:#e3f0ff;border-color:#78a9df}
+.answer{background:#f0f8f2;border-right-color:#26945c}
+.answer h3{color:#8a5416}
+.answer p{color:#245c43}
+
 </style>
 </head>
 <body>
@@ -229,7 +247,7 @@ function searchItems(items,query){
 }
 function showAnswer(item){
  activeItem=item;
- $("answerTitle").textContent="❓ "+item.q;
+ $("answerTitle").textContent="💡 "+item.q;
  $("answerText").textContent=item.a;
  $("answerBox").classList.remove("hidden");
  $("voiceStatus").textContent="";
@@ -241,7 +259,7 @@ function renderQuestions(items,target){
  if(!items.length){target.innerHTML='<div class="empty">مش لاقي سؤال مطابق. جرّب كلمة تانية أو اختار قسم من الأقسام.</div>';return;}
  items.forEach(item=>{
   const b=document.createElement("button");b.className="qbtn";b.type="button";
-  b.textContent="❓ "+item.q;
+  b.innerHTML='<span class="qmark" aria-hidden="true">❓</span> <span></span>';b.lastElementChild.textContent=item.q;
   b.addEventListener("click",()=>showAnswer(item));
   target.appendChild(b);
  });
