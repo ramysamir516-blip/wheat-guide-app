@@ -1,542 +1,207 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>🌾 دليل مزارع القمح</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Tahoma, sans-serif;
-            background: linear-gradient(135deg, #f4f8f1, #e8f3e5);
-            color: #26351f;
-            min-height: 100vh;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #2f6b35, #4f8f3f);
-            color: white;
-            text-align: center;
-            padding: 28px 15px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-        }
-
-        .header h1 {
-            margin: 0 0 8px;
-            font-size: 30px;
-        }
-
-        .header p {
-            margin: 0;
-            font-size: 17px;
-        }
-
-        .container {
-            max-width: 850px;
-            margin: auto;
-            padding: 20px 15px 40px;
-        }
-
-        .welcome {
-            text-align: center;
-            margin: 10px 0 25px;
-        }
-
-        .welcome h2 {
-            margin-bottom: 8px;
-            color: #315f31;
-        }
-
-        .welcome p {
-            margin-top: 0;
-            color: #5b6756;
-        }
-
-        .sections {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .section-card {
-            background: white;
-            border-radius: 20px;
-            padding: 22px 12px;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.10);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 2px solid transparent;
-        }
-
-        .section-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            border-color: #7eaf69;
-        }
-
-        .section-icon {
-            font-size: 55px;
-            margin-bottom: 8px;
-        }
-
-        .section-card h2 {
-            margin: 5px 0;
-            font-size: 22px;
-        }
-
-        .screen {
-            display: none;
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        .back-button {
-            border: none;
-            background: #557d45;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-size: 17px;
-            cursor: pointer;
-            margin-bottom: 18px;
-        }
-
-        .screen-title {
-            background: white;
-            border-radius: 18px;
-            padding: 18px;
-            text-align: center;
-            margin-bottom: 18px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
-
-        .screen-title h2 {
-            margin: 0;
-            color: #356733;
-        }
-
-        .questions {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .question-button {
-            width: 100%;
-            text-align: right;
-            border: none;
-            background: white;
-            padding: 17px 18px;
-            border-radius: 15px;
-            font-size: 18px;
-            color: #26351f;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: 0.2s;
-        }
-
-        .question-button:hover {
-            background: #f1f8ed;
-            transform: translateX(-2px);
-        }
-
-        .answer-box {
-            background: white;
-            margin-top: 20px;
-            padding: 22px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.10);
-            border-right: 5px solid #5c9348;
-        }
-
-        .answer-box h3 {
-            margin-top: 0;
-            color: #356733;
-            line-height: 1.6;
-        }
-
-        .answer-text {
-            font-size: 18px;
-            line-height: 1.9;
-            color: #374331;
-        }
-
-        .speak-button {
-            width: 100%;
-            border: none;
-            background: #3f7d32;
-            color: white;
-            padding: 15px;
-            border-radius: 14px;
-            font-size: 19px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .speak-button:hover {
-            background: #326428;
-        }
-
-        .stop-button {
-            width: 100%;
-            border: none;
-            background: #9b4b3d;
-            color: white;
-            padding: 12px;
-            border-radius: 14px;
-            font-size: 17px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .footer {
-            text-align: center;
-            color: #6d7868;
-            font-size: 14px;
-            margin-top: 35px;
-        }
-
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 25px;
-            }
-
-            .sections {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-
-            .section-card {
-                padding: 18px 8px;
-            }
-
-            .section-icon {
-                font-size: 45px;
-            }
-
-            .section-card h2 {
-                font-size: 19px;
-            }
-
-            .question-button {
-                font-size: 17px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#176b45">
+<title>قمح إرشاد المنيا | دليل مزارع القمح</title>
+<style>
+:root{--green:#176b45;--green2:#2d8158;--light:#eef7f0;--ink:#24372d;--muted:#66766c;--gold:#e9b949}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(145deg,#f3f8f2,#e7f1e8);color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+header{background:linear-gradient(125deg,#125638,#278052);color:#fff;text-align:center;padding:26px 16px 24px;box-shadow:0 4px 16px #1238}
+header .wheat{font-size:38px}
+header h1{font-size:clamp(24px,5vw,32px);margin:5px 0 8px}
+header p{margin:0;font-size:16px}
+main{max-width:940px;margin:auto;padding:18px 14px 36px}
+.intro{text-align:center;padding:12px 8px 18px}
+.intro h2{margin:5px 0 8px;color:#205f3e;font-size:23px}
+.intro p{margin:0;color:var(--muted);line-height:1.8}
+.search-wrap{background:#fff;border-radius:17px;padding:12px;box-shadow:0 4px 14px #18351c12;margin:0 0 18px}
+.search-wrap label{display:block;font-weight:bold;margin:2px 4px 8px}
+input[type=search]{width:100%;border:1px solid #d4e2d7;border-radius:12px;padding:14px;font-size:17px;font-family:inherit;outline-color:var(--green)}
+.hint{font-size:13px;color:var(--muted);margin:8px 4px 0}
+.section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.section-card{border:1px solid #e2ebe3;background:white;border-radius:17px;padding:18px 10px;min-height:118px;text-align:center;cursor:pointer;box-shadow:0 4px 12px #18351c10;color:var(--ink);font-family:inherit}
+.section-card:active{transform:scale(.985)}
+.section-card .ico{font-size:35px;display:block;margin-bottom:8px}
+.section-card strong{font-size:18px}
+.section-card small{display:block;color:var(--muted);margin-top:5px}
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.back{border:0;background:#e0eee3;color:#205f3e;border-radius:11px;padding:11px 15px;font: bold 15px Tahoma;cursor:pointer}
+.current-title{font-size:21px;color:#205f3e;font-weight:bold;flex:1}
+.questions{display:grid;gap:10px}
+.qbtn{width:100%;border:1px solid #e3ebe4;background:#fff;color:#293a30;border-radius:14px;padding:15px;text-align:right;font:16px/1.7 Tahoma;cursor:pointer;box-shadow:0 3px 10px #18351c0c}
+.qbtn:hover,.qbtn:focus{border-color:#7fb18c;background:#fafffa}
+.answer{margin-top:16px;background:#fff;border-radius:17px;padding:18px;border-right:5px solid var(--green);box-shadow:0 4px 14px #18351c12}
+.answer h3{margin:0 0 12px;color:#205f3e;font-size:19px;line-height:1.7}
+.answer p{font-size:17px;line-height:2;margin:0;white-space:pre-line}
+.actions{display:flex;gap:9px;margin-top:16px;flex-wrap:wrap}
+.actions button{border:0;border-radius:11px;padding:12px 15px;font:bold 15px Tahoma;cursor:pointer}
+.listen{background:var(--green);color:white;flex:1}
+.stop{background:#f4e8e5;color:#8b3d30}
+.status{font-size:13px;color:var(--muted);margin-top:8px;min-height:18px}
+.empty{background:#fff;padding:18px;border-radius:14px;text-align:center;color:var(--muted);line-height:1.8}
+.note{margin-top:24px;background:#fff8e7;border:1px solid #f0dfb4;border-radius:14px;padding:14px;font-size:14px;line-height:1.8;color:#5d512e}
+footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20px 8px 6px}
+.hidden{display:none!important}
+@media(min-width:650px){.section-grid{grid-template-columns:repeat(3,minmax(0,1fr))}main{padding-top:24px}.qbtn{font-size:17px}}
+</style>
 </head>
-
 <body>
-
-    <header class="header">
-        <h1>🌾 دليل مزارع القمح</h1>
-        <p>معًا نحو زراعة أفضل</p>
-    </header>
-
-    <main class="container">
-
-        <!-- الصفحة الرئيسية -->
-        <section id="homeScreen" class="screen active">
-
-            <div class="welcome">
-                <h2>أهلاً بك يا مزارع القمح 🌾</h2>
-                <p>اختر القسم الذي تريد معرفة معلومات عنه</p>
-            </div>
-
-            <div class="sections">
-
-                <div class="section-card" onclick="openSection('الزراعة')">
-                    <div class="section-icon">🌱</div>
-                    <h2>الزراعة</h2>
-                </div>
-
-                <div class="section-card" onclick="openSection('الري')">
-                    <div class="section-icon">💧</div>
-                    <h2>الري</h2>
-                </div>
-
-                <div class="section-card" onclick="openSection('التسميد')">
-                    <div class="section-icon">🧪</div>
-                    <h2>التسميد</h2>
-                </div>
-
-                <div class="section-card" onclick="openSection('الآفات')">
-                    <div class="section-icon">🐛</div>
-                    <h2>الآفات</h2>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- صفحة الأسئلة -->
-        <section id="questionsScreen" class="screen">
-
-            <button class="back-button" onclick="goHome()">
-                ↩️ رجوع
-            </button>
-
-            <div class="screen-title">
-                <h2 id="sectionTitle"></h2>
-            </div>
-
-            <div id="questionsList" class="questions"></div>
-
-            <div id="answerBox" class="answer-box" style="display:none;">
-
-                <h3 id="questionTitle"></h3>
-
-                <div id="answerText" class="answer-text"></div>
-
-                <button class="speak-button" onclick="speakAnswer()">
-                    🔊 اسمع الإجابة
-                </button>
-
-                <button class="stop-button" onclick="stopSpeaking()">
-                    ⏹️ إيقاف الصوت
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <div class="footer">
-            🌾 دليل مزارع القمح — نموذج تجريبي
-        </div>
-
-    </main>
-
-
-    <script>
-
-        const data = {
-
-            "الزراعة": [
-                {
-                    question: "متى يتم زراعة القمح؟",
-                    answer: "يتم تحديد ميعاد زراعة القمح المناسب حسب المنطقة والصنف والظروف الجوية والتوصيات الزراعية المعتمدة."
-                },
-                {
-                    question: "كيف أجهز الأرض قبل زراعة القمح؟",
-                    answer: "يتم تجهيز الأرض جيدًا وتسويتها والتأكد من خلوها من الحشائش وتجهيزها بصورة مناسبة قبل الزراعة."
-                },
-                {
-                    question: "ما أهمية اختيار تقاوي القمح الجيدة؟",
-                    answer: "التقاوي الجيدة تساعد على الحصول على نباتات قوية ومتجانسة، وتساهم في تحسين نمو المحصول والإنتاج."
-                }
-            ],
-
-            "الري": [
-                {
-                    question: "متى يكون أول ري لمحصول القمح؟",
-                    answer: "يتم تحديد موعد الري حسب نوع التربة وميعاد الزراعة والظروف الجوية ومرحلة نمو النبات."
-                },
-                {
-                    question: "لماذا يجب عدم الإسراف في ري القمح؟",
-                    answer: "الإفراط في مياه الري قد يسبب مشكلات في منطقة الجذور ويؤثر على نمو النبات، لذلك يجب تنظيم الري وفق احتياجات المحصول."
-                }
-            ],
-
-            "التسميد": [
-                {
-                    question: "متى تتم إضافة السماد لمحصول القمح؟",
-                    answer: "يتم تحديد مواعيد إضافة الأسمدة وكمياتها وفق نوع التربة ومرحلة نمو المحصول والتوصيات الزراعية المعتمدة."
-                },
-                {
-                    question: "ما أهمية التسميد المتوازن للقمح؟",
-                    answer: "التسميد المتوازن يساعد النبات على النمو بصورة جيدة، ويساهم في تكوين السنابل والحبوب بصورة أفضل."
-                }
-            ],
-
-            "الآفات": [
-                {
-                    question: "كيف أتعرف على وجود إصابة حشرية في القمح؟",
-                    answer: "يجب فحص النباتات بانتظام وملاحظة أي تغيرات غير طبيعية أو وجود حشرات أو أعراض إصابة على النباتات."
-                },
-                {
-                    question: "ماذا أفعل عند ظهور إصابة في الحقل؟",
-                    answer: "يجب أولًا تحديد نوع الإصابة وشدتها، ثم اتباع وسيلة المكافحة المناسبة وفق التوصيات الزراعية المعتمدة."
-                },
-                {
-                    question: "هل يجب استخدام المبيد بمجرد رؤية حشرة؟",
-                    answer: "ليس بالضرورة. يجب أولًا تحديد نوع الآفة وشدة الإصابة والحاجة الفعلية للمكافحة قبل استخدام أي مبيد."
-                }
-            ]
-
-        };
-
-
-        let currentSection = "";
-        let currentAnswer = "";
-
-
-        function openSection(section) {
-
-            currentSection = section;
-
-            document.getElementById("homeScreen").classList.remove("active");
-            document.getElementById("questionsScreen").classList.add("active");
-
-            document.getElementById("sectionTitle").textContent =
-                getSectionIcon(section) + " " + section;
-
-            const list = document.getElementById("questionsList");
-
-            list.innerHTML = "";
-
-            document.getElementById("answerBox").style.display = "none";
-
-            data[section].forEach(function(item, index) {
-
-                const button = document.createElement("button");
-
-                button.className = "question-button";
-
-                button.textContent =
-                    "❓ " + item.question;
-
-                button.onclick = function() {
-                    showAnswer(index);
-                };
-
-                list.appendChild(button);
-
-            });
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-
-
-        function showAnswer(index) {
-
-            const item = data[currentSection][index];
-
-            currentAnswer = item.answer;
-
-            document.getElementById("questionTitle").textContent =
-                "❓ " + item.question;
-
-            document.getElementById("answerText").textContent =
-                item.answer;
-
-            document.getElementById("answerBox").style.display = "block";
-
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth"
-            });
-        }
-
-
-        function speakAnswer() {
-
-            if (!currentAnswer) {
-                return;
-            }
-
-            if (!("speechSynthesis" in window)) {
-
-                alert("عذرًا، المتصفح لا يدعم تشغيل الصوت.");
-
-                return;
-            }
-
-            window.speechSynthesis.cancel();
-
-            const speech =
-                new SpeechSynthesisUtterance(currentAnswer);
-
-            speech.lang = "ar-EG";
-
-            speech.rate = 0.85;
-
-            speech.pitch = 1;
-
-            speech.volume = 1;
-
-            const voices =
-                window.speechSynthesis.getVoices();
-
-            const arabicVoice =
-                voices.find(function(voice) {
-                    return voice.lang &&
-                           voice.lang.toLowerCase().startsWith("ar");
-                });
-
-            if (arabicVoice) {
-                speech.voice = arabicVoice;
-            }
-
-            window.speechSynthesis.speak(speech);
-        }
-
-
-        function stopSpeaking() {
-
-            if ("speechSynthesis" in window) {
-                window.speechSynthesis.cancel();
-            }
-
-        }
-
-
-        function goHome() {
-
-            stopSpeaking();
-
-            document.getElementById("questionsScreen")
-                .classList.remove("active");
-
-            document.getElementById("homeScreen")
-                .classList.add("active");
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        }
-
-
-        function getSectionIcon(section) {
-
-            const icons = {
-                "الزراعة": "🌱",
-                "الري": "💧",
-                "التسميد": "🧪",
-                "الآفات": "🐛"
-            };
-
-            return icons[section] || "🌾";
-        }
-
-
-        // تحميل أصوات الجهاز مبكرًا
-        if ("speechSynthesis" in window) {
-
-            window.speechSynthesis.getVoices();
-
-            window.speechSynthesis.onvoiceschanged =
-                function() {
-                    window.speechSynthesis.getVoices();
-                };
-
-        }
-
-    </script>
-
+<header><div class="wheat">🌾</div><h1>قمح إرشاد المنيا</h1><p>معًا نحو زراعة أفضل</p></header>
+<main>
+<section id="home">
+ <div class="intro"><h2>أهلاً بك يا مزارع القمح</h2><p>اسأل عن زراعة القمح، أو اختار الموضوع اللي عايز تعرف عنه.<br>معلومة إرشادية مبسطة من نشرة الأراضي القديمة.</p></div>
+ <div class="search-wrap"><label for="searchHome">🔎 ابحث عن سؤالك</label><input id="searchHome" type="search" placeholder="مثال: ميعاد الزراعة، التقاوي، رية المحاياة..."><div class="hint">اكتب كلمة من سؤالك لعرض الأسئلة المرتبطة بها.</div></div>
+ <div id="homeResults" class="questions hidden"></div>
+ <div id="sections" class="section-grid">
+  <button class="section-card" data-section="الزراعة"><span class="ico">🌱</span><strong>الزراعة وتجهيز الأرض</strong><small>المواعيد – الأصناف – طرق الزراعة</small></button>
+  <button class="section-card" data-section="الري"><span class="ico">💧</span><strong>الري</strong><small>مواعيد الري وترشيد المياه</small></button>
+  <button class="section-card" data-section="التسميد"><span class="ico">🧪</span><strong>التسميد</strong><small>العضوي – الفوسفاتي – الآزوتي</small></button>
+  <button class="section-card" data-section="الحشائش"><span class="ico">🌿</span><strong>الحشائش</strong><small>الوقاية والمكافحة</small></button>
+  <button class="section-card" data-section="الأمراض والآفات"><span class="ico">🛡️</span><strong>الأمراض والآفات</strong><small>الأصداء والمنّ والتشخيص</small></button>
+  <button class="section-card" data-section="الحصاد"><span class="ico">🌾</span><strong>الحصاد</strong><small>التوقيت وتقليل الفاقد</small></button>
+ </div>
+</section>
+<section id="detail" class="hidden">
+ <div class="toolbar"><button class="back" id="backHome">↩ رجوع</button><div id="sectionTitle" class="current-title"></div></div>
+ <div class="search-wrap"><label for="searchSection">🔎 ابحث داخل الأسئلة</label><input id="searchSection" type="search" placeholder="اكتب كلمة من السؤال..."></div>
+ <div id="questionList" class="questions"></div>
+ <div id="answerBox" class="answer hidden"><h3 id="answerTitle"></h3><p id="answerText"></p><div class="actions"><button class="listen" id="listenBtn">🔊 اسمع الإجابة</button><button class="stop" id="stopBtn">⏹ إيقاف</button></div><div id="voiceStatus" class="status" aria-live="polite"></div></div>
+</section>
+<div class="note"><strong>تنبيه إرشادي:</strong> المعلومات المعروضة تخص الأراضي القديمة (أرض الوادي) وفق النشرة العلمية رقم 1449 لموسم 2025/2026. راجع مهندس الإرشاد الزراعي عند اختلاف ظروف الحقل، ولا تستخدم مبيدًا إلا بعد تحديد الحشيشة أو الإصابة واتباع بطاقة المبيد والتوصيات الرسمية.</div>
+<footer>إعداد: إرشاد المنيا | المصدر: مركز البحوث الزراعية – الإدارة المركزية للإرشاد الزراعي<br>نشرة «زراعة القمح في الأراضي القديمة – أرض الوادي» رقم 1449، 2025/2026</footer>
+</main>
+<script>
+const data = {
+"الزراعة":[
+{q:"ما أنسب ميعاد لزراعة القمح؟",a:"النشرة بتحدد أنسب ميعاد للزراعة في الوجهين البحري والقبلي من 15 إلى 30 نوفمبر، وممكن تمتد الزراعة لحد 10 ديسمبر. ويُفضّل عدم التبكير أو التأخير الشديد عن المواعيد دي."},
+{q:"ليه ماينفعش أبكر أو أأخر زراعة القمح؟",a:"التبكير الشديد ممكن يقلل التفريع وعدد السنابل وحجم السنبلة، والتأخير بيقصّر فترة النمو ويعرّض النبات للحرارة والرياح الساخنة وقت طرد السنابل وامتلاء الحبوب، وده يقلل المحصول."},
+{q:"إيه الأصناف اللي أزرعها في المنيا؟",a:"النشرة بتوضح أصناف الوجه القبلي ومصر الوسطى، وبتوصي باختيار الصنف المعتمد المناسب للمنطقة من مصدر رسمي. من الأصناف المذكورة لمصر الوسطى: جيزة 171، مصر 1، مصر 3، مصر 4، مصر 5، مصر 6، مصر 7، سخا 95، سخا 96، سخا 97، سدس 12، سدس 14، سدس 15، وجميزة 11. لازم تتأكد من التوصية المعتمدة للموسم الحالي قبل شراء التقاوي."},
+{q:"ليه أشتري تقاوي معتمدة؟",a:"التقاوي المعتمدة بتكون نقاوتها الوراثية عالية ومتجانسة وحيوية، وخالية من الشوائب وبذور الحشائش، وبتكون معالجة لمقاومة التفحم السائب. وده يساعد على انتظام الإنبات والنمو."},
+{q:"إزاي أجهز الأرض قبل زراعة القمح؟",a:"الأرض المناسبة تكون متجانسة الخصوبة وجيدة الصرف وغير موبوءة بالحشائش. النشرة بتوصي بحرث الأرض سكتين متعامدتين لفك التربة وتهويتها، وبعدها التزحيف لتنعيم السطح وتسويته وتكسير القلاقيل."},
+{q:"هل تسوية الأرض بالليزر مهمة؟",a:"أيوه، النشرة بتوصي بالتسوية الدقيقة بالليزر، ولو على فترات كل حوالي 3 إلى 5 سنوات، علشان الأرض تبقى مستوية ويسهل استخدام آلات الزراعة والتحكم في مياه الري."},
+{q:"ما أفضل طريقة لزراعة القمح؟",a:"النشرة بتوصي بصفة عامة بالزراعة العفير، وبتعتبر الزراعة بآلة التسطير من أفضل الطرق، خصوصًا في المساحات الكبيرة والتجمعات؛ لأنها بتوزع التقاوي بانتظام وعلى عمق مناسب وبتوفر في كمية التقاوي."},
+{q:"ما معدل التقاوي في الزراعة العفير بالتسطير؟",a:"للفدان: 45 كجم من تقاوي قمح الخبز، وتزيد إلى 60 كجم من قمح الديورم. وعمق الزراعة يكون من 3 إلى 5 سم تحت سطح التربة."},
+{q:"ما معدل التقاوي في الزراعة العفير بدار؟",a:"للفدان: 60 كجم من تقاوي قمح الخبز، وتزيد إلى 70 كجم من قمح الديورم. تُبذر التقاوي بانتظام بعد خدمة الأرض، وتُغطى جيدًا لضمان الإنبات."},
+{q:"متى أستخدم الزراعة الحراتي؟",a:"النشرة ما بتنصحش بالحراتي إلا في الأراضي الموبوءة بالحشائش أو لما يكون تكسير القلاقيل الكبيرة صعب. ومش مناسبة للأراضي اللي ملوحتها مرتفعة؛ لأن تركيز الأملاح وقت الإنبات ممكن يقلل ظهور البادرات."},
+{q:"ما معدل التقاوي في الزراعة الحراتي؟",a:"للفدان: 70 كجم من قمح الخبز، وتزيد إلى 85 كجم من قمح الديورم؛ لأن جزءًا من الحبوب ممكن ينزل لعمق كبير فتقل نسبة الإنبات."},
+{q:"ما فوائد زراعة القمح على مصاطب؟",a:"النشرة بتذكر إن الزراعة على مصاطب ممكن توفر حوالي 25% من التقاوي، وحوالي 20% أو أكتر من مياه الري، وتحسن كفاءة السماد الآزوتي، وتقلل الرقاد عند هبوب الرياح، مع انتظام توزيع النباتات."},
+{q:"ما عرض المصطبة المناسب؟",a:"في طريقة الزراعة بالنقر على المصاطب، النشرة بتذكر عرضًا من 100 إلى 120 سم. وتُراعى طريقة إعداد المصطبة والزراعة والري طبقًا للطريقة المستخدمة بالحقل."}
+],
+"الري":[
+{q:"القمح محتاج كام رية؟",a:"حسب النشرة، القمح يحتاج من 4 إلى 5 ريات في الوجه البحري، ومن 5 إلى 6 ريات في الوجه القبلي، بالإضافة إلى رية الزراعة. العدد الفعلي يتأثر بحالة الأرض والجو واحتياج النبات."},
+{q:"إمتى أعمل رية المحاياة؟",a:"رية المحاياة أو التشتية بتكون بعد حوالي 21 يومًا من الزراعة، وماينفعش تتأخر عن 25 يومًا إلا في حالة سقوط أمطار غزيرة."},
+{q:"كل كام يوم أروي بعد رية المحاياة؟",a:"النشرة بتذكر إن الري بعد كده يكون كل حوالي 25 يومًا، وتقل الفترة في الوجه القبلي لحوالي 20 يومًا، مع مراعاة حالة التربة والنبات والظروف الجوية."},
+{q:"إيه علامات إن القمح محتاج ري؟",a:"من العلامات اللي ذكرتها النشرة: جفاف التربة وظهور شقوق عميقة فيها، والتفاف أوراق النباتات كعلامة من علامات العطش. لازم تتابع الحقل وما تسيبش النبات يتعرض للعطش."},
+{q:"هل الإسراف في الري يضر القمح؟",a:"أيوه. الإسراف ممكن يغسل السماد بعيد عن الجذور ويسبب اختناق للمجموع الجذري ورقاد للنبات، ونقص مياه رية الزراعة كمان ممكن يقلل الإنبات. المطلوب رية منتظمة من غير تغريق."},
+{q:"إزاي أروي القمح المزروع على مصاطب؟",a:"الري يكون في المسافات بين المصاطب أو بطنية المصطبة، وما نستمرش في الري لحد ما المياه تغرق ظهر المصطبة؛ علشان ما يحصلش إسراف وغسيل للسماد."},
+{q:"إمتى أوقف الري قبل الحصاد؟",a:"النشرة بتوصي بإيقاف الري عند الوصول للنضج الفسيولوجي، وده بيظهر باصفرار السلامية الأخيرة الحاملة للسنبلة في حوالي 50% من نباتات الحقل."},
+{q:"هل أوقف الري بعد طرد السنابل؟",a:"لا. النشرة بتحذر من إيقاف الري بعد طرد السنابل؛ لأن النبات بيحتاج المياه لاستمرار التمثيل الضوئي وامتلاء الحبوب. يستمر الري حتى مرحلة النضج الفسيولوجي، مع تجنب الإسراف."}
+],
+"التسميد":[
+{q:"هل السماد العضوي مفيد للقمح؟",a:"النشرة بتفضل إضافة السماد العضوي لأنه بيحسن خواص التربة، بشرط يكون قديم ومتحلل ومكمور ومن مصدر موثوق، علشان يكون خالي من بذور الحشائش ومسببات الأمراض والآفات."},
+{q:"ما معدل السماد البلدي للقمح؟",a:"المعدل المذكور في النشرة 20 متر مكعب للفدان، ويتخلط بالتربة جيدًا أثناء حرث الأرض. وعند إضافته يتم خفض السماد النيتروجيني الكيميائي بمقدار 15 كجم نيتروجين للفدان."},
+{q:"ما معدل السماد الفوسفاتي للفدان؟",a:"التوصية هي 15 كجم فو₂أ₅ للفدان، وتعادل 100 كجم سوبر فوسفات أحادي 15%، أو 40 كجم فوسفات ثنائي 37%، أو 33 كجم فوسفات ثلاثي 45%. يضاف نثرًا قبل آخر حرثة ويُقلب في التربة."},
+{q:"ما معدل السماد البوتاسي؟",a:"التوصية 24 كجم بو₂أ للفدان، وتعادل شيكارة واحدة 50 كجم من سلفات البوتاسيوم 48%. ويفضل إضافته بعد شهر من الزراعة، إما نثرًا أو ذائبًا مع مياه الري على دفعات حتى طرد السنابل، أو أثناء خدمة الأرض."},
+{q:"ما احتياج القمح من السماد النيتروجيني؟",a:"التوصية الأساسية في النشرة 75 كجم نيتروجين للفدان. وتعادل 163 كجم يوريا 46%، أو 224 كجم نترات نشادر 33.5%، أو 364 كجم سلفات نشادر 20.6%، أو 448 كجم نترات جير 15.5%."},
+{q:"كيف أقسم دفعات السماد النيتروجيني؟",a:"الدفعة الأولى 20% عند الزراعة وقبل رية الزراعة مباشرة. الدفعة الثانية 40% عند رية المحاياة، ولا تتأخر عن 25 يومًا من الزراعة. الدفعة الثالثة 40% عند الرية الثانية، حوالي 25 يومًا بعد رية المحاياة وقبل السدة الشتوية."},
+{q:"ماذا أفعل لو ما أضفتش الدفعة التنشيطية وقت الزراعة؟",a:"حسب النشرة، لو الدفعة التنشيطية ما اتضافتش مع الزراعة، يضاف ثلثا كمية السماد المقررة عند رية المحاياة، والثلث الباقي عند الرية الثانية."},
+{q:"هل أضيف سماد بعد طرد السنابل؟",a:"النشرة لا تنصح بإضافة أسمدة بعد طرد السنابل؛ لأنها لا تحقق زيادة في المحصول. وتؤكد أهمية الالتزام بمواعيد الدفعات المقررة وعدم تأخير الدفعة الأخيرة."},
+{q:"إمتى أضيف السماد قبل الري؟",a:"النشرة بتوصي بإضافة السماد قبل الري مباشرة، وعدم تأجيله لليوم التالي أو بعد الري بعدة أيام؛ علشان يذوب مع مياه الري ويتحرك لمنطقة الجذور."},
+{q:"هل أخلط أنواع الأسمدة مع بعض؟",a:"النشرة بتنصح بعدم خلط الأسمدة، وأن يُنثر كل سماد على حدة، مع الالتزام بمواعيد الإضافة والكميات المحددة."}
+],
+"الحشائش":[
+{q:"الحشائش بتسبب خسارة قد إيه في محصول القمح؟",a:"النشرة بتذكر إن الحشائش ممكن تسبب نقصًا في محصول القمح بمتوسط يتراوح بين 20 و30%، وقد تزيد الخسارة مع الكثافة العالية للحشائش."},
+{q:"إيه أشهر الحشائش الموجودة في القمح؟",a:"من الحشائش عريضة الأوراق: الجعضيض والحمّيض والسلق والزربيح والخبيزة والخلة وغيرها. ومن الحشائش ضيقة الأوراق: الزمير والصامة والفالارس وديل القط. ومن المعمرة: العليق والسعد."},
+{q:"إزاي أقلل الحشائش قبل الزراعة؟",a:"استخدم تقاوي معتمدة ونظيفة وخالية من بذور الحشائش، واهتم بالدورة الزراعية، ويمكن استخدام الحراتي في الأراضي الموبوءة بالحشائش وفق ما ورد بالنشرة."},
+{q:"هل أخلط مبيد الحشائش عريضة الأوراق مع ضيقة الأوراق؟",a:"النشرة بتحذر من خلط مبيدات الحشائش عريضة الأوراق مع مبيدات الحشائش ضيقة الأوراق؛ لأن الخلط ممكن يسبب تفاعلًا بين المبيدات ويقلل كفاءة المكافحة."},
+{q:"هل أسيب الزمير اللي ظهر بعد الرش؟",a:"لا. النشرة بتؤكد ضرورة التخلص يدويًا من الحشائش المتخلفة، خصوصًا الزمير؛ لأنه ممكن يظهر على دفعات مختلفة ويكوّن بذورًا تنتشر في التربة للمواسم التالية."},
+{q:"إيه احتياطات رش مبيدات الحشائش؟",a:"لازم الالتزام بميعاد الرش الموصى به وببطاقة المبيد، وعدم الرش عشوائيًا. ارتدِ الملابس الواقية والكمامة والقفازات، ونفّذ إجراءات النظافة بعد الرش لتجنب التسمم."}
+],
+"الأمراض والآفات":[
+{q:"إزاي أتعرف على الصدأ الأصفر؟",a:"النشرة بتوضح إن من علامات الإصابة بالصدأ الأصفر وجود مسحوق أصفر على الأوراق. لكن الاصفرار وحده مش كفاية للتشخيص؛ لأنه ممكن ينتج عن نقص عناصر غذائية أو اختناق الجذور بسبب الغرق. استشر مهندس الإرشاد عند الشك."},
+{q:"هل كل اصفرار في القمح معناه صدأ؟",a:"لا. النشرة بتحذر من الخلط بين الصدأ الأصفر والاصفرار الناتج عن نقص بعض الأسمدة أو اختناق الجذور بسبب زيادة مياه الري. لازم تتأكد من سبب الاصفرار قبل اتخاذ قرار المكافحة."},
+{q:"إزاي أحمي القمح من أمراض الأصداء؟",a:"اختار الصنف الموصى به والمقاوم للأصداء الثلاثة: الأصفر والبرتقالي والأسود، حسب المنطقة والتوصيات الرسمية. اختيار الصنف المقاوم يساعد على تقليل استخدام المبيدات وتكاليف الإنتاج."},
+{q:"أتصرف إزاي لو ظهرت إصابة صدأ؟",a:"النشرة بتشدد على التشخيص الصحيح وعدم استخدام مبيد عشوائي. في حالة ظهور الصدأ الأصفر يلزم التحرك فور ظهوره، أما باقي أمراض الصدأ فذكرت النشرة حدًا إرشاديًا للإصابة يقارب 10%، مع الالتزام بالمبيد المسجل وتعليماته واستشارة مهندس الإرشاد."},
+{q:"هل أتأخر في مكافحة الصدأ لحد ما ينتشر؟",a:"لا. التأخير لحد ما الإصابة تبقى شديدة بيصعّب المكافحة ويزيد الضرر. تابع الحقل باستمرار، وشخّص الإصابة مبكرًا، واستعن بمهندس الإرشاد لتحديد الإجراء المناسب."}
+],
+"الحصاد":[
+{q:"إيه أخطاء الحصاد اللي بتسبب فقد في المحصول؟",a:"من الأخطاء: التأخير في الحصاد بعد النضج التام لحد ما الحبوب تفرط، والضم وقت الظهر والحرارة العالية، وتأخير الدراس بعد الضم، واستخدام آلة دراس غير معايرة."},
+{q:"إمتى أفضل وقت لضم القمح؟",a:"النشرة بتوصي إن الضم يكون في الصباح الباكر أو بعد العصر، وتجنب الضم وقت الظهيرة والحرارة العالية."},
+{q:"ليه ماينفعش أأخر الدراس بعد الضم؟",a:"تأخير الدراس فترة طويلة بعد الضم ممكن يسبب فرط السنابل وسقوط الحبوب على الأرض، وكمان يعرض المحصول للإصابة بالعصافير والفئران وغيرها."},
+{q:"هل معايرة آلة الدراس مهمة؟",a:"أيوه. عدم معايرة آلة الدراس ممكن يسبب تطاير وفقد جزء من الحبوب، أو وجود أتربة وأجزاء نباتية مع الحبوب، وده يقلل كمية المحصول وجودته وسعره."},
+{q:"إيه أهمية التعبئة الجيدة بعد الدراس؟",a:"استخدم أجولة وعبوات سليمة وغير ممزقة أثناء التعبئة والنقل؛ لأن العبوات الرديئة ممكن تسبب فقد جزء من المحصول."}
+]
+};
+let activeSection="";
+let activeItem=null;
+const $=id=>document.getElementById(id);
+function allItems(){return Object.entries(data).flatMap(([section,items])=>items.map((item,index)=>({...item,section,index})));}
+function showAnswer(item){
+ activeItem=item;
+ $("answerTitle").textContent="❓ "+item.q;
+ $("answerText").textContent=item.a;
+ $("answerBox").classList.remove("hidden");
+ $("voiceStatus").textContent="";
+ stopVoice(false);
+ $("answerBox").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function renderQuestions(items,target){
+ target.innerHTML="";
+ if(!items.length){target.innerHTML='<div class="empty">مش لاقي سؤال مطابق. جرّب كلمة تانية أو اختار قسم من الأقسام.</div>';return;}
+ items.forEach(item=>{
+  const b=document.createElement("button");b.className="qbtn";b.type="button";
+  b.textContent="❓ "+item.q;
+  b.addEventListener("click",()=>showAnswer(item));
+  target.appendChild(b);
+ });
+}
+function openSection(section){
+ activeSection=section;
+ $("home").classList.add("hidden");$("detail").classList.remove("hidden");
+ $("sectionTitle").textContent=section;
+ $("searchSection").value="";$("answerBox").classList.add("hidden");
+ renderQuestions(data[section].map((item,index)=>({...item,section,index})),$("questionList"));
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function goHome(){stopVoice(false);$("detail").classList.add("hidden");$("home").classList.remove("hidden");$("answerBox").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function stopVoice(update=true){
+ if("speechSynthesis" in window)window.speechSynthesis.cancel();
+ if(update)$("voiceStatus").textContent="تم إيقاف الصوت.";
+}
+function speakAnswer(){
+ if(!activeItem)return;
+ if(!("speechSynthesis" in window)){$("voiceStatus").textContent="المتصفح لا يدعم قراءة النصوص بالصوت.";return;}
+ window.speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(activeItem.q+". "+activeItem.a);
+ u.lang="ar-EG";u.rate=.9;u.pitch=1;u.volume=1;
+ const voices=window.speechSynthesis.getVoices();
+ const v=voices.find(x=>x.lang&&x.lang.toLowerCase()==="ar-eg")||voices.find(x=>x.lang&&x.lang.toLowerCase().startsWith("ar"));
+ if(v)u.voice=v;
+ u.onstart=()=>{$("voiceStatus").textContent="جاري قراءة الإجابة...";};
+ u.onend=()=>{$("voiceStatus").textContent="انتهت قراءة الإجابة.";};
+ u.onerror=()=>{$("voiceStatus").textContent="تعذر تشغيل الصوت. تأكد من وجود صوت عربي على الجهاز.";};
+ window.speechSynthesis.speak(u);
+}
+document.querySelectorAll("[data-section]").forEach(b=>b.addEventListener("click",()=>openSection(b.dataset.section)));
+$("backHome").addEventListener("click",goHome);
+$("listenBtn").addEventListener("click",speakAnswer);
+$("stopBtn").addEventListener("click",()=>stopVoice(true));
+$("searchSection").addEventListener("input",e=>{
+ const term=e.target.value.trim().toLowerCase();
+ const items=data[activeSection].map((item,index)=>({...item,section:activeSection,index})).filter(x=>(x.q+" "+x.a).toLowerCase().includes(term));
+ renderQuestions(items,$("questionList"));
+});
+$("searchHome").addEventListener("input",e=>{
+ const term=e.target.value.trim().toLowerCase(), box=$("homeResults");
+ if(!term){box.classList.add("hidden");$("sections").classList.remove("hidden");box.innerHTML="";return;}
+ $("sections").classList.add("hidden");box.classList.remove("hidden");
+ const items=allItems().filter(x=>(x.q+" "+x.a+" "+x.section).toLowerCase().includes(term));
+ renderQuestions(items,box);
+});
+if("speechSynthesis" in window)window.speechSynthesis.getVoices();
+</script>
 </body>
 </html>
