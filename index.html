@@ -136,7 +136,7 @@ const data = {
 {q:"إيه أهمية التعبئة الجيدة بعد الدراس؟",a:"استخدم أجولة وعبوات سليمة وغير ممزقة أثناء التعبئة والنقل؛ لأن العبوات الرديئة ممكن تسبب فقد جزء من المحصول."}
 ],
 "الوجه القبلي":[
-{q:"ما أنسب ميعاد لزراعة القمح في الوجه القبلي؟",a:"حسب نشرة القمح رقم 1449 لموسم 2025/2026، أنسب ميعاد للزراعة في الوجهين البحري والقبلي من 15 إلى 30 نوفمبر، وقد تمتد الزراعة حتى 10 ديسمبر. ويُنصح بعدم التبكير أو التأخير كثيرًا عن هذه المواعيد."},
+{q:"ما أنسب ميعاد لزراعة القمح في الوجه القبلي؟",a:"حسب توصيات الإرشاد الزراعي بالمنيا للموسم 2025/2026، أنسب ميعاد للزراعة في الوجهين البحري والقبلي من 15 إلى 30 نوفمبر، وقد تمتد الزراعة حتى 10 ديسمبر. ويُنصح بعدم التبكير أو التأخير كثيرًا عن هذه المواعيد."},
 {q:"ما نتيجة عدم الالتزام بميعاد الزراعة المناسب؟",a:"الإرشاد الزراعي بالمنيا بيوضح أن عدم الالتزام بمواعيد الزراعة المناسبة قد يؤدي إلى انخفاض المحصول بما لا يقل عن 25%. والسبب أن مراحل نمو القمح قد لا تتوافق مع درجات الحرارة وطول النهار، وقد يتعرض المحصول لحرارة نهاية الموسم، خاصة في الوجه القبلي."},
 {q:"ما أضرار التبكير في زراعة القمح؟",a:"التبكير قد يؤدي إلى قلة التفريع وعدد السنابل، وصغر حجم السنبلة وقلة عدد الحبوب ووزنها. كما قد يحدث طرد السنابل في ظروف جوية غير مناسبة للإخصاب وتكوين الحبوب، وقد يزيد تعرض المحصول لأكل الطيور."},
 {q:"ما أضرار التأخير في زراعة القمح بالوجه القبلي؟",a:"التأخير يقصر فترة النمو الخضري، وقد لا يتاح ري القمح وتسميده قبل السدة الشتوية، فيتعرض للعطش. كما قد يتعرض وقت طرد السنابل وامتلاء الحبوب لرياح الخماسين وارتفاع الحرارة وزيادة البخر، فتضمر الحبوب ويقل وزنها."},
@@ -158,6 +158,13 @@ let activeSection="";
 let activeItem=null;
 const $=id=>document.getElementById(id);
 function allItems(){return Object.entries(data).flatMap(([section,items])=>items.map((item,index)=>({...item,section,index})));}
+function normalizeSearchText(value){return value.toLowerCase().replace(/[\u064B-\u065F\u0670ـ]/g,"").replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").replace(/[ًٌٍَُِّْٰ]/g,"").replace(/[^\u0621-\u064A0-9\s]/g," ").replace(/\s+/g," ").trim();}
+function matchesSearch(item,query){
+ const haystack=normalizeSearchText(item.q+" "+item.a+" "+(item.section||""));
+ const words=normalizeSearchText(query).split(" ").filter(Boolean);
+ const synonyms={"موعد":["موعد","ميعاد"],"ميعاد":["ميعاد","موعد"]};
+ return words.every(word=>(synonyms[word]||[word]).some(variant=>haystack.includes(variant)));
+}
 function showAnswer(item){
  activeItem=item;
  $("answerTitle").textContent="❓ "+item.q;
@@ -209,15 +216,15 @@ $("backHome").addEventListener("click",goHome);
 $("listenBtn").addEventListener("click",speakAnswer);
 $("stopBtn").addEventListener("click",()=>stopVoice(true));
 $("searchSection").addEventListener("input",e=>{
- const term=e.target.value.trim().toLowerCase();
- const items=data[activeSection].map((item,index)=>({...item,section:activeSection,index})).filter(x=>(x.q+" "+x.a).toLowerCase().includes(term));
+ const term=e.target.value.trim();
+ const items=data[activeSection].map((item,index)=>({...item,section:activeSection,index})).filter(x=>matchesSearch(x,term));
  renderQuestions(items,$("questionList"));
 });
 $("searchHome").addEventListener("input",e=>{
- const term=e.target.value.trim().toLowerCase(), box=$("homeResults");
+ const term=e.target.value.trim(), box=$("homeResults");
  if(!term){box.classList.add("hidden");$("sections").classList.remove("hidden");box.innerHTML="";return;}
  $("sections").classList.add("hidden");box.classList.remove("hidden");
- const items=allItems().filter(x=>(x.q+" "+x.a+" "+x.section).toLowerCase().includes(term));
+ const items=allItems().filter(x=>matchesSearch(x,term));
  renderQuestions(items,box);
 });
 if("speechSynthesis" in window)window.speechSynthesis.getVoices();
