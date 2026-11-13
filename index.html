@@ -129,25 +129,25 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 
 /* Illustrated wheat disease and pest atlas */
 .atlas-entry{margin:14px 0 18px}
-.atlas-open{width:100%;border:0;border-radius:16px;padding:15px 16px;background:linear-gradient(115deg,#174e36,#28734d);color:#fff;font:inherit;font-weight:800;box-shadow:0 6px 18px #174e3620;display:flex;align-items:center;gap:12px;justify-content:center;cursor:pointer}
+.atlas-open{width:100%;border:0;border-radius:16px;padding:17px 16px;background:linear-gradient(115deg,#174e36,#28734d);color:#fff;font:700 19px Tahoma,Arial,sans-serif;box-shadow:0 6px 18px #174e3620;display:flex;align-items:center;gap:12px;justify-content:center;cursor:pointer}
 .atlas-open .atlas-book{font-size:25px}
 #pestAtlas{margin:14px 0 22px}
 .atlas-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
-.atlas-head h3{margin:0;color:#205f3e;font-size:19px}
-.atlas-back{border:1px solid #dce8dc;background:#f5faf5;color:#205f3e;border-radius:11px;padding:9px 12px;font:inherit;font-weight:700}
-.atlas-intro{background:#f3f8f1;border:1px solid #e0eadc;border-radius:13px;padding:12px 14px;color:#4d6252;line-height:1.8;font-size:13px;margin-bottom:13px}
+.atlas-head h3{margin:0;color:#205f3e;font-size:24px;line-height:1.6}
+.atlas-back{border:1px solid #dce8dc;background:#f5faf5;color:#205f3e;border-radius:11px;padding:10px 13px;font:700 16px Tahoma,Arial,sans-serif}
+.atlas-intro{background:#f3f8f1;border:1px solid #e0eadc;border-radius:13px;padding:14px 16px;color:#3d5744;line-height:2;font-size:17px;margin-bottom:15px}
 .atlas-filters{display:flex;gap:7px;overflow-x:auto;padding:2px 0 12px}
-.atlas-filter{white-space:nowrap;border:1px solid #dce8dc;background:#fff;color:#41634e;border-radius:20px;padding:8px 13px;font:inherit;font-size:13px;font-weight:700}
+.atlas-filter{white-space:nowrap;border:1px solid #dce8dc;background:#fff;color:#41634e;border-radius:20px;padding:10px 15px;font:700 15px Tahoma,Arial,sans-serif}
 .atlas-filter.active{background:#dcebdc;border-color:#91b79a;color:#174e36}
 .atlas-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.atlas-card{min-width:0;background:#fff;border:1px solid #e4ebe3;border-radius:15px;padding:11px;box-shadow:0 3px 12px #203d2410}
-.atlas-card h4{margin:7px 0 5px;color:#205f3e;font-size:15px;line-height:1.5}
-.atlas-kind{display:inline-block;border-radius:20px;padding:4px 8px;background:#eef6ee;color:#39734a;font-size:11px;font-weight:700}
+.atlas-card{min-width:0;background:#fff;border:1px solid #e4ebe3;border-radius:15px;padding:16px;box-shadow:0 3px 12px #203d2410}
+.atlas-card h4{margin:9px 0 7px;color:#205f3e;font-size:21px;line-height:1.6}
+.atlas-kind{display:inline-block;border-radius:20px;padding:5px 10px;background:#eef6ee;color:#39734a;font-size:14px;font-weight:800}
 .atlas-kind.disease{background:#fff3e9;color:#9b642d}
-.atlas-copy{font-size:12px;line-height:1.75;color:#4b554e;margin:8px 0 0}
+.atlas-copy{font-size:17px;line-height:2;color:#37483c;margin:10px 0 0}
 .atlas-copy strong{color:#315d40}
-.atlas-foot{margin-top:13px;color:#6c756c;font-size:12px;line-height:1.7}
-@media(max-width:390px){.atlas-grid{grid-template-columns:1fr}}
+.atlas-foot{margin-top:15px;color:#505e53;font-size:15px;line-height:2}
+@media(max-width:649px){.atlas-grid{grid-template-columns:1fr}.atlas-head h3{font-size:21px}.atlas-card h4{font-size:20px}.atlas-copy{font-size:17px}}
 
 </style>
 </head>
@@ -229,7 +229,7 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 <section id="detail" class="hidden">
  <div class="toolbar"><button class="back" id="backHome">↩ رجوع</button><div id="sectionTitle" class="current-title"></div></div>
 
- <div class="atlas-entry"><button type="button" class="atlas-open" id="openPestAtlas"><span class="atlas-book">📚</span><span>شاهد الصور والتعرّف على الإصابات</span><span>←</span></button></div>
+ <div class="atlas-entry"><button type="button" class="atlas-open" id="openPestAtlas"><span class="atlas-book">📚</span><span>افتح موسوعة أمراض وآفات القمح</span><span>←</span></button></div>
  <div id="pestAtlas" class="hidden">
   <div class="atlas-head"><h3>📖 موسوعة أمراض وآفات القمح بالصور</h3><button type="button" class="atlas-back" id="closePestAtlas">↩ الأسئلة</button></div>
   <div class="atlas-intro">اتعرّف على أهم أمراض وآفات القمح من خلال صور واضحة وعلامات الإصابة، واقرأ الإرشادات الأساسية للتعامل معها.</div>
