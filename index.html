@@ -144,13 +144,10 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 .atlas-card h4{margin:7px 0 5px;color:#205f3e;font-size:15px;line-height:1.5}
 .atlas-kind{display:inline-block;border-radius:20px;padding:4px 8px;background:#eef6ee;color:#39734a;font-size:11px;font-weight:700}
 .atlas-kind.disease{background:#fff3e9;color:#9b642d}
-.atlas-photo{width:100%;height:126px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#eaf2e7,#f8f5e8);display:flex;align-items:center;justify-content:center;color:#477a53;font-size:36px;position:relative}
-.atlas-photo iframe{width:100%;height:100%;border:0;background:#f4f6f2}
-.atlas-view{margin-top:8px;width:100%;border:0;border-radius:9px;padding:9px 7px;background:#edf5ed;color:#205f3e;font:inherit;font-size:12px;font-weight:800}
+.atlas-photo{width:100%;height:142px;border-radius:11px;overflow:hidden;background-color:#edf3e9;background-image:url('./images/atlas/atlas-sprite.jpg');background-repeat:no-repeat;background-size:300% 300%;background-position:var(--atlas-x,0%) var(--atlas-y,0%);border:1px solid #e7ede4}
+.atlas-photo[role="img"]{display:block}
 .atlas-copy{font-size:12px;line-height:1.75;color:#4b554e;margin:8px 0 0}
 .atlas-copy strong{color:#315d40}
-.atlas-page{margin-top:8px;padding-top:7px;border-top:1px dashed #dce5db;color:#7b806f;font-size:11px;display:flex;justify-content:space-between;gap:5px}
-.atlas-page a{color:#39734a;text-decoration:none;font-weight:700}
 .atlas-foot{margin-top:13px;color:#6c756c;font-size:12px;line-height:1.7}
 @media(max-width:390px){.atlas-grid{grid-template-columns:1fr}.atlas-photo{height:150px}}
 
@@ -237,7 +234,7 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
  <div class="atlas-entry"><button type="button" class="atlas-open" id="openPestAtlas"><span class="atlas-book">📚</span><span>شاهد الصور والتعرّف على الإصابات</span><span>←</span></button></div>
  <div id="pestAtlas" class="hidden">
   <div class="atlas-head"><h3>📖 موسوعة أمراض وآفات القمح بالصور</h3><button type="button" class="atlas-back" id="closePestAtlas">↩ الأسئلة</button></div>
-  <div class="atlas-intro">صور الموسوعة مأخوذة من نشرة القمح رقم 1449 لموسم 2025/2026. اضغط «عرض صورة النشرة» لفتح الصفحة الأصلية التي تحتوي على الصورة، ويمكنك تكبيرها داخل عارض النشرة. عرض الصور يحتاج اتصالًا بالإنترنت.</div>
+  <div class="atlas-intro">اتعرّف على أهم أمراض وآفات القمح من خلال صور واضحة وعلامات الإصابة، واقرأ الإرشادات الأساسية للتعامل معها.</div>
   <div class="atlas-filters">
    <button class="atlas-filter active" type="button" data-atlas-filter="all">الكل</button>
    <button class="atlas-filter" type="button" data-atlas-filter="disease">أمراض القمح</button>
@@ -252,8 +249,8 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
  <div id="questionList" class="questions"></div>
  <div id="answerBox" class="answer hidden"><h3 id="answerTitle"></h3><p id="answerText"></p><div class="actions"><button class="listen" id="listenBtn">🔊 اسمع الإجابة</button><button class="stop" id="stopBtn">⏹ إيقاف</button><button class="share" id="shareBtn">🟢 شارك الإجابة عبر واتساب</button></div><div id="voiceStatus" class="status" aria-live="polite"></div></div>
 </section>
-<div class="note"><strong>تنبيه إرشادي:</strong> المعلومات المعروضة تخص الأراضي القديمة (أرض الوادي) وفق النشرة العلمية رقم 1449 لموسم 2025/2026. راجع مهندس الإرشاد الزراعي عند اختلاف ظروف الحقل، ولا تستخدم مبيدًا إلا بعد تحديد الحشيشة أو الإصابة واتباع بطاقة المبيد والتوصيات الرسمية.</div>
-<footer>إعداد: إرشاد المنيا | المصدر: مركز البحوث الزراعية – الإدارة المركزية للإرشاد الزراعي<br>نشرة «زراعة القمح في الأراضي القديمة – أرض الوادي» رقم 1449، 2025/2026</footer>
+<div class="note"><strong>تنبيه إرشادي:</strong> المعلومات المعروضة تخص الأراضي القديمة (أرض الوادي) وفق التوصيات الإرشادية المعتمدة للموسم. راجع مهندس الإرشاد الزراعي عند اختلاف ظروف الحقل، ولا تستخدم مبيدًا إلا بعد تحديد الحشيشة أو الإصابة واتباع بطاقة المبيد والتوصيات الرسمية.</div>
+<footer>إعداد: الإرشاد الزراعي بمحافظة المنيا</footer>
 </main>
 <script>
 const data = {
@@ -464,25 +461,28 @@ function speakAnswer(){
 }
 
 const atlasItems=[
- {name:"الحفار",type:"insect",icon:"🪲",page:32,printed:30,symptoms:"يهاجم البادرات أسفل سطح التربة؛ فتذبل النباتات أو تموت، وقد تظهر أنفاق مرتفعة قليلًا بعد الري.",care:"خدمة الأرض جيدًا، والتخلص من بقايا المحصول والحشائش، وفحص الحقل مبكرًا. تُحدد المكافحة المناسبة بعد التأكد من وجود الإصابة."},
- {name:"الدودة القارضة",type:"insect",icon:"🐛",page:33,printed:31,symptoms:"تقطع البادرات عند سطح التربة أو تقرض الساق؛ فتسقط النباتات أو تختفي بادرات في بقع من الحقل.",care:"الحرث الجيد قبل الزراعة، ومتابعة البادرات وفحص التربة حول النباتات المصابة، وإزالة الحشائش. لا تُستخدم معاملة إلا بعد تحديد الإصابة."},
- {name:"دودة الحشد الخريفية",type:"insect",icon:"🐛",page:34,printed:32,symptoms:"تظهر على الأوراق مناطق شفافة كالشباك ثم ثقوب غير منتظمة، وقد تتآكل الأوراق أو القلوب مع وجود يرقات.",care:"الفحص المبكر للأوراق والقلوب، والتخلص من الحشائش والعوائل، ومتابعة بؤر الإصابة. عند ثبوت الإصابة يُرجع للمهندس لتحديد المكافحة المسجلة."},
- {name:"حشرات المن",type:"insect",icon:"🪲",page:37,printed:35,symptoms:"تتجمع حشرات صغيرة على الأوراق وتمتص العصارة؛ وقد يظهر اصفرار والتفاف للأوراق، وإفرازات عسلية وعفن هبابي، وضعف في تكوين الحبوب.",care:"الفحص الدوري خاصة في الفترات المناسبة لانتشار المن، وتجنب المغالاة في التسميد الآزوتي، والحفاظ على الأعداء الحيوية النافعة."},
- {name:"جعل الورد الزغبي",type:"insect",icon:"🪲",page:39,printed:37,symptoms:"تظهر الحشرات الكاملة وقت الإزهار وتتغذى على مكونات الزهرة، وقد تصبح السنابل بيضاء جافة وخالية من الحبوب.",care:"تكثيف المرور الحقلي خلال فترة الإزهار، وملاحظة وجود الحشرات الكاملة والسنابل الفارغة، وطلب التوجيه الفني قبل أي تدخل."},
- {name:"دودة سنابل القمح (النفاسيا)",type:"insect",icon:"🐛",page:41,printed:39,symptoms:"قد تبدو السنابل بيضاء جافة فوق نباتات خضراء، ويسهل فصلها عن الساق عند وجود اليرقات داخل حامل السنبلة.",care:"جمع النباتات المصابة والتخلص منها مبكرًا، وتوحيد ميعاد الزراعة في التجمعات، والحرث الجيد بعد الحصاد للتعرض للشمس والأعداء الحيوية."},
- {name:"دبور الحنطة المنشاري",type:"insect",icon:"🪰",page:42,printed:40,symptoms:"تضع الأنثى البيض داخل ساق النبات، وتتغذى اليرقة داخل الساق؛ فيضعف النبات وقد تنكسر السيقان أو تجف السنابل.",care:"اختيار الأصناف ذات السيقان الصلبة متى أوصت بها الجهات المختصة، وجمع النباتات المصابة والتخلص من بقايا المحصول، ومتابعة الحقل."},
- {name:"القواقع والبزاقات الأرضية",type:"other",icon:"🐌",page:43,printed:41,symptoms:"تتغذى على الأوراق وقد تترك آثار قضم وخطوطًا مخاطية لامعة، وتزداد الأضرار مع كثافة الإصابة ورطوبة البيئة.",care:"خدمة الأرض جيدًا، والتخلص من الحشائش ومخلفات المحصول، ومتابعة الحقل خصوصًا في الأماكن الرطبة، وتجنب الزراعات المتأخرة بجوار حقول البرسيم."},
- {name:"الصدأ الأصفر",type:"disease",icon:"🌾",page:46,printed:44,symptoms:"تظهر بثرات أو مسحوق أصفر مرتبة في خطوط طولية على الأوراق، وقد تظهر الإصابة على أجزاء أخرى من النبات.",care:"اختيار الأصناف الموصى بها والمقاومة، والمرور الحقلي المنتظم. عند الاشتباه يلزم تأكيد التشخيص والتحرك وفق التوصية الرسمية دون تأخير."},
- {name:"الصدأ البرتقالي",type:"disease",icon:"🌾",page:47,printed:45,symptoms:"تظهر بثرات برتقالية أو بنية برتقالية على الأوراق، وتكون غالبًا مبعثرة وليست في خطوط منتظمة كالصدأ الأصفر.",care:"زراعة الأصناف الموصى بها والمقاومة للأصداء، ومتابعة الأوراق دوريًا، والرجوع لمهندس الإرشاد عند ظهور أعراض مشتبه بها."},
- {name:"الصدأ الأسود (صدأ الساق)",type:"disease",icon:"🌾",page:47,printed:45,symptoms:"تظهر بثرات داكنة أو بنية مائلة للسواد على الساق وأجزاء من النبات، وقد تمتد الإصابة إلى الأوراق والسنابل.",care:"الاعتماد على الأصناف المقاومة الموصى بها، والفحص المبكر، والتأكد من نوع الصدأ قبل تحديد أي إجراء للمكافحة."},
- {name:"التفحم السائب",type:"disease",icon:"🌾",page:49,printed:47,symptoms:"تتحول أجزاء السنبلة المصابة إلى كتلة من مسحوق أسود، وقد لا تظهر العلامات بوضوح إلا عند طرد السنابل.",care:"استخدام تقاوي معتمدة ومعاملة بالمطهرات الفطرية من مصدر موثوق، وعدم استخدام تقاوي مجهولة المصدر."},
- {name:"البياض الدقيقي",type:"disease",icon:"🌾",page:50,printed:48,symptoms:"تظهر بقع أو طبقة بيضاء دقيقية على الأوراق والأغماد، وقد تتسع وتتحد ويتغير لونها مع تقدم الإصابة.",care:"اختيار الصنف المناسب، والالتزام بالتوصيات الزراعية والتسميد المتوازن، ومتابعة الإصابة والرجوع للمهندس عند انتشارها."},
+ {name:"الحفار",type:"insect",icon:"🪲",page:32,printed:30,symptoms:"يهاجم البادرات أسفل سطح التربة؛ فتذبل النباتات أو تموت، وقد تظهر أنفاق مرتفعة قليلًا بعد الري.",care:"خدمة الأرض جيدًا، والتخلص من بقايا المحصول والحشائش، وفحص الحقل مبكرًا. تُحدد المكافحة المناسبة بعد التأكد من وجود الإصابة.",image:0},
+ {name:"الدودة القارضة",type:"insect",icon:"🐛",page:33,printed:31,symptoms:"تقطع البادرات عند سطح التربة أو تقرض الساق؛ فتسقط النباتات أو تختفي بادرات في بقع من الحقل.",care:"الحرث الجيد قبل الزراعة، ومتابعة البادرات وفحص التربة حول النباتات المصابة، وإزالة الحشائش. لا تُستخدم معاملة إلا بعد تحديد الإصابة.",image:1},
+ {name:"دودة الحشد الخريفية",type:"insect",icon:"🐛",page:34,printed:32,symptoms:"تظهر على الأوراق مناطق شفافة كالشباك ثم ثقوب غير منتظمة، وقد تتآكل الأوراق أو القلوب مع وجود يرقات.",care:"الفحص المبكر للأوراق والقلوب، والتخلص من الحشائش والعوائل، ومتابعة بؤر الإصابة. عند ثبوت الإصابة يُرجع للمهندس لتحديد المكافحة المسجلة.",image:1},
+ {name:"حشرات المن",type:"insect",icon:"🪲",page:37,printed:35,symptoms:"تتجمع حشرات صغيرة على الأوراق وتمتص العصارة؛ وقد يظهر اصفرار والتفاف للأوراق، وإفرازات عسلية وعفن هبابي، وضعف في تكوين الحبوب.",care:"الفحص الدوري خاصة في الفترات المناسبة لانتشار المن، وتجنب المغالاة في التسميد الآزوتي، والحفاظ على الأعداء الحيوية النافعة.",image:1},
+ {name:"جعل الورد الزغبي",type:"insect",icon:"🪲",page:39,printed:37,symptoms:"تظهر الحشرات الكاملة وقت الإزهار وتتغذى على مكونات الزهرة، وقد تصبح السنابل بيضاء جافة وخالية من الحبوب.",care:"تكثيف المرور الحقلي خلال فترة الإزهار، وملاحظة وجود الحشرات الكاملة والسنابل الفارغة، وطلب التوجيه الفني قبل أي تدخل.",image:1},
+ {name:"دودة سنابل القمح (النفاسيا)",type:"insect",icon:"🐛",page:41,printed:39,symptoms:"قد تبدو السنابل بيضاء جافة فوق نباتات خضراء، ويسهل فصلها عن الساق عند وجود اليرقات داخل حامل السنبلة.",care:"جمع النباتات المصابة والتخلص منها مبكرًا، وتوحيد ميعاد الزراعة في التجمعات، والحرث الجيد بعد الحصاد للتعرض للشمس والأعداء الحيوية.",image:1},
+ {name:"دبور الحنطة المنشاري",type:"insect",icon:"🪰",page:42,printed:40,symptoms:"تضع الأنثى البيض داخل ساق النبات، وتتغذى اليرقة داخل الساق؛ فيضعف النبات وقد تنكسر السيقان أو تجف السنابل.",care:"اختيار الأصناف ذات السيقان الصلبة متى أوصت بها الجهات المختصة، وجمع النباتات المصابة والتخلص من بقايا المحصول، ومتابعة الحقل.",image:2},
+ {name:"القواقع والبزاقات الأرضية",type:"other",icon:"🐌",page:43,printed:41,symptoms:"تتغذى على الأوراق وقد تترك آثار قضم وخطوطًا مخاطية لامعة، وتزداد الأضرار مع كثافة الإصابة ورطوبة البيئة.",care:"خدمة الأرض جيدًا، والتخلص من الحشائش ومخلفات المحصول، ومتابعة الحقل خصوصًا في الأماكن الرطبة، وتجنب الزراعات المتأخرة بجوار حقول البرسيم.",image:2},
+ {name:"الصدأ الأصفر",type:"disease",icon:"🌾",page:46,printed:44,symptoms:"تظهر بثرات أو مسحوق أصفر مرتبة في خطوط طولية على الأوراق، وقد تظهر الإصابة على أجزاء أخرى من النبات.",care:"اختيار الأصناف الموصى بها والمقاومة، والمرور الحقلي المنتظم. عند الاشتباه يلزم تأكيد التشخيص والتحرك وفق التوصية الرسمية دون تأخير.",image:3},
+ {name:"الصدأ البرتقالي",type:"disease",icon:"🌾",page:47,printed:45,symptoms:"تظهر بثرات برتقالية أو بنية برتقالية على الأوراق، وتكون غالبًا مبعثرة وليست في خطوط منتظمة كالصدأ الأصفر.",care:"زراعة الأصناف الموصى بها والمقاومة للأصداء، ومتابعة الأوراق دوريًا، والرجوع لمهندس الإرشاد عند ظهور أعراض مشتبه بها.",image:3},
+ {name:"الصدأ الأسود (صدأ الساق)",type:"disease",icon:"🌾",page:47,printed:45,symptoms:"تظهر بثرات داكنة أو بنية مائلة للسواد على الساق وأجزاء من النبات، وقد تمتد الإصابة إلى الأوراق والسنابل.",care:"الاعتماد على الأصناف المقاومة الموصى بها، والفحص المبكر، والتأكد من نوع الصدأ قبل تحديد أي إجراء للمكافحة.",image:4},
+ {name:"التفحم السائب",type:"disease",icon:"🌾",page:49,printed:47,symptoms:"تتحول أجزاء السنبلة المصابة إلى كتلة من مسحوق أسود، وقد لا تظهر العلامات بوضوح إلا عند طرد السنابل.",care:"استخدام تقاوي معتمدة ومعاملة بالمطهرات الفطرية من مصدر موثوق، وعدم استخدام تقاوي مجهولة المصدر.",image:4},
+ {name:"البياض الدقيقي",type:"disease",icon:"🌾",page:50,printed:48,symptoms:"تظهر بقع أو طبقة بيضاء دقيقية على الأوراق والأغماد، وقد تتسع وتتحد ويتغير لونها مع تقدم الإصابة.",care:"اختيار الصنف المناسب، والالتزام بالتوصيات الزراعية والتسميد المتوازن، ومتابعة الإصابة والرجوع للمهندس عند انتشارها.",image:5},
  {name:"فيروس تقزم الشعير الأصفر",type:"disease",icon:"🌾",page:50,printed:48,symptoms:"قد يظهر اصفرار أو احمرار بالأوراق مع تقزم النبات وضعف نموه، وينتقل الفيروس بواسطة حشرات المن.",care:"المتابعة المبكرة لحشرات المن، واستخدام الأصناف الموصى بها، وإزالة النباتات شديدة الإصابة وفق إرشاد المختص، وعدم اعتبار الاصفرار وحده دليلًا قاطعًا."}
-];
+],image:6;
 function renderAtlas(filter="all"){
  const grid=$("atlasGrid");
  const items=atlasItems.filter(item=>filter==="all"||item.type===filter);
- grid.innerHTML=items.map((item,index)=>'<article class="atlas-card" data-atlas-card="'+item.name+'"><span class="atlas-kind '+(item.type==="disease"?"disease":"")+'">'+(item.type==="disease"?"مرض":item.type==="other"?"آفة أخرى":"حشرة/آفة حشرية")+'</span><h4>'+item.icon+' '+item.name+'</h4><div class="atlas-photo" data-loaded="0"><span>'+item.icon+'</span></div><button class="atlas-view" type="button" data-atlas-page="'+item.page+'">🖼️ عرض صورة النشرة</button><p class="atlas-copy"><strong>علامات الإصابة:</strong> '+item.symptoms+'</p><p class="atlas-copy"><strong>التعامل الإرشادي:</strong> '+item.care+'</p><div class="atlas-page"><span>النشرة 1449 – ص '+item.printed+'</span><a href="https://online.fliphtml5.com/opyuzh/hvor/#p='+item.page+'" target="_blank" rel="noopener">فتح الصفحة الأصلية ↗</a></div></article>').join("");
+ grid.innerHTML=items.map(item=>{
+  const x=(item.image%3)*50, y=Math.floor(item.image/3)*50;
+  return '<article class="atlas-card" data-atlas-card="'+item.name+'"><span class="atlas-kind '+(item.type==="disease"?"disease":"")+'">'+(item.type==="disease"?"مرض":item.type==="other"?"آفة أخرى":"حشرة/آفة حشرية")+'</span><h4>'+item.icon+' '+item.name+'</h4><div class="atlas-photo" role="img" aria-label="صورة أصلية لـ '+item.name+'" style="--atlas-x:'+x+'%;--atlas-y:'+y+'%"></div><p class="atlas-copy"><strong>علامات الإصابة:</strong> '+item.symptoms+'</p><p class="atlas-copy"><strong>التعامل الإرشادي:</strong> '+item.care+'</p></article>';
+ }).join("");
 }
 $("openPestAtlas").addEventListener("click",()=>{
  $("searchSection").parentElement.classList.add("hidden");
@@ -502,15 +502,7 @@ document.querySelectorAll("[data-atlas-filter]").forEach(btn=>btn.addEventListen
  document.querySelectorAll("[data-atlas-filter]").forEach(b=>b.classList.remove("active"));
  btn.classList.add("active");renderAtlas(btn.dataset.atlasFilter);
 }));
-$("atlasGrid").addEventListener("click",event=>{
- const btn=event.target.closest("[data-atlas-page]");
- if(!btn)return;
- const card=btn.closest(".atlas-card"),photo=card.querySelector(".atlas-photo");
- if(photo.dataset.loaded==="1")return;
- const page=btn.dataset.atlasPage;
- photo.innerHTML='<iframe title="صفحة النشرة الأصلية" loading="lazy" allowfullscreen src="https://online.fliphtml5.com/opyuzh/hvor/#p='+page+'"></iframe>';
- photo.dataset.loaded="1";btn.textContent="تم فتح صفحة النشرة — استخدم العارض للتكبير";
-});
+
 
 document.querySelectorAll("[data-section]").forEach(b=>b.addEventListener("click",()=>openSection(b.dataset.section)));
 $("openJourney").addEventListener("click",openJourney);
