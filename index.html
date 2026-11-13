@@ -76,9 +76,40 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 .answer h3{color:#8a5416;font-size:20px;line-height:1.8;margin-bottom:14px}
 .answer p{color:#174f37;font-size:19px;font-weight:700;line-height:2.15}
 
+
+/* شاشة الترحيب الافتتاحية */
+#welcomeScreen{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:100vh;min-height:100dvh;padding:clamp(24px,6vh,58px) 20px max(28px,env(safe-area-inset-bottom));text-align:center;color:#fff;background:linear-gradient(180deg,rgba(8,54,31,.72),rgba(12,67,39,.28) 48%,rgba(7,43,25,.82)),url("https://images.unsplash.com/photo-1758573728869-d25eb4bafb67?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800") center/cover no-repeat;transition:opacity .45s ease,visibility .45s ease}
+#welcomeScreen.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+.welcome-top{display:flex;flex-direction:column;align-items:center;gap:9px}
+.welcome-ministry{font-size:14px;font-weight:700;letter-spacing:.3px;text-shadow:0 2px 8px #0008}
+.welcome-logo{width:92px;height:92px;object-fit:contain;padding:10px;background:rgba(255,255,255,.96);border:2px solid rgba(255,255,255,.8);border-radius:26px;box-shadow:0 8px 26px #0004}
+.welcome-title{margin:8px 0 0;font-size:clamp(29px,7vw,43px);font-weight:900;text-shadow:0 3px 12px #0008}
+.welcome-tagline{margin:0;color:#ffe39a;font-size:clamp(18px,4.5vw,23px);font-weight:800;text-shadow:0 2px 8px #0009}
+.welcome-bottom{width:min(100%,440px);display:flex;flex-direction:column;align-items:center;gap:14px}
+.welcome-greeting{margin:0;font-size:clamp(21px,5vw,27px);font-weight:800;text-shadow:0 2px 9px #0009}
+.welcome-description{margin:0;max-width:360px;font-size:16px;line-height:1.9;color:#fff;text-shadow:0 2px 7px #0009}
+#welcomeStart{width:min(100%,270px);border:2px solid rgba(255,255,255,.75);border-radius:999px;padding:15px 24px;background:linear-gradient(135deg,#f5d36f,#d99b22);color:#24472f;font:900 19px Tahoma,Arial,sans-serif;box-shadow:0 7px 22px #0004;cursor:pointer}
+#welcomeStart:active{transform:scale(.98)}
+@media(prefers-reduced-motion:reduce){#welcomeScreen{transition:none}}
+
 </style>
 </head>
 <body>
+
+<div id="welcomeScreen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+ <div class="welcome-top">
+  <div class="welcome-ministry">الإرشاد الزراعي بمحافظة المنيا</div>
+  <img class="welcome-logo" src="./icon.svg" alt="أيقونة قمح إرشاد المنيا">
+  <h1 class="welcome-title" id="welcomeTitle">قمح إرشاد المنيا</h1>
+  <p class="welcome-tagline">معًا نحو زراعة أفضل</p>
+ </div>
+ <div class="welcome-bottom">
+  <p class="welcome-greeting">أهلاً بك يا مزارع المنيا 🌾</p>
+  <p class="welcome-description">دليلك الإرشادي المبسط لزراعة القمح من الزراعة حتى الحصاد</p>
+  <button id="welcomeStart" type="button">ابدأ الآن ←</button>
+ </div>
+</div>
+
 <header><div class="wheat">🌾</div><h1>قمح إرشاد المنيا</h1><p>معًا نحو زراعة أفضل</p></header>
 <main>
 <section id="home">
@@ -338,5 +369,21 @@ if ("serviceWorker" in navigator && location.protocol === "https:") {
   });
 }
 </script>
+
+<script>
+(function(){
+ const screen=document.getElementById("welcomeScreen");
+ const start=document.getElementById("welcomeStart");
+ if(!screen||!start)return;
+ function enterApp(){
+  screen.classList.add("is-hidden");
+  screen.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+ }
+ start.addEventListener("click",enterApp);
+ document.body.style.overflow="hidden";
+})();
+</script>
+
 </body>
 </html>
