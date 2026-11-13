@@ -92,6 +92,40 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 #welcomeStart:active{transform:scale(.98)}
 @media(prefers-reduced-motion:reduce){#welcomeScreen{transition:none}}
 
+
+/* رحلة القمح: خط زمني تفاعلي */
+#journey{padding:16px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(242,249,239,.88)),url("https://images.unsplash.com/photo-1758573728869-d25eb4bafb67?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800") center/cover fixed}
+.journey-intro{text-align:center;padding:12px 8px 20px}
+.journey-intro .journey-mark{font-size:48px;filter:drop-shadow(0 4px 5px #8a6b2b44)}
+.journey-intro h2{margin:5px 0 8px;color:#205f3e;font-size:25px}
+.journey-intro p{margin:0;color:#52685a;line-height:1.9}
+.journey-list{position:relative;display:grid;gap:13px;max-width:760px;margin:0 auto}
+.journey-stage{position:relative;background:rgba(255,255,255,.96);border:1px solid #dce9dc;border-radius:18px;padding:15px 16px 15px 14px;box-shadow:0 5px 15px #173d2012;overflow:hidden}
+.journey-stage:before{content:"";position:absolute;right:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,#d9ad43,#278052)}
+.journey-stage summary{list-style:none;display:flex;align-items:center;gap:12px;cursor:pointer;min-height:54px}
+.journey-stage summary::-webkit-details-marker{display:none}
+.journey-number{flex:0 0 46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#eaf5e9,#d4ead8);font-size:25px}
+.journey-stage:nth-child(2) .journey-number{background:#e4f3df}
+.journey-stage:nth-child(3) .journey-number{background:#e1f2e9}
+.journey-stage:nth-child(4) .journey-number{background:#e4eff8}
+.journey-stage:nth-child(5) .journey-number{background:#fff1cf}
+.journey-stage:nth-child(6) .journey-number{background:#f8e9c9}
+.journey-stage summary strong{display:block;color:#205f3e;font-size:17px;line-height:1.6}
+.journey-stage summary small{display:block;color:#718075;font-size:12px;margin-top:2px}
+.journey-chevron{margin-right:auto;color:#8b9b8e;font-size:20px;transition:transform .2s}
+.journey-stage[open] .journey-chevron{transform:rotate(180deg)}
+.journey-content{border-top:1px solid #e8efe8;margin-top:13px;padding:12px 4px 2px;color:#344b3b;line-height:1.95}
+.journey-content ul{margin:5px 0 12px;padding-right:21px}
+.journey-content li{margin:5px 0}
+.journey-link{border:0;border-radius:10px;padding:10px 13px;background:#e6f2e8;color:#205f3e;font: bold 14px Tahoma;cursor:pointer}
+.journey-caution{max-width:760px;margin:16px auto 0;padding:13px 15px;border-radius:13px;background:#fff7df;border:1px solid #f0dfb4;color:#66552b;font-size:13px;line-height:1.9}
+.journey-home-card{grid-column:1/-1;display:flex;align-items:center;gap:14px;text-align:right;min-height:94px;padding:14px 17px;background:linear-gradient(115deg,#fffdf5,#e8f4e9);border:1px solid #d9e6d7}
+.journey-home-card .ico{flex:0 0 60px;margin:0!important;background:linear-gradient(145deg,#d9a62e,#f3d477)!important;color:#fff}
+.journey-home-card .journey-card-copy{flex:1}
+.journey-home-card strong{color:#205f3e}
+.journey-home-card small{line-height:1.7}
+@media(max-width:649px){#journey{padding:12px;background-attachment:scroll}.journey-stage{padding:13px 13px 13px 10px}.journey-stage summary strong{font-size:16px}}
+
 </style>
 </head>
 <body>
@@ -124,8 +158,51 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
   <button class="section-card" data-section="الحشائش"><span class="ico">🌿</span><strong>الحشائش</strong><small>الوقاية والمكافحة</small></button>
   <button class="section-card" data-section="الأمراض والآفات"><span class="ico">🛡️</span><strong>الأمراض والآفات</strong><small>الأصداء والمنّ والتشخيص</small></button>
   <button class="section-card" data-section="الحصاد"><span class="ico">🌾</span><strong>الحصاد</strong><small>التوقيت وتقليل الفاقد</small></button>
+
+  <button class="section-card journey-home-card" id="openJourney" type="button">
+   <span class="ico">🌾</span>
+   <span class="journey-card-copy"><strong>رحلة القمح</strong><small>تابع مراحل نمو القمح من الزراعة حتى الحصاد خطوة بخطوة</small></span>
+   <span aria-hidden="true" style="font-size:24px;color:#b58a2d">←</span>
+  </button>
  </div>
 </section>
+
+<section id="journey" class="hidden">
+ <div class="toolbar"><button class="back" id="backJourney">↩ رجوع</button><div class="current-title">🌾 رحلة القمح</div></div>
+ <div class="journey-intro">
+  <div class="journey-mark">🌾</div>
+  <h2>من حبة صغيرة إلى سنبلة مليانة خير</h2>
+  <p>امشِ مع محصولك مرحلة بمرحلة، واعرف أهم العمليات اللي تتابعها في الحقل.</p>
+ </div>
+ <div class="journey-list">
+  <details class="journey-stage">
+   <summary><span class="journey-number">🚜</span><span><strong>1. تجهيز الأرض والزراعة</strong><small>بداية الموسم وتجهيز الحقل</small></span><span class="journey-chevron">⌄</span></summary>
+   <div class="journey-content"><ul><li>اختار تقاوي معتمدة من مصدر موثوق والصنف الموصى به للمنطقة.</li><li>جهّز الأرض واهتم بالتسوية وتنعيم سطح التربة.</li><li>التزم بميعاد الزراعة ومعدل التقاوي وعمق الزراعة المناسب لطريقة الزراعة.</li><li>اضبط رية الزراعة دون تغريق أو تعطيش.</li></ul><button class="journey-link" type="button" data-journey-section="الزراعة">اعرف تفاصيل الزراعة ←</button></div>
+  </details>
+  <details class="journey-stage">
+   <summary><span class="journey-number">🌱</span><span><strong>2. الإنبات وظهور البادرات</strong><small>تأكد إن الحقل بدأ يطلع بانتظام</small></span><span class="journey-chevron">⌄</span></summary>
+   <div class="journey-content"><ul><li>تابع ظهور النباتات وانتظام توزيعها في الحقل.</li><li>افحص الأماكن الخالية أو ضعيفة الإنبات وحدد سبب المشكلة.</li><li>تجنب زيادة مياه الري أو نقصها بما يضر البادرات.</li><li>راقب بداية ظهور الحشائش من بدري.</li></ul><button class="journey-link" type="button" data-journey-section="الري">اعرف إرشادات الري ←</button></div>
+  </details>
+  <details class="journey-stage">
+   <summary><span class="journey-number">🌿</span><span><strong>3. مرحلة التفريع</strong><small>مرحلة مهمة لتكوين عدد مناسب من السنابل</small></span><span class="journey-chevron">⌄</span></summary>
+   <div class="journey-content"><ul><li>تابع التفريع وقوة نمو النباتات وانتظام الكثافة.</li><li>نفّذ رية المحاياة والريات التالية في مواعيدها المناسبة لحالة الأرض.</li><li>نفّذ التسميد الآزوتي على دفعات طبقًا للتوصية المعتمدة.</li><li>تابع الحشائش واختار المكافحة المناسبة بعد تحديد نوعها.</li></ul><button class="journey-link" type="button" data-journey-section="التسميد">اعرف تفاصيل التسميد ←</button></div>
+  </details>
+  <details class="journey-stage">
+   <summary><span class="journey-number">🌾</span><span><strong>4. الاستطالة وطرد السنابل</strong><small>النبات بيطول والسنبلة بتبدأ تظهر</small></span><span class="journey-chevron">⌄</span></summary>
+   <div class="journey-content"><ul><li>تابع نمو الساق وظهور السنابل بانتظام.</li><li>حافظ على انتظام الري وتجنب تعريض النبات للعطش أو التغريق.</li><li>افحص النباتات باستمرار لاكتشاف الأصداء والآفات مبكرًا.</li><li>لا تستخدم أي مبيد إلا بعد التأكد من الإصابة واتباع التوصيات الرسمية.</li></ul><button class="journey-link" type="button" data-journey-section="الأمراض والآفات">اعرف إرشادات الأمراض والآفات ←</button></div>
+  </details>
+  <details class="journey-stage">
+   <summary><span class="journey-number">🌼</span><span><strong>5. التزهير وامتلاء الحبوب</strong><small>مرحلة تكوين الحبوب وزيادة وزنها</small></span><span class="journey-chevron">⌄</span></summary>
+   <div class="journey-content"><ul><li>تابع التزهير وامتلاء الحبوب وتطور لون السنابل.</li><li>حافظ على انتظام الري حسب احتياج النبات وظروف التربة والجو.</li><li>راقب أي إصابات مرضية أو حشرية، خصوصًا مع تغير الظروف الجوية.</li><li>تجنب أي معاملة غير موصى بها خلال هذه المرحلة.</li></ul><button class="journey-link" type="button" data-journey-section="الري">راجع إرشادات الري ←</button></div>
+  </details>
+  <details class="journey-stage">
+   <summary><span class="journey-number">🌅</span><span><strong>6. النضج والحصاد</strong><small>وصلنا لآخر الرحلة وجمع المحصول</small></span><span class="journey-chevron">⌄</span></summary>
+   <div class="journey-content"><ul><li>تابع علامات النضج واستعد للحصاد في الموعد المناسب.</li><li>أوقف الري قبل الحصاد بالمدة الموصى بها وفق حالة الحقل.</li><li>نظّم عملية الحصاد والنقل والتخزين لتقليل الفاقد.</li><li>نظّف المعدات وخطط للدورة الزراعية القادمة.</li></ul><button class="journey-link" type="button" data-journey-section="الحصاد">اعرف تفاصيل الحصاد ←</button></div>
+  </details>
+ </div>
+ <div class="journey-caution"><strong>معلومة مهمة:</strong> المراحل دي بتتتابع حسب ميعاد الزراعة والصنف والطقس وحالة الحقل؛ مش مواعيد ثابتة بالأيام لكل الأراضي. اتبع توصيات الإرشاد الزراعي بالمنيا للموسم وظروف أرضك.</div>
+</section>
+
 <section id="detail" class="hidden">
  <div class="toolbar"><button class="back" id="backHome">↩ رجوع</button><div id="sectionTitle" class="current-title"></div></div>
  <div class="search-wrap"><label for="searchSection">🔎 ابحث داخل الأسئلة</label><input id="searchSection" type="search" placeholder="اكتب كلمة من السؤال..."></div>
@@ -309,13 +386,14 @@ function renderQuestions(items,target){
 }
 function openSection(section){
  activeSection=section;
- $("home").classList.add("hidden");$("detail").classList.remove("hidden");
+ $("home").classList.add("hidden");$("journey").classList.add("hidden");$("detail").classList.remove("hidden");
  $("sectionTitle").textContent=section;
  $("searchSection").value="";$("answerBox").classList.add("hidden");
  renderQuestions(data[section].map((item,index)=>({...item,section,index})),$("questionList"));
  window.scrollTo({top:0,behavior:"smooth"});
 }
-function goHome(){stopVoice(false);$("detail").classList.add("hidden");$("home").classList.remove("hidden");$("answerBox").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function openJourney(){$("home").classList.add("hidden");$("detail").classList.add("hidden");$("journey").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function goHome(){stopVoice(false);$("detail").classList.add("hidden");$("journey").classList.add("hidden");$("home").classList.remove("hidden");$("answerBox").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth"});}
 function stopVoice(update=true){
  if("speechSynthesis" in window)window.speechSynthesis.cancel();
  if(update)$("voiceStatus").textContent="تم إيقاف الصوت.";
@@ -341,6 +419,9 @@ function speakAnswer(){
  window.speechSynthesis.speak(u);
 }
 document.querySelectorAll("[data-section]").forEach(b=>b.addEventListener("click",()=>openSection(b.dataset.section)));
+$("openJourney").addEventListener("click",openJourney);
+$("backJourney").addEventListener("click",goHome);
+document.querySelectorAll("[data-journey-section]").forEach(b=>b.addEventListener("click",()=>openSection(b.dataset.journeySection)));
 $("backHome").addEventListener("click",goHome);
 $("listenBtn").addEventListener("click",speakAnswer);
 $("stopBtn").addEventListener("click",()=>stopVoice(true));
