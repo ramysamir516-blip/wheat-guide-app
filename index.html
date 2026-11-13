@@ -20,6 +20,11 @@ header .wheat{font-size:38px}
 header h1{font-size:clamp(24px,5vw,32px);margin:5px 0 8px}
 header p{margin:0;font-size:16px}
 main{max-width:940px;margin:auto;padding:18px 14px 36px}
+/* خلفية فوتوغرافية للقمح في الشاشة الرئيسية وشاشة الأسئلة */
+#home{padding:16px;border-radius:22px;background-image:linear-gradient(180deg,rgba(255,255,255,.72),rgba(247,252,244,.86)),url("https://images.unsplash.com/photo-1758573728869-d25eb4bafb67?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800");background-size:cover;background-position:center;background-attachment:fixed}
+#detail{padding:16px;border-radius:22px;background-image:linear-gradient(180deg,rgba(250,255,250,.78),rgba(245,252,246,.88)),url("https://images.unsplash.com/photo-1753081490039-45da26d61a2e?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800");background-size:cover;background-position:center;background-attachment:fixed}
+@media(max-width:649px){#home,#detail{padding:12px;background-attachment:scroll}}
+
 .intro{text-align:center;padding:12px 8px 18px}
 .intro h2{margin:5px 0 8px;color:#205f3e;font-size:23px}
 .intro p{margin:0;color:var(--muted);line-height:1.8}
