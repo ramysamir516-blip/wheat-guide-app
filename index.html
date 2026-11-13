@@ -158,12 +158,64 @@ let activeSection="";
 let activeItem=null;
 const $=id=>document.getElementById(id);
 function allItems(){return Object.entries(data).flatMap(([section,items])=>items.map((item,index)=>({...item,section,index})));}
-function normalizeSearchText(value){return value.toLowerCase().replace(/[\u064B-\u065F\u0670ـ]/g,"").replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").replace(/[ًٌٍَُِّْٰ]/g,"").replace(/[^\u0621-\u064A0-9\s]/g," ").replace(/\s+/g," ").trim();}
-function matchesSearch(item,query){
- const haystack=normalizeSearchText(item.q+" "+item.a+" "+(item.section||""));
- const words=normalizeSearchText(query).split(" ").filter(Boolean);
- const synonyms={"موعد":["موعد","ميعاد"],"ميعاد":["ميعاد","موعد"]};
- return words.every(word=>(synonyms[word]||[word]).some(variant=>haystack.includes(variant)));
+function normalizeSearchText(value){
+ return value.toLowerCase()
+ .replace(/[ًٌٍَُِّْٰـ]/g,"")
+ .replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي")
+ .replace(/[ؤئ]/g,"ء").replace(/[^ء-ي0-9\s]/g," ")
+ .replace(/\s+/g," ").trim();
+}
+const searchGroups=[
+ ["موعد","ميعاد","وقت","امتى","متى","تاريخ"],
+ ["زراعه","ازرع","يزرع","زرع","زراعه","ميعاد الزراعه"],
+ ["قمح","القمح","قمحه"],
+ ["منيا","المنيا","مينيا"],
+ ["تقاوي","تقاوى","بذور","بذر","حبوب"],
+ ["ري","الري","ارو","اسقي","سقي","مياه","ماء","عطش","تعطيش"],
+ ["تسميد","سماد","اسمد","السماد","اسمده","تسميده"],
+ ["نيتروجين","ازوت","نيتروجيني","يوريا","نترات","سلفات"],
+ ["فوسفور","فوسفاتي","سوبر","فوسفات"],
+ ["بوتاسيوم","بوتاسي","بوتاس"],
+ ["حشائش","حشيشه","حشيش","زمير","حشائش"],
+ ["مبيد","مبيدات","رش","ارشش","مكافحه"],
+ ["مرض","امراض","اصابه","صدأ","اصداء","اصفرار"],
+ ["حصاد","احصد","ضم","الدراس","دراس","حصاد"],
+ ["مصطبه","مصاطب","مصاطب"],
+ ["ارض","الارض","تربه","التربه"],
+ ["فدان","الفدان","مساحه"],
+ ["كيلوجرام","كيلو","كجم","كيلو جرام"],
+ ["صنف","اصناف","انواع"],
+ ["محصول","انتاج","انتاجيه","غله"]
+];
+const searchCanonical={};
+for(const group of searchGroups){
+ const key=normalizeSearchText(group[0]);
+ for(const word of group) searchCanonical[normalizeSearchText(word)]=key;
+}
+const searchStopWords=new Set(["ما","ماذا","هل","ايه","اي","ازاي","كيف","ليه","لماذا","من","في","عن","على","الى","او","و","ال","ده","دي","دا","هو","هي","كم","قد","بعد","قبل","مع","انا","عايز","عاوزه","ممكن","لو","كان","تكون","يكون"]);
+function searchTokens(value){
+ return normalizeSearchText(value).split(" ").filter(word=>word.length>1&&!searchStopWords.has(word))
+ .map(word=>searchCanonical[word]||word);
+}
+function searchScore(item,query){
+ const words=[...new Set(searchTokens(query))];
+ if(!words.length)return 0;
+ const q=searchTokens(item.q).join(" "), a=searchTokens(item.a).join(" "), section=searchTokens(item.section||"").join(" ");
+ let score=0,hits=0;
+ for(const word of words){
+  let points=0;
+  if(q.includes(word))points=3;
+  else if(section.includes(word))points=2;
+  else if(a.includes(word))points=1;
+  if(points){hits++;score+=points;}
+ }
+ const needed=words.length===1?1:Math.min(2,Math.ceil(words.length*.35));
+ return hits>=needed?score+(hits/words.length):0;
+}
+function searchItems(items,query){
+ return items.map(item=>({...item,_score:searchScore(item,query)}))
+ .filter(item=>item._score>0)
+ .sort((a,b)=>b._score-a._score);
 }
 function showAnswer(item){
  activeItem=item;
@@ -217,14 +269,14 @@ $("listenBtn").addEventListener("click",speakAnswer);
 $("stopBtn").addEventListener("click",()=>stopVoice(true));
 $("searchSection").addEventListener("input",e=>{
  const term=e.target.value.trim();
- const items=data[activeSection].map((item,index)=>({...item,section:activeSection,index})).filter(x=>matchesSearch(x,term));
+ const items=searchItems(data[activeSection].map((item,index)=>({...item,section:activeSection,index})),term);
  renderQuestions(items,$("questionList"));
 });
 $("searchHome").addEventListener("input",e=>{
  const term=e.target.value.trim(), box=$("homeResults");
  if(!term){box.classList.add("hidden");$("sections").classList.remove("hidden");box.innerHTML="";return;}
  $("sections").classList.add("hidden");box.classList.remove("hidden");
- const items=allItems().filter(x=>matchesSearch(x,term));
+ const items=searchItems(allItems(),term);
  renderQuestions(items,box);
 });
 if("speechSynthesis" in window)window.speechSynthesis.getVoices();
