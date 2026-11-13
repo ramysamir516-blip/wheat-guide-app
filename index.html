@@ -523,11 +523,11 @@ const atlasItems=[
  {name:"فيروس تقزم الشعير الأصفر",type:"disease",icon:"🌾",symptoms:"قد يظهر اصفرار أو احمرار بالأوراق مع تقزم النبات وضعف نموه، وينتقل الفيروس بواسطة حشرات المن.",care:"المتابعة المبكرة لحشرات المن، واستخدام الأصناف الموصى بها، وإزالة النباتات شديدة الإصابة وفق إرشاد المختص، وعدم اعتبار الاصفرار وحده دليلًا قاطعًا."}
 ];
 const atlasImages = {
- "الصدأ الأصفر":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/yellow_rust_2.jpg",alt:"أعراض الصدأ الأصفر على أوراق القمح",source:"مصدر علمي: جامعة تاميل نادو الزراعية"},
- "الصدأ البرتقالي":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/wheat%20leaf%20rust.JPG",alt:"أعراض الصدأ البرتقالي على القمح",source:"مصدر علمي: جامعة تاميل نادو الزراعية"},
- "الصدأ الأسود (صدأ الساق)":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/wheat%20black%20rust%20.JPG",alt:"أعراض الصدأ الأسود على القمح",source:"مصدر علمي: جامعة تاميل نادو الزراعية"},
- "التفحم السائب":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/Loose_Smut_headcloseup.jpg",alt:"سنبلة قمح مصابة بالتفحم السائب",source:"مصدر علمي: جامعة تاميل نادو الزراعية"},
- "البياض الدقيقي":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/Powdery_Meldew_leaf_1.jpg",alt:"أعراض البياض الدقيقي على أوراق القمح",source:"مصدر علمي: جامعة تاميل نادو الزراعية"}
+ "الصدأ الأصفر":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/yellow_rust_2.jpg",alt:"أعراض الصدأ الأصفر على أوراق القمح"},
+ "الصدأ البرتقالي":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/wheat%20leaf%20rust.JPG",alt:"أعراض الصدأ البرتقالي على القمح"},
+ "الصدأ الأسود (صدأ الساق)":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/wheat%20black%20rust%20.JPG",alt:"أعراض الصدأ الأسود على القمح"},
+ "التفحم السائب":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/Loose_Smut_headcloseup.jpg",alt:"سنبلة قمح مصابة بالتفحم السائب"},
+ "البياض الدقيقي":{url:"https://agritech.tnau.ac.in/crop_protection/images/wheat_diseases/Powdery_Meldew_leaf_1.jpg",alt:"أعراض البياض الدقيقي على أوراق القمح"}
 };
 
 const atlasImageModal=$("atlasImageModal");
@@ -540,7 +540,7 @@ function renderAtlas(filter="all"){
  const grid=$("atlasGrid");
  const items=atlasItems.filter(item=>filter==="all"||item.type===filter);
  grid.innerHTML=items.map(item=>
-  '<article class="atlas-card" data-atlas-card="'+item.name+'"><span class="atlas-kind '+(item.type==="disease"?"disease":"")+'">'+(item.type==="disease"?"مرض":item.type==="other"?"آفة أخرى":"حشرة/آفة حشرية")+'</span><h4>'+item.icon+' '+item.name+'</h4>'+(atlasImages[item.name]?'<img class="atlas-photo" src="'+atlasImages[item.name].url+'" alt="'+atlasImages[item.name].alt+'" loading="lazy" data-atlas-image="'+atlasImages[item.name].url+'"><div class="atlas-photo-source">'+atlasImages[item.name].source+' · اضغط على الصورة للتكبير</div>':'<div class="atlas-photo-note">الصورة التوضيحية لهذا النوع قيد الإضافة</div>')+'<p class="atlas-copy"><strong>علامات الإصابة:</strong> '+item.symptoms+'</p><p class="atlas-copy"><strong>التعامل الإرشادي:</strong> '+item.care+'</p></article>'
+  '<article class="atlas-card" data-atlas-card="'+item.name+'"><span class="atlas-kind '+(item.type==="disease"?"disease":"")+'">'+(item.type==="disease"?"مرض":item.type==="other"?"آفة أخرى":"حشرة/آفة حشرية")+'</span><h4>'+item.icon+' '+item.name+'</h4>'+(atlasImages[item.name]?'<img class="atlas-photo" src="'+atlasImages[item.name].url+'" alt="'+atlasImages[item.name].alt+'" loading="lazy" data-atlas-image="'+atlasImages[item.name].url+'"><div class="atlas-photo-source">'+اضغط على الصورة للتكبير</div>':'<div class="atlas-photo-note">الصورة التوضيحية لهذا النوع قيد الإضافة</div>')+'<p class="atlas-copy"><strong>علامات الإصابة:</strong> '+item.symptoms+'</p><p class="atlas-copy"><strong>التعامل الإرشادي:</strong> '+item.care+'</p></article>'
  ).join("");
 }
 $("openPestAtlas").addEventListener("click",()=>{
