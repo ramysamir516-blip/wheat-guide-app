@@ -1,4 +1,4 @@
-const CACHE_NAME = "qamh-ershad-minya-v15";
+const CACHE_NAME = "qamh-ershad-minya-v16";
 const APP_SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg"];
 
 self.addEventListener("install", event => {
