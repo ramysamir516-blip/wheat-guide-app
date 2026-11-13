@@ -25,6 +25,26 @@ main{max-width:940px;margin:auto;padding:18px 14px 36px}
 #detail{padding:16px;border-radius:22px;background-image:linear-gradient(180deg,rgba(250,255,250,.34),rgba(245,252,246,.46)),url("https://images.unsplash.com/photo-1753081490039-45da26d61a2e?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800");background-size:cover;background-position:center;background-attachment:fixed}
 @media(max-width:649px){#home,#detail{padding:12px;background-attachment:scroll}}
 
+/* بطاقة طقس مراكز المنيا */
+.weather-panel{background:linear-gradient(135deg,#eaf6ef,#f8fcf8);border:1px solid #cfe4d4;border-radius:20px;padding:16px;margin:0 0 18px;box-shadow:0 5px 16px #18351c12}
+.weather-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.weather-title{font-size:20px;font-weight:bold;color:#205f3e}
+.weather-select{width:100%;border:1px solid #cbded0;border-radius:12px;padding:12px;background:#fff;color:#24372d;font:16px Tahoma;outline-color:var(--green)}
+.weather-current{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border-radius:16px;padding:14px;margin-top:12px}
+.weather-main{display:flex;align-items:center;gap:10px}
+.weather-icon{font-size:42px}
+.weather-temp{font-size:34px;font-weight:bold;color:#205f3e;line-height:1.2}
+.weather-desc{font-size:14px;color:var(--muted);margin-top:4px}
+.weather-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.weather-stat{background:#fff;border-radius:12px;padding:10px;text-align:center;font-size:14px}
+.weather-stat b{display:block;color:#205f3e;font-size:16px;margin-top:4px}
+.weather-days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.weather-day{background:#fff;border-radius:12px;padding:10px 5px;text-align:center;font-size:13px}
+.weather-day .day-icon{display:block;font-size:24px;margin:5px 0}
+.weather-status{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.6}
+.weather-refresh{border:0;border-radius:10px;background:#dceee1;color:#205f3e;padding:9px 12px;font:bold 14px Tahoma;cursor:pointer}
+@media(max-width:420px){.weather-current{align-items:flex-start}.weather-meta{gap:6px}.weather-stat{font-size:12px}.weather-days{gap:5px}.weather-day{font-size:12px}}
+
 .intro{text-align:center;padding:12px 8px 18px}
 .intro h2{margin:5px 0 8px;color:#205f3e;font-size:23px}
 .intro p{margin:0;color:var(--muted);line-height:1.8}
@@ -171,6 +191,24 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 <main>
 <section id="home">
  <div class="intro"><h2>أهلاً بك يا مزارع القمح</h2><p>اسأل عن زراعة القمح، أو اختار الموضوع اللي عايز تعرف عنه.<br>معلومة إرشادية مبسطة تساعدك في خدمة محصول القمح.</p></div>
+ <div class="weather-panel" id="weatherPanel" dir="rtl">
+  <div class="weather-top"><div class="weather-title">🌤️ طقس مراكز محافظة المنيا</div><button class="weather-refresh" id="weatherRefresh" type="button">↻ تحديث الطقس</button></div>
+  <label for="weatherCenter" style="display:block;font-weight:bold;margin:0 3px 7px">اختار المركز</label>
+  <select class="weather-select" id="weatherCenter">
+   <option value="28.696,30.740">مركز العدوة</option>
+   <option value="28.641,30.794">مركز مغاغة</option>
+   <option value="28.518,30.731">مركز بني مزار</option>
+   <option value="28.431,30.710">مركز مطاي</option>
+   <option value="28.285,30.629">مركز سمالوط</option>
+   <option value="28.101,30.641" selected>مركز المنيا</option>
+   <option value="27.939,30.770">مركز أبو قرقاص</option>
+   <option value="27.775,30.801">مركز ملوي</option>
+   <option value="27.655,30.790">مركز دير مواس</option>
+  </select>
+  <div id="weatherResult" aria-live="polite">
+   <div class="weather-status">جارٍ تحميل حالة الطقس...</div>
+  </div>
+ </div>
  <div class="search-wrap"><label for="searchHome">🔎 ابحث عن سؤالك</label><input id="searchHome" type="search" placeholder="مثال: ميعاد الزراعة، التقاوي، رية المحاياة..."><div class="hint">اكتب كلمة من سؤالك لعرض الأسئلة المرتبطة بها.</div></div>
  <div id="homeResults" class="questions hidden"></div>
  <div id="sections" class="section-grid">
@@ -521,6 +559,57 @@ $("searchHome").addEventListener("input",e=>{
  const items=searchItems(allItems(),term);
  renderQuestions(items,box);
 });
+
+/* طقس مراكز محافظة المنيا - بيانات مباشرة من Open-Meteo */
+const minyaWeatherCodes={
+ 0:["سماء صافية","☀️"],1:["غائم جزئيًا","🌤️"],2:["غائم جزئيًا","⛅"],3:["غائم","☁️"],
+ 45:["شبورة","🌫️"],48:["شبورة كثيفة","🌫️"],51:["رذاذ خفيف","🌦️"],53:["رذاذ متوسط","🌦️"],55:["رذاذ كثيف","🌧️"],
+ 56:["رذاذ متجمد خفيف","🌧️"],57:["رذاذ متجمد كثيف","🌧️"],61:["أمطار خفيفة","🌧️"],63:["أمطار متوسطة","🌧️"],65:["أمطار غزيرة","🌧️"],
+ 66:["أمطار متجمدة خفيفة","🌧️"],67:["أمطار متجمدة غزيرة","🌧️"],71:["ثلوج خفيفة","🌨️"],73:["ثلوج متوسطة","🌨️"],75:["ثلوج كثيفة","🌨️"],
+ 77:["حبيبات ثلجية","🌨️"],80:["زخات مطر خفيفة","🌦️"],81:["زخات مطر متوسطة","🌧️"],82:["زخات مطر شديدة","⛈️"],
+ 85:["زخات ثلجية خفيفة","🌨️"],86:["زخات ثلجية كثيفة","🌨️"],95:["عاصفة رعدية","⛈️"],96:["عاصفة رعدية وبَرَد","⛈️"],99:["عاصفة رعدية وبَرَد شديد","⛈️"]
+};
+function minyaWeatherInfo(code){return minyaWeatherCodes[code]||["حالة جوية متغيرة","🌤️"];}
+async function loadMinyaWeather(){
+ const select=document.getElementById("weatherCenter"),result=document.getElementById("weatherResult");
+ if(!select||!result)return;
+ const parts=select.value.split(","),lat=parts[0],lon=parts[1],center=select.options[select.selectedIndex].text;
+ result.innerHTML='<div class="weather-status">⏳ جارٍ تحديث حالة الطقس لـ '+center+'...</div>';
+ const url="https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=3&timezone=Africa%2FCairo&wind_speed_unit=kmh";
+ try{
+  const response=await fetch(url,{cache:"no-store"});
+  if(!response.ok)throw new Error("weather request failed");
+  const data=await response.json(),c=data.current,d=data.daily;
+  if(!c||!d)throw new Error("weather data unavailable");
+  const info=minyaWeatherInfo(c.weather_code);
+  const dateLabel=new Intl.DateTimeFormat("ar-EG",{weekday:"long",day:"numeric",month:"long"}).format(new Date(c.time));
+  const updated=new Intl.DateTimeFormat("ar-EG",{hour:"2-digit",minute:"2-digit",hour12:true}).format(new Date(c.time));
+  const windDir=["شمال","شمال شرقي","شرق","جنوب شرقي","جنوب","جنوب غربي","غرب","شمال غربي"][Math.round((c.wind_direction_10m||0)/45)%8];
+  const stats=[
+   ["🌡️ المحسوسة",Math.round(c.apparent_temperature)+"°م"],
+   ["💧 الرطوبة",Math.round(c.relative_humidity_2m)+"%"],
+   ["💨 سرعة الرياح",Math.round(c.wind_speed_10m)+" كم/س"],
+   ["🧭 اتجاه الرياح",windDir],
+   ["🌧️ الأمطار الآن",Number(c.precipitation||0).toFixed(1)+" مم"]
+  ];
+  const statHtml=stats.map(x=>'<div class="weather-stat">'+x[0]+'<b>'+x[1]+'</b></div>').join("");
+  const days=d.time.map((day,i)=>{
+   const di=minyaWeatherInfo(d.weather_code[i]);
+   const label=new Intl.DateTimeFormat("ar-EG",{weekday:"short",day:"numeric"}).format(new Date(day+"T12:00:00"));
+   return '<div class="weather-day">'+label+'<span class="day-icon">'+di[1]+'</span>'+di[0]+'<br><b>'+Math.round(d.temperature_2m_max[i])+'° / '+Math.round(d.temperature_2m_min[i])+'°</b><br><small>احتمال المطر '+(d.precipitation_probability_max[i]??0)+'%</small></div>';
+  }).join("");
+  result.innerHTML='<div class="weather-current"><div class="weather-main"><span class="weather-icon">'+info[1]+'</span><div><div class="weather-temp">'+Math.round(c.temperature_2m)+'°م</div><div class="weather-desc">'+info[0]+'</div></div></div><div style="text-align:left"><b>'+center+'</b><div class="weather-desc">'+dateLabel+'</div></div></div><div class="weather-meta">'+statHtml+'</div><div class="weather-title" style="font-size:16px;margin:14px 2px 8px">توقعات الأيام القادمة</div><div class="weather-days">'+days+'</div><div class="weather-status">آخر تحديث للبيانات: '+updated+' — التوقعات آلية وقد تختلف الظروف من قرية لأخرى داخل المركز.</div>';
+ }catch(error){
+  result.innerHTML='<div class="weather-status">تعذر تحميل الطقس حاليًا. اتأكد من اتصال الإنترنت واضغط «تحديث الطقس» مرة تانية.</div>';
+ }
+}
+const weatherCenterSelect=document.getElementById("weatherCenter");
+if(weatherCenterSelect){
+ weatherCenterSelect.addEventListener("change",loadMinyaWeather);
+ document.getElementById("weatherRefresh").addEventListener("click",loadMinyaWeather);
+ loadMinyaWeather();
+}
+
 if("speechSynthesis" in window)window.speechSynthesis.getVoices();
 </script>
 
