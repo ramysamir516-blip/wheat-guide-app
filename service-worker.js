@@ -1,5 +1,5 @@
-const CACHE_NAME = "qamh-ershad-minya-v9";
-const APP_SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg"];
+const CACHE_NAME = "qamh-ershad-minya-v11";
+const APP_SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./images/atlas/atlas-sprite.jpg"];
 
 self.addEventListener("install", event => {
   event.waitUntil(
