@@ -1,4 +1,4 @@
-const CACHE_NAME = "qamh-ershad-minya-v3";
+const CACHE_NAME = "qamh-ershad-minya-v4";
 const APP_SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg"];
 
 self.addEventListener("install", event => {
@@ -24,7 +24,26 @@ self.addEventListener("fetch", event => {
   const request = event.request;
   if (request.method !== "GET") return;
   const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
+  if (url.origin !== self.location.origin) {
+    if (url.hostname === "images.unsplash.com" && request.destination === "image") {
+      event.respondWith(
+        caches.open(CACHE_NAME).then(async cache => {
+          const cached = await cache.match(request);
+          if (cached) return cached;
+          try {
+            const response = await fetch(request);
+            if (response && (response.ok || response.type === "opaque")) {
+              await cache.put(request, response.clone());
+            }
+            return response;
+          } catch (error) {
+            return cached || Response.error();
+          }
+        })
+      );
+    }
+    return;
+  }
 
   if (request.mode === "navigate") {
     event.respondWith(
