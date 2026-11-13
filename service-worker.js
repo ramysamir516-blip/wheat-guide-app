@@ -25,7 +25,7 @@ self.addEventListener("fetch", event => {
   if (request.method !== "GET") return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) {
-    if (url.hostname === "images.unsplash.com" && request.destination === "image") {
+    if ((url.hostname === "images.unsplash.com" || url.hostname === "agritech.tnau.ac.in") && request.destination === "image") {
       event.respondWith(
         caches.open(CACHE_NAME).then(async cache => {
           const cached = await cache.match(request);
