@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "name": "قمح إرشاد المنيا",
+  "short_name": "قمح المنيا",
+  "description": "دليل إرشادي مبسط لزراعة القمح بمحافظة المنيا",
+  "lang": "ar-EG",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eef7f0",
+  "theme_color": "#176b45",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
