@@ -51,6 +51,7 @@ input[type=search]{width:100%;border:1px solid #d4e2d7;border-radius:12px;paddin
 .actions button{border:0;border-radius:11px;padding:12px 15px;font:bold 15px Tahoma;cursor:pointer}
 .listen{background:var(--green);color:white;flex:1}
 .stop{background:#f4e8e5;color:#8b3d30}
+.share{background:#168b4b;color:#fff;flex:1 1 100%}
 .status{font-size:13px;color:var(--muted);margin-top:8px;min-height:18px}
 .empty{background:#fff;padding:18px;border-radius:14px;text-align:center;color:var(--muted);line-height:1.8}
 .note{margin-top:24px;background:#fff8e7;border:1px solid #f0dfb4;border-radius:14px;padding:14px;font-size:14px;line-height:1.8;color:#5d512e}
@@ -98,7 +99,7 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
  <div class="toolbar"><button class="back" id="backHome">↩ رجوع</button><div id="sectionTitle" class="current-title"></div></div>
  <div class="search-wrap"><label for="searchSection">🔎 ابحث داخل الأسئلة</label><input id="searchSection" type="search" placeholder="اكتب كلمة من السؤال..."></div>
  <div id="questionList" class="questions"></div>
- <div id="answerBox" class="answer hidden"><h3 id="answerTitle"></h3><p id="answerText"></p><div class="actions"><button class="listen" id="listenBtn">🔊 اسمع الإجابة</button><button class="stop" id="stopBtn">⏹ إيقاف</button></div><div id="voiceStatus" class="status" aria-live="polite"></div></div>
+ <div id="answerBox" class="answer hidden"><h3 id="answerTitle"></h3><p id="answerText"></p><div class="actions"><button class="listen" id="listenBtn">🔊 اسمع الإجابة</button><button class="stop" id="stopBtn">⏹ إيقاف</button><button class="share" id="shareBtn">🟢 شارك الإجابة عبر واتساب</button></div><div id="voiceStatus" class="status" aria-live="polite"></div></div>
 </section>
 <div class="note"><strong>تنبيه إرشادي:</strong> المعلومات المعروضة تخص الأراضي القديمة (أرض الوادي) وفق النشرة العلمية رقم 1449 لموسم 2025/2026. راجع مهندس الإرشاد الزراعي عند اختلاف ظروف الحقل، ولا تستخدم مبيدًا إلا بعد تحديد الحشيشة أو الإصابة واتباع بطاقة المبيد والتوصيات الرسمية.</div>
 <footer>إعداد: إرشاد المنيا | المصدر: مركز البحوث الزراعية – الإدارة المركزية للإرشاد الزراعي<br>نشرة «زراعة القمح في الأراضي القديمة – أرض الوادي» رقم 1449، 2025/2026</footer>
@@ -288,6 +289,12 @@ function stopVoice(update=true){
  if("speechSynthesis" in window)window.speechSynthesis.cancel();
  if(update)$("voiceStatus").textContent="تم إيقاف الصوت.";
 }
+function shareAnswer(){
+ if(!activeItem)return;
+ const message="🌾 قمح إرشاد المنيا\n\n❓ السؤال: "+activeItem.q+"\n\n💡 الإجابة:\n"+activeItem.a+"\n\n📲 افتح التطبيق للمزيد من الإرشادات:\nhttps://ramysamir516-blip.github.io/wheat-guide-app/";
+ const url="https://wa.me/?text="+encodeURIComponent(message);
+ window.open(url,"_blank","noopener,noreferrer");
+}
 function speakAnswer(){
  if(!activeItem)return;
  if(!("speechSynthesis" in window)){$("voiceStatus").textContent="المتصفح لا يدعم قراءة النصوص بالصوت.";return;}
@@ -306,6 +313,7 @@ document.querySelectorAll("[data-section]").forEach(b=>b.addEventListener("click
 $("backHome").addEventListener("click",goHome);
 $("listenBtn").addEventListener("click",speakAnswer);
 $("stopBtn").addEventListener("click",()=>stopVoice(true));
+$("shareBtn").addEventListener("click",shareAnswer);
 $("searchSection").addEventListener("input",e=>{
  const term=e.target.value.trim();
  const items=searchItems(data[activeSection].map((item,index)=>({...item,section:activeSection,index})),term);
