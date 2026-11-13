@@ -1,5 +1,5 @@
-const CACHE_NAME = "qamh-ershad-minya-v1";
-const APP_SHELL = ["./", "./index.html"];
+const CACHE_NAME = "qamh-ershad-minya-v2";
+const APP_SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg"];
 
 self.addEventListener("install", event => {
   event.waitUntil(
@@ -23,7 +23,6 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   const request = event.request;
   if (request.method !== "GET") return;
-
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
