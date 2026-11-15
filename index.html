@@ -289,6 +289,48 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
 }
 @media(prefers-reduced-motion:reduce){.section-card,.back,.weather-refresh,.atlas-back,.calc-reset{transition:none}}
 
+
+/* لمسة نهائية لأيقونات الأقسام الرئيسية وشاشة الترحيب */
+#sections .section-card:not(.calculator-home-card):not(.journey-home-card) .ico{
+ width:72px;height:72px;border-radius:24px;font-size:38px;
+ border:1px solid rgba(255,255,255,.72);
+ box-shadow:0 8px 17px rgba(24,53,28,.16),inset 0 1px 0 rgba(255,255,255,.42);
+ transform:translateY(0);
+ transition:transform .2s ease,box-shadow .2s ease;
+}
+#sections .section-card:nth-child(1) .ico{background:linear-gradient(145deg,#0d7544,#39b96e);text-shadow:0 2px 3px #14532d66}
+#sections .section-card:nth-child(2) .ico{background:linear-gradient(145deg,#c58a12,#f5ca52);text-shadow:0 2px 3px #80550066}
+#sections .section-card:nth-child(3) .ico{background:linear-gradient(145deg,#087ca8,#43c4e8);text-shadow:0 2px 3px #07598566}
+#sections .section-card:nth-child(4) .ico{background:linear-gradient(145deg,#7040b7,#b18bea);text-shadow:0 2px 3px #4c1d9566}
+#sections .section-card:nth-child(5) .ico{background:linear-gradient(145deg,#5d8d19,#a5ce4e);text-shadow:0 2px 3px #36531466}
+#sections .section-card:nth-child(6) .ico{background:linear-gradient(145deg,#bd4141,#f18b79);text-shadow:0 2px 3px #7f1d1d66}
+#sections .section-card:nth-child(7) .ico{background:linear-gradient(145deg,#bd651b,#f3b54c);text-shadow:0 2px 3px #7c2d1266}
+#sections .section-card:not(.calculator-home-card):not(.journey-home-card):hover .ico{transform:translateY(-3px) rotate(-2deg);box-shadow:0 12px 21px rgba(24,53,28,.2),inset 0 1px 0 rgba(255,255,255,.5)}
+#sections .section-card:not(.calculator-home-card):not(.journey-home-card){border-color:#d8e6d9}
+#sections .section-card:nth-child(1):after{background:linear-gradient(90deg,#9bd7a8,#238653)}
+#sections .section-card:nth-child(2):after{background:linear-gradient(90deg,#f5d98a,#c18b1d)}
+#sections .section-card:nth-child(3):after{background:linear-gradient(90deg,#9bdcf0,#1686b3)}
+#sections .section-card:nth-child(4):after{background:linear-gradient(90deg,#d8c2f4,#8154bd)}
+#sections .section-card:nth-child(5):after{background:linear-gradient(90deg,#d2e6a2,#719d2d)}
+#sections .section-card:nth-child(6):after{background:linear-gradient(90deg,#f2c1b8,#c95750)}
+#sections .section-card:nth-child(7):after{background:linear-gradient(90deg,#f6d3a1,#cf7627)}
+.welcome-top{gap:12px}
+.welcome-ministry{
+ display:inline-flex;align-items:center;justify-content:center;
+ padding:11px 22px;border:1px solid rgba(255,255,255,.48);
+ border-radius:18px;background:linear-gradient(120deg,rgba(255,255,255,.2),rgba(255,255,255,.09));
+ color:#fff;font-size:clamp(21px,5.4vw,27px);font-weight:900;
+ line-height:1.65;letter-spacing:0;text-shadow:0 3px 10px #000b;
+ box-shadow:0 6px 18px #0003, inset 0 1px 0 #ffffff40;
+}
+@media(max-width:420px){
+ #sections .section-card:not(.calculator-home-card):not(.journey-home-card) .ico{width:62px;height:62px;border-radius:21px;font-size:34px}
+ .welcome-ministry{font-size:clamp(19px,5.2vw,23px);padding:9px 14px;border-radius:15px}
+}
+@media(prefers-reduced-motion:reduce){
+ #sections .section-card .ico{transition:none}
+}
+
 </style>
 </head>
 <body>
