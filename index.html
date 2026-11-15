@@ -1072,6 +1072,13 @@ function calculateProfit(){
  const strawRevenue=strawLoads*strawPrice;
  const totalRevenue=grainRevenue+strawRevenue,net=totalRevenue-totalCost;
  const costPerArdab=totalProduction>0?totalCost/totalProduction:0;
+ // نقطة التعادل تخص إيراد الحبوب بعد خصم إيراد التبن من التكاليف المطلوب تغطيتها.
+ const grainRevenueNeeded=Math.max(0,totalCost-strawRevenue);
+ const breakEvenPrice=grainRevenueNeeded/totalProduction;
+ const breakEvenYieldPerFeddan=grainRevenueNeeded/(area*pricePerArdab);
+ const breakEvenTotalYield=breakEvenYieldPerFeddan*area;
+ const status=Math.abs(net)<0.005?"تعادل":net>0?"ربح":"خسارة";
+ const statusClass=Math.abs(net)<0.005?"":net>0?"net-positive":"net-negative";
  const rows=costFields.map(item=>'<tr><td>'+item[0]+'</td><td>'+fmt(get(item[1]))+'</td><td>'+fmt(get(item[1])*area)+'</td></tr>').join("");
  out.innerHTML=
   '<div class="profit-result-head"><strong>🌾 تقدير حسابات مساحة '+fmt(area)+' فدان</strong><br>بناءً على بيانات الإنتاج والأسعار والتكاليف التي أدخلتها</div>'+
@@ -1084,6 +1091,15 @@ function calculateProfit(){
    '<div class="profit-result-item '+(net>=0?'net-positive':'net-negative')+'"><small>'+(net>=0?'صافي العائد المتوقع':'العجز التقديري')+'</small><strong>'+fmt(Math.abs(net))+' جنيه</strong></div>'+
    '<div class="profit-result-item"><small>صافي العائد للفدان</small><strong>'+fmt(net/area)+' جنيه</strong></div>'+
    '<div class="profit-result-item"><small>متوسط تكلفة إنتاج الأردب</small><strong>'+fmt(costPerArdab)+' جنيه</strong></div>'+
+  '</div>'+
+  '<div class="profit-card"><h3>🎯 نقطة التعادل — إمتى تغطي تكاليفك؟</h3>'+
+   '<div class="profit-result-grid">'+
+    '<div class="profit-result-item"><small>سعر التعادل للأردب</small><strong>'+fmt(breakEvenPrice)+' جنيه</strong></div>'+
+    '<div class="profit-result-item"><small>إنتاج التعادل للفدان</small><strong>'+fmt(breakEvenYieldPerFeddan)+' أردب</strong></div>'+
+    '<div class="profit-result-item"><small>إجمالي إنتاج التعادل للمساحة</small><strong>'+fmt(breakEvenTotalYield)+' أردب</strong></div>'+
+    '<div class="profit-result-item '+statusClass+'"><small>نتيجة الحساب</small><strong>'+(status==="ربح"?"🟢 ":status==="خسارة"?"🔴 ":"🟡 ")+status+'</strong></div>'+
+   '</div>'+
+   '<div class="profit-warning">نقطة التعادل محسوبة بعد خصم إيراد التبن من التكاليف المطلوب تغطيتها. سعر التعادل هو أقل سعر للأردب عند الإنتاج الذي أدخلته، وإنتاج التعادل هو أقل إنتاج للفدان عند سعر الأردب الذي أدخلته. '+(grainRevenueNeeded===0?'إيراد التبن وحده يغطي تكاليف الزراعة المدخلة؛ لذلك تظهر نقطة التعادل للحبوب بصفر.':'')+'</div>'+
   '</div>'+
   '<div class="profit-card"><h3>📋 تفصيل تكاليف الزراعة</h3><table class="profit-table"><thead><tr><th>بند التكلفة</th><th>للفدان (جنيه)</th><th>للمساحة كلها (جنيه)</th></tr></thead><tbody>'+rows+'<tr><th>الإجمالي</th><th>'+fmt(costPerFeddan)+'</th><th>'+fmt(totalCost)+'</th></tr></tbody></table></div>'+
   '<div class="profit-warning"><strong>مهم قبل اتخاذ القرار:</strong><br>• النتائج تقديرية وتعتمد بالكامل على الأرقام التي أدخلتها، وليست ضمانًا للإنتاج أو الربح.<br>• إيراد الحبوب = إجمالي الإنتاج المتوقع × سعر الأردب.<br>• إيراد التبن = عدد الحمولات × سعر الحمولة. إذا لم تبع التبن اترك العدد أو السعر صفرًا.<br>• إجمالي الإيرادات = إيراد الحبوب + إيراد التبن، وصافي العائد = إجمالي الإيرادات − إجمالي التكاليف.<br>• الحساب لا يضيف أسعارًا أو تكاليف من عنده. أدخل أسعار السوق الفعلية وتكاليف أرضك، وحدّثها عند تغيرها.<br>• لم تُدرج أي تكاليف غير مكتوبة في البنود أعلاه؛ أضفها في خانة «نقل ومصاريف أخرى». لم يُحتسب ثمن إيجار الأرض أو تكلفة التمويل إلا إذا أضفتهما ضمن المصاريف الأخرى.</div>'+
