@@ -212,6 +212,41 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 @media(max-width:520px){.calc-fields{grid-template-columns:1fr}.calc-field.full{grid-column:auto}.calc-result-grid{grid-template-columns:1fr 1fr}.calc-table{font-size:12px}.calc-table th,.calc-table td{padding:9px 6px}}
 
 
+/* حاسبة الإنتاجية والتكاليف */
+.profit-home-card{grid-column:1/-1;display:flex;align-items:center;gap:14px;text-align:right;min-height:94px;padding:14px 17px;background:linear-gradient(115deg,#fff8e9,#f3e9d3);border:1px solid #e9d8ad}
+.profit-home-card .ico{flex:0 0 60px;margin:0!important;background:linear-gradient(145deg,#b7791f,#e8b84d)!important;color:#fff}
+.profit-home-card .profit-card-copy{flex:1}
+.profit-home-card strong{color:#805516}
+.profit-home-card small{line-height:1.7}
+#profitCalculator .current-title{font-size:22px;font-weight:800;color:#805516}
+.profit-intro{background:linear-gradient(120deg,#fff5dc,#f1f8e9);border:1px solid #ead9ad;border-radius:17px;padding:18px;margin-bottom:14px;color:#684f20;font-size:16px;line-height:2}
+.profit-card{background:#fff;border:1px solid #eadfca;border-top:4px solid #c28a2c;border-radius:17px;padding:16px;margin:12px 0;box-shadow:0 4px 13px #6b4a1510}
+.profit-card h3{margin:0 0 13px;color:#805516;font-size:18px}
+.profit-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.profit-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.profit-field label{font-weight:bold;color:#5f512f;font-size:14px}
+.profit-field input{width:100%;min-width:0;border:1px solid #dfd2b5;border-radius:11px;padding:12px;background:#fff;color:#3d3524;font:16px Tahoma;outline-color:#b7791f}
+.profit-field.full{grid-column:1/-1}
+.profit-hint{font-size:12px;color:#81765e;line-height:1.8}
+.profit-submit{width:100%;border:0;border-radius:13px;padding:15px;background:linear-gradient(120deg,#96651d,#d5a43e);color:#fff;font:bold 18px Tahoma;cursor:pointer;box-shadow:0 5px 14px #96651d28}
+.profit-results{margin-top:16px}
+.profit-results[hidden]{display:none}
+.profit-result-head{background:linear-gradient(120deg,#77501b,#b9822b);color:#fff;border-radius:15px;padding:16px;text-align:center;line-height:1.9}
+.profit-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.profit-result-item{background:#fff;border:1px solid #eadfca;border-radius:13px;padding:14px;text-align:center}
+.profit-result-item small{display:block;color:#81765e;font-size:13px;line-height:1.7}
+.profit-result-item strong{display:block;color:#805516;font-size:22px;margin-top:6px;line-height:1.5}
+.profit-result-item.net-positive{background:#eff8ed;border-color:#cde5c9}
+.profit-result-item.net-negative{background:#fff0ed;border-color:#f0cbc3}
+.profit-result-item.net-negative strong{color:#a33c2d}
+.profit-table{width:100%;border-collapse:collapse;background:#fff;border-radius:13px;overflow:hidden;font-size:14px}
+.profit-table th,.profit-table td{padding:11px 9px;border-bottom:1px solid #eee7d9;text-align:right;line-height:1.7}
+.profit-table th{background:#f8f0df;color:#805516}
+.profit-table tr:last-child td{border-bottom:0}
+.profit-warning{margin-top:12px;padding:13px;border-radius:12px;background:#fff7df;border:1px solid #efdfb5;color:#66552b;font-size:13px;line-height:1.9}
+.profit-reset{border:1px solid #e4d7b9;background:#fbf6e9;color:#805516;border-radius:10px;padding:10px 14px;font:bold 14px Tahoma;cursor:pointer;margin-top:10px}
+@media(max-width:520px){.profit-fields{grid-template-columns:1fr}.profit-field.full{grid-column:auto}.profit-result-grid{grid-template-columns:1fr 1fr}.profit-table{font-size:12px}.profit-table th,.profit-table td{padding:9px 6px}}
+ 
 /* تحسين وضوح وتناسق حاسبة القمح */
 #wheatCalculator .current-title{font-size:22px;font-weight:800;color:#1c633f}
 #wheatCalculator .calc-intro{font-size:17px;font-weight:600;background:linear-gradient(120deg,#e4f3e8 0%,#fff6dc 100%);border:1px solid #c9dfce;color:#24563a;padding:19px}
@@ -510,6 +545,7 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
   <button class="section-card" data-section="الحصاد"><span class="ico">🌾</span><strong>الحصاد</strong><small>التوقيت وتقليل الفاقد</small></button>
 
 <button class="section-card clinic-home-card" id="openClinic" type="button"><span class="ico">🩺</span><span class="clinic-home-copy"><strong>عيادة القمح</strong><small>اختار الصورة الأقرب للأعراض وتعرّف على الاحتمالات والإرشادات</small></span><span aria-hidden="true" style="font-size:24px;color:#b58a2d">←</span></button>  <button class="section-card calculator-home-card" id="openWheatCalculator" type="button"><span class="ico">🧮</span><span class="calc-card-copy"><strong>حاسبة احتياجات زراعة القمح</strong><small>احسب التقاوي والأسمدة المطلوبة لمساحة أرضك</small></span><span aria-hidden="true" style="font-size:24px;color:#b58a2d">←</span></button>
+  <button class="section-card profit-home-card" id="openProfitCalculator" type="button"><span class="ico">💰</span><span class="profit-card-copy"><strong>احسب إنتاجك ومكسبك</strong><small>قدّر إنتاج القمح والإيراد والتكاليف وصافي العائد لمساحتك</small></span><span aria-hidden="true" style="font-size:24px;color:#b58a2d">←</span></button>
   <button class="section-card journey-home-card" id="openJourney" type="button">
    <span class="ico">🌾</span>
    <span class="journey-card-copy"><strong>رحلة القمح</strong><small>تابع مراحل نمو القمح من الزراعة حتى الحصاد خطوة بخطوة</small></span>
@@ -602,6 +638,36 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
   </div></div>
   <button class="calc-submit" id="calculateWheatNeeds" type="button">احسب احتياجات أرضي 🌾</button>
   <div class="calc-results" id="wheatCalcResults" hidden aria-live="polite"></div>
+ </div>
+</section>
+
+<section id="profitCalculator" class="hidden">
+ <div class="toolbar"><button class="back" id="backProfitCalculator" type="button">↩ رجوع</button><div class="current-title">💰 احسب إنتاجك ومكسبك</div></div>
+ <div class="calculator-wrap">
+  <div class="profit-intro">🌾 احسب بصورة تقديرية إنتاج القمح والإيراد المتوقع وتكاليف الزراعة وصافي العائد. أدخل بيانات أرضك وأسعار البيع والتكاليف الفعلية عندك؛ من غير افتراض أسعار أو إنتاجية ثابتة.</div>
+  <div class="profit-card"><h3>📏 أولًا: مساحة الأرض</h3><div class="profit-fields">
+   <div class="profit-field"><label for="profitFeddan">عدد الأفدنة</label><input id="profitFeddan" type="number" min="0" step="0.25" value="1" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitQirat">عدد القراريط</label><input id="profitQirat" type="number" min="0" max="23.99" step="0.25" value="0" inputmode="decimal"></div>
+   <div class="profit-field full"><span class="profit-hint">الفدان = 24 قيراطًا. يمكن إدخال المساحة بالفدان أو القيراط أو الاثنين معًا.</span></div>
+  </div></div>
+  <div class="profit-card"><h3>🌾 ثانيًا: الإنتاج وسعر البيع</h3><div class="profit-fields">
+   <div class="profit-field"><label for="profitYield">الإنتاج المتوقع للفدان (أردب)</label><input id="profitYield" type="number" min="0" step="0.1" placeholder="اكتب عدد الأردب المتوقع" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitPrice">سعر بيع الأردب (جنيه)</label><input id="profitPrice" type="number" min="0" step="1" placeholder="اكتب سعر البيع المتوقع" inputmode="decimal"></div>
+   <div class="profit-field full"><span class="profit-hint">اكتب إنتاجية تقديرية واقعية لحقلِك وسعر البيع الذي تريد الحساب على أساسه. لا توجد قيمة افتراضية مفروضة.</span></div>
+  </div></div>
+  <div class="profit-card"><h3>🧾 ثالثًا: تكاليف زراعة الفدان الواحد</h3><div class="profit-fields">
+   <div class="profit-field"><label for="profitSeedCost">التقاوي (جنيه/فدان)</label><input id="profitSeedCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitFertilizerCost">الأسمدة (جنيه/فدان)</label><input id="profitFertilizerCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitLandCost">تجهيز الأرض والزراعة (جنيه/فدان)</label><input id="profitLandCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitIrrigationCost">الري والطاقة (جنيه/فدان)</label><input id="profitIrrigationCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitLaborCost">العمالة والخدمة (جنيه/فدان)</label><input id="profitLaborCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitWeedCost">مقاومة الحشائش والآفات (جنيه/فدان)</label><input id="profitWeedCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitHarvestCost">الحصاد والدراس (جنيه/فدان)</label><input id="profitHarvestCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitOtherCost">نقل ومصاريف أخرى (جنيه/فدان)</label><input id="profitOtherCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
+   <div class="profit-field full"><span class="profit-hint">اكتب تكلفة الفدان الواحد في كل بند. اترك أي بند لا ينطبق عليك فارغًا أو اكتب صفرًا. سيتم ضرب مجموع تكاليف الفدان في مساحة أرضك.</span></div>
+  </div></div>
+  <button class="profit-submit" id="calculateProfit" type="button">احسب إنتاجي وصافي عائدي 💰</button>
+  <div class="profit-results" id="profitResults" hidden aria-live="polite"></div>
  </div>
 </section>
 
@@ -978,6 +1044,55 @@ function closeWheatCalculator(){$("wheatCalculator").classList.add("hidden");$("
 $("openWheatCalculator").addEventListener("click",openWheatCalculator);
 $("backCalculator").addEventListener("click",closeWheatCalculator);
 $("calculateWheatNeeds").addEventListener("click",calculateWheatNeeds);
+
+/* حاسبة الإنتاجية والتكاليف وصافي العائد */
+function calculateProfit(){
+ const get=id=>Number($(id).value||0),areaFeddan=get("profitFeddan"),qirat=get("profitQirat"),area=areaFeddan+qirat/24,out=$("profitResults");
+ const yieldPerFeddan=get("profitYield"),pricePerArdab=get("profitPrice");
+ const costFields=[
+  ["التقاوي","profitSeedCost"],["الأسمدة","profitFertilizerCost"],["تجهيز الأرض والزراعة","profitLandCost"],
+  ["الري والطاقة","profitIrrigationCost"],["العمالة والخدمة","profitLaborCost"],["مقاومة الحشائش والآفات","profitWeedCost"],
+  ["الحصاد والدراس","profitHarvestCost"],["النقل ومصاريف أخرى","profitOtherCost"]
+ ];
+ const invalidArea=!Number.isFinite(area)||area<=0||!Number.isFinite(qirat)||qirat<0||qirat>=24||areaFeddan<0;
+ const invalidNumbers=["profitYield","profitPrice",...costFields.map(x=>x[1])].some(id=>!Number.isFinite(get(id))||get(id)<0);
+ if(invalidArea||invalidNumbers||yieldPerFeddan<=0||pricePerArdab<=0){
+  out.hidden=false;out.innerHTML='<div class="profit-warning">من فضلك راجع البيانات: أدخل مساحة صحيحة، وإنتاجًا متوقعًا وسعر بيع أكبر من صفر، وتأكد أن جميع التكاليف أرقام غير سالبة.</div>';return;
+ }
+ const fmt=n=>Number(n.toFixed(2)).toLocaleString("ar-EG",{maximumFractionDigits:2});
+ const costPerFeddan=costFields.reduce((sum,item)=>sum+get(item[1]),0);
+ const totalCost=costPerFeddan*area,totalProduction=yieldPerFeddan*area;
+ const revenue=totalProduction*pricePerArdab,net=revenue-totalCost;
+ const costPerArdab=totalProduction>0?totalCost/totalProduction:0;
+ const rows=costFields.map(item=>'<tr><td>'+item[0]+'</td><td>'+fmt(get(item[1]))+'</td><td>'+fmt(get(item[1])*area)+'</td></tr>').join("");
+ out.innerHTML=
+  '<div class="profit-result-head"><strong>🌾 تقدير حسابات مساحة '+fmt(area)+' فدان</strong><br>بناءً على بيانات الإنتاج والأسعار والتكاليف التي أدخلتها</div>'+
+  '<div class="profit-result-grid">'+
+   '<div class="profit-result-item"><small>إجمالي الإنتاج المتوقع</small><strong>'+fmt(totalProduction)+' أردب</strong></div>'+
+   '<div class="profit-result-item"><small>إجمالي قيمة المحصول</small><strong>'+fmt(revenue)+' جنيه</strong></div>'+
+   '<div class="profit-result-item"><small>إجمالي تكاليف الزراعة</small><strong>'+fmt(totalCost)+' جنيه</strong></div>'+
+   '<div class="profit-result-item '+(net>=0?'net-positive':'net-negative')+'"><small>'+(net>=0?'صافي العائد المتوقع':'العجز التقديري')+'</small><strong>'+fmt(Math.abs(net))+' جنيه</strong></div>'+
+   '<div class="profit-result-item"><small>صافي العائد للفدان</small><strong>'+fmt(net/area)+' جنيه</strong></div>'+
+   '<div class="profit-result-item"><small>متوسط تكلفة إنتاج الأردب</small><strong>'+fmt(costPerArdab)+' جنيه</strong></div>'+
+  '</div>'+
+  '<div class="profit-card"><h3>📋 تفصيل تكاليف الزراعة</h3><table class="profit-table"><thead><tr><th>بند التكلفة</th><th>للفدان (جنيه)</th><th>للمساحة كلها (جنيه)</th></tr></thead><tbody>'+rows+'<tr><th>الإجمالي</th><th>'+fmt(costPerFeddan)+'</th><th>'+fmt(totalCost)+'</th></tr></tbody></table></div>'+
+  '<div class="profit-warning"><strong>مهم قبل اتخاذ القرار:</strong><br>• النتائج تقديرية وتعتمد بالكامل على الأرقام التي أدخلتها، وليست ضمانًا للإنتاج أو الربح.<br>• الحساب لا يضيف أسعارًا أو تكاليف من عنده. أدخل أسعار السوق الفعلية وتكاليف أرضك، وحدّثها عند تغيرها.<br>• لم تُدرج أي تكاليف غير مكتوبة في البنود أعلاه؛ أضفها في خانة «نقل ومصاريف أخرى».<br>• قيمة المحصول = الإنتاج المتوقع × سعر الأردب، وصافي العائد = قيمة المحصول − إجمالي التكاليف. لم يُحتسب ثمن إيجار الأرض أو تكلفة التمويل إلا إذا أضفتهما ضمن المصاريف الأخرى.</div>'+
+  '<button class="profit-reset" type="button" id="resetProfitCalculator">↻ تعديل البيانات وإعادة الحساب</button>';
+ out.hidden=false;
+ $("resetProfitCalculator").addEventListener("click",()=>{out.hidden=true;out.innerHTML="";$("profitYield").focus();});
+ out.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function openProfitCalculator(){
+ $("home").classList.add("hidden");$("detail").classList.add("hidden");$("journey").classList.add("hidden");
+ $("fieldToday").classList.add("hidden");$("wheatCalculator").classList.add("hidden");
+ $("profitCalculator").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});
+}
+function closeProfitCalculator(){
+ $("profitCalculator").classList.add("hidden");$("home").classList.remove("hidden");
+ $("profitResults").hidden=true;$("profitResults").innerHTML="";window.scrollTo({top:0,behavior:"smooth"});
+}
+$("openProfitCalculator").addEventListener("click",openProfitCalculator);
+$("backProfitCalculator").addEventListener("click",closeProfitCalculator);
 
 /* طقس مراكز محافظة المنيا - بيانات مباشرة من Open-Meteo */
 const minyaWeatherCodes={
