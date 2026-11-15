@@ -331,6 +331,95 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
  #sections .section-card .ico{transition:none}
 }
 
+
+/* تطوير بصري لواجهة «أهلاً بك يا مزارع القمح» */
+#home{
+ position:relative;isolation:isolate;overflow:hidden;
+ padding:17px;
+ background-color:#e8f1e5;
+ background-image:
+  radial-gradient(ellipse at 8% 5%,rgba(238,198,92,.22),transparent 34%),
+  linear-gradient(180deg,rgba(247,252,243,.78),rgba(237,246,233,.88)),
+  url("https://images.unsplash.com/photo-1758573728869-d25eb4bafb67?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800");
+ background-size:cover;background-position:center;
+}
+#home:before{
+ content:"";position:absolute;z-index:-1;top:110px;left:-72px;width:190px;height:190px;
+ border:1px solid rgba(183,145,55,.16);border-radius:50%;
+ box-shadow:0 0 0 18px rgba(183,145,55,.045),0 0 0 38px rgba(45,105,64,.035);
+ pointer-events:none;
+}
+#home .intro{
+ position:relative;isolation:isolate;overflow:hidden;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ min-height:174px;margin:0 0 17px;padding:22px 18px 20px;
+ border:1px solid rgba(255,255,255,.68);border-bottom:4px solid #e4bd59;
+ border-radius:25px;
+ background:
+  radial-gradient(circle at 12% 20%,rgba(255,255,255,.17),transparent 28%),
+  linear-gradient(125deg,rgba(13,72,46,.97),rgba(31,112,69,.94) 58%,rgba(55,132,82,.94));
+ box-shadow:0 12px 27px rgba(24,75,43,.2),inset 0 1px 0 rgba(255,255,255,.2);
+}
+#home .intro:before{
+ content:"🌾";display:grid;place-items:center;width:54px;height:54px;margin-bottom:9px;
+ border:1px solid rgba(255,255,255,.38);border-radius:18px;
+ background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.08));
+ font-size:31px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.16));
+ box-shadow:0 6px 15px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.22);
+}
+#home .intro h2{
+ position:relative;margin:0 0 8px;color:#fff;
+ font-size:clamp(23px,4.7vw,30px);font-weight:900;line-height:1.55;
+ text-shadow:0 3px 10px rgba(0,0,0,.28);
+}
+#home .intro p{
+ max-width:610px;margin:0;color:#f4f8ed;
+ font-size:clamp(14px,2.7vw,16px);font-weight:600;line-height:1.95;
+ text-shadow:0 2px 6px rgba(0,0,0,.2);
+}
+#home .search-wrap{
+ position:relative;border:1px solid #d6e5d5;border-radius:19px;
+ background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(246,250,241,.96));
+ box-shadow:0 7px 19px rgba(34,76,42,.11);
+}
+#home .search-wrap label{display:flex;align-items:center;gap:8px;color:#205f3e;font-size:17px}
+#home input[type=search]{
+ border:1.5px solid #c9ddcc;background:#fff;
+ box-shadow:inset 0 2px 5px rgba(30,75,42,.035);
+}
+#home .section-grid{position:relative;gap:15px}
+#home .section-card{
+ min-height:148px;border:1px solid rgba(206,224,207,.95);
+ border-radius:23px;background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(245,250,243,.96));
+ box-shadow:0 7px 18px rgba(31,72,39,.12),inset 0 1px 0 #fff;
+}
+#home #sections .section-card:not(.calculator-home-card):not(.journey-home-card) .ico{
+ width:74px;height:74px;margin-bottom:12px;border-radius:25px;
+ outline:4px solid rgba(255,255,255,.62);outline-offset:2px;
+ box-shadow:0 9px 18px rgba(25,61,34,.19),inset 0 1px 0 rgba(255,255,255,.5);
+}
+#home .section-card strong{font-size:17px;letter-spacing:0;color:#214b33}
+#home .section-card small{font-size:12px;color:#6a796c}
+#home .calculator-home-card,#home .journey-home-card{
+ border-radius:21px;box-shadow:0 7px 18px rgba(31,72,39,.12);
+}
+#home .weather-panel{
+ border-radius:22px;padding:17px;
+ box-shadow:0 8px 20px rgba(31,72,39,.12),inset 0 1px 0 #fff;
+}
+#home .weather-title{font-size:19px}
+@media(max-width:649px){
+ #home{padding:12px}
+ #home .intro{min-height:158px;padding:18px 13px 17px;border-radius:21px}
+ #home .intro:before{width:47px;height:47px;border-radius:16px;font-size:27px}
+ #home .section-grid{gap:11px}
+ #home .section-card{min-height:135px;border-radius:19px}
+ #home #sections .section-card:not(.calculator-home-card):not(.journey-home-card) .ico{width:62px;height:62px;border-radius:21px;font-size:33px}
+ #home .section-card strong{font-size:15px}
+ #home .section-card small{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){#home .section-card{transition:none}}
+
 </style>
 </head>
 <body>
