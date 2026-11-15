@@ -178,6 +178,39 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 .atlas-image-close{position:absolute;top:14px;left:14px;border:0;border-radius:50%;width:44px;height:44px;background:#fff;color:#173f2b;font-size:27px;font-weight:bold;cursor:pointer}
 .atlas-photo-source{font-size:12px;color:#66736a;margin-top:5px}
 
+
+/* حاسبة احتياجات زراعة القمح */
+.calculator-wrap{max-width:780px;margin:0 auto}
+.calc-intro{background:linear-gradient(135deg,#eaf6ec,#fff9e8);border:1px solid #dce9d9;border-radius:17px;padding:16px;margin-bottom:14px;line-height:1.9;color:#315640}
+.calc-card{background:#fff;border:1px solid #e0eae0;border-radius:17px;padding:16px;margin:12px 0;box-shadow:0 4px 13px #18351c0d}
+.calc-card h3{margin:0 0 13px;color:#205f3e;font-size:18px}
+.calc-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.calc-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.calc-field label{font-weight:bold;color:#365642;font-size:14px}
+.calc-field input,.calc-field select{width:100%;min-width:0;border:1px solid #cbded0;border-radius:11px;padding:12px;background:#fff;color:#24372d;font:16px Tahoma;outline-color:var(--green)}
+.calc-field.full{grid-column:1/-1}
+.calc-hint{font-size:12px;color:#718075;line-height:1.7}
+.calc-submit{width:100%;border:0;border-radius:13px;padding:15px;background:linear-gradient(120deg,#176b45,#2d8158);color:#fff;font:bold 18px Tahoma;cursor:pointer;box-shadow:0 5px 14px #176b4528}
+.calc-results{margin-top:16px}
+.calc-results[hidden]{display:none}
+.calc-result-head{background:linear-gradient(120deg,#175b3b,#2d8158);color:#fff;border-radius:15px;padding:15px;text-align:center;line-height:1.8}
+.calc-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.calc-result-item{background:#fff;border:1px solid #e1ebe1;border-radius:13px;padding:13px;text-align:center}
+.calc-result-item small{display:block;color:#718075;font-size:13px}
+.calc-result-item strong{display:block;color:#205f3e;font-size:22px;margin-top:6px}
+.calc-table{width:100%;border-collapse:collapse;background:#fff;border-radius:13px;overflow:hidden;font-size:14px}
+.calc-table th,.calc-table td{padding:11px 9px;border-bottom:1px solid #e6eee6;text-align:right;line-height:1.7}
+.calc-table th{background:#eaf4eb;color:#205f3e}
+.calc-table tr:last-child td{border-bottom:0}
+.calc-warning{margin-top:12px;padding:13px;border-radius:12px;background:#fff7df;border:1px solid #efdfb5;color:#66552b;font-size:13px;line-height:1.9}
+.calc-reset{border:1px solid #d5e4d6;background:#f3f8f3;color:#205f3e;border-radius:10px;padding:10px 14px;font:bold 14px Tahoma;cursor:pointer;margin-top:10px}
+.calculator-home-card{grid-column:1/-1;display:flex;align-items:center;gap:14px;text-align:right;min-height:94px;padding:14px 17px;background:linear-gradient(115deg,#fff9e8,#e7f4e9);border:1px solid #e6d9ae}
+.calculator-home-card .ico{flex:0 0 60px;margin:0!important;background:linear-gradient(145deg,#d9a62e,#f3d477)!important;color:#fff}
+.calculator-home-card .calc-card-copy{flex:1}
+.calculator-home-card strong{color:#205f3e}
+.calculator-home-card small{line-height:1.7}
+@media(max-width:520px){.calc-fields{grid-template-columns:1fr}.calc-field.full{grid-column:auto}.calc-result-grid{grid-template-columns:1fr 1fr}.calc-table{font-size:12px}.calc-table th,.calc-table td{padding:9px 6px}}
+
 </style>
 </head>
 <body>
@@ -229,6 +262,7 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
   <button class="section-card" data-section="الأمراض والآفات"><span class="ico">🛡️</span><strong>الأمراض والآفات</strong><small>الأصداء والمنّ والتشخيص</small></button>
   <button class="section-card" data-section="الحصاد"><span class="ico">🌾</span><strong>الحصاد</strong><small>التوقيت وتقليل الفاقد</small></button>
 
+  <button class="section-card calculator-home-card" id="openWheatCalculator" type="button"><span class="ico">🧮</span><span class="calc-card-copy"><strong>حاسبة احتياجات زراعة القمح</strong><small>احسب التقاوي والأسمدة المطلوبة لمساحة أرضك</small></span><span aria-hidden="true" style="font-size:24px;color:#b58a2d">←</span></button>
   <button class="section-card journey-home-card" id="openJourney" type="button">
    <span class="ico">🌾</span>
    <span class="journey-card-copy"><strong>رحلة القمح</strong><small>تابع مراحل نمو القمح من الزراعة حتى الحصاد خطوة بخطوة</small></span>
@@ -271,6 +305,30 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
   </details>
  </div>
  <div class="journey-caution"><strong>معلومة مهمة:</strong> المراحل دي بتتتابع حسب ميعاد الزراعة والصنف والطقس وحالة الحقل؛ مش مواعيد ثابتة بالأيام لكل الأراضي. اتبع توصيات الإرشاد الزراعي بالمنيا للموسم وظروف أرضك.</div>
+</section>
+
+
+<section id="wheatCalculator" class="hidden">
+ <div class="toolbar"><button class="back" id="backCalculator" type="button">↩ رجوع</button><div class="current-title">🧮 حاسبة احتياجات زراعة القمح</div></div>
+ <div class="calculator-wrap">
+  <div class="calc-intro">🌾 احسب احتياجات أرضك من تقاوي القمح والأسمدة وفق المعدلات الإرشادية للأراضي القديمة بمحافظة المنيا. أدخل المساحة واختار طريقة الزراعة ونوع السماد.</div>
+  <div class="calc-card"><h3>📏 أولًا: مساحة الأرض</h3><div class="calc-fields">
+   <div class="calc-field"><label for="calcFeddan">عدد الأفدنة</label><input id="calcFeddan" type="number" min="0" step="1" value="1" inputmode="decimal"></div>
+   <div class="calc-field"><label for="calcQirat">عدد القراريط</label><input id="calcQirat" type="number" min="0" max="23.99" step="0.25" value="0" inputmode="decimal"></div>
+   <div class="calc-field full"><span class="calc-hint">الفدان = 24 قيراطًا. يمكن إدخال المساحة بالفدان أو القيراط أو الاثنين معًا.</span></div>
+  </div></div>
+  <div class="calc-card"><h3>🌱 ثانيًا: تحديد التقاوي</h3><div class="calc-fields">
+   <div class="calc-field"><label for="calcWheatType">نوع القمح</label><select id="calcWheatType"><option value="bread">قمح خبز</option><option value="durum">قمح ديورم (مكرونة)</option></select></div>
+   <div class="calc-field"><label for="calcSowing">طريقة الزراعة</label><select id="calcSowing"><option value="line">عفير بالتسطير</option><option value="broadcast">عفير بدار</option><option value="harathi">حراتي</option></select></div>
+  </div></div>
+  <div class="calc-card"><h3>🧪 ثالثًا: اختيار نوع السماد</h3><div class="calc-fields">
+   <div class="calc-field"><label for="calcNitrogen">السماد الآزوتي (اختار نوعًا واحدًا)</label><select id="calcNitrogen"><option value="urea">يوريا 46%</option><option value="nitrate">نترات نشادر 33.5%</option><option value="sulfate">سلفات نشادر 20.6%</option></select></div>
+   <div class="calc-field"><label for="calcPhosphate">السماد الفوسفاتي</label><select id="calcPhosphate"><option value="single">سوبر فوسفات أحادي 15%</option><option value="double">فوسفات ثنائي 37%</option><option value="triple">فوسفات ثلاثي 45%</option></select></div>
+   <div class="calc-field full"><span class="calc-hint">اختيار نوع واحد من السماد الآزوتي أو الفوسفاتي يمنع جمع بدائل السماد معًا واحتسابها كأنها مطلوبة كلها.</span></div>
+  </div></div>
+  <button class="calc-submit" id="calculateWheatNeeds" type="button">احسب احتياجات أرضي 🌾</button>
+  <div class="calc-results" id="wheatCalcResults" hidden aria-live="polite"></div>
+ </div>
 </section>
 
 <section id="detail" class="hidden">
@@ -583,6 +641,32 @@ $("searchHome").addEventListener("input",e=>{
  const items=searchItems(allItems(),term);
  renderQuestions(items,box);
 });
+
+
+/* حاسبة احتياجات زراعة القمح */
+function calculateWheatNeeds(){
+ const feddan=Number($("calcFeddan").value||0),qirat=Number($("calcQirat").value||0),area=feddan+qirat/24,out=$("wheatCalcResults");
+ if(!Number.isFinite(area)||area<=0||!Number.isFinite(qirat)||qirat<0||qirat>=24||feddan<0){out.hidden=false;out.innerHTML='<div class="calc-warning">من فضلك أدخل مساحة صحيحة، وعدد القراريط من صفر إلى أقل من 24.</div>';return;}
+ const wheat=$("calcWheatType").value,sowing=$("calcSowing").value,nType=$("calcNitrogen").value,pType=$("calcPhosphate").value;
+ const seedRates={bread:{line:45,broadcast:60,harathi:70},durum:{line:60,broadcast:70,harathi:85}},seed=seedRates[wheat][sowing]*area;
+ const nRates={urea:163,nitrate:224,sulfate:364},nNames={urea:"يوريا 46%",nitrate:"نترات نشادر 33.5%",sulfate:"سلفات نشادر 20.6%"},nTotal=nRates[nType]*area;
+ const pRates={single:100,double:40,triple:33},pNames={single:"سوبر فوسفات أحادي 15%",double:"فوسفات ثنائي 37%",triple:"فوسفات ثلاثي 45%"},pTotal=pRates[pType]*area,kTotal=50*area;
+ const fmt=n=>Number(n.toFixed(1)).toLocaleString("ar-EG",{maximumFractionDigits:1}),n1=nTotal*.20,n2=nTotal*.40,n3=nTotal*.40;
+ const sowingName=sowing==="line"?"عفير بالتسطير":sowing==="broadcast"?"عفير بدار":"حراتي",wheatName=wheat==="bread"?"قمح خبز":"قمح ديورم (مكرونة)";
+ out.innerHTML=
+ '<div class="calc-result-head"><strong>🌾 احتياجات مساحة '+fmt(area)+' فدان</strong><br>'+wheatName+' — '+sowingName+'</div>'+
+ '<div class="calc-result-grid"><div class="calc-result-item"><small>التقاوي المطلوبة</small><strong>'+fmt(seed)+' كجم</strong></div><div class="calc-result-item"><small>'+nNames[nType]+' (إجمالي)</small><strong>'+fmt(nTotal)+' كجم</strong></div><div class="calc-result-item"><small>'+pNames[pType]+'</small><strong>'+fmt(pTotal)+' كجم</strong></div><div class="calc-result-item"><small>سلفات البوتاسيوم 48%</small><strong>'+fmt(kTotal)+' كجم</strong></div></div>'+
+ '<div class="calc-card"><h3>📅 جدول توزيع السماد الآزوتي</h3><table class="calc-table"><thead><tr><th>موعد الإضافة</th><th>النسبة</th><th>الكمية</th></tr></thead><tbody><tr><td>مع الزراعة وقبل رية الزراعة</td><td>20%</td><td>'+fmt(n1)+' كجم</td></tr><tr><td>عند رية المحاياة (في حدود 21–25 يومًا)</td><td>40%</td><td>'+fmt(n2)+' كجم</td></tr><tr><td>عند الرية الثانية بعد المحاياة</td><td>40%</td><td>'+fmt(n3)+' كجم</td></tr></tbody></table></div>'+
+ '<div class="calc-card"><h3>🗓️ مواعيد إضافة باقي الأسمدة</h3><table class="calc-table"><tbody><tr><td>'+pNames[pType]+'</td><td>'+fmt(pTotal)+' كجم</td><td>قبل آخر حرثة ويُقلب في التربة</td></tr><tr><td>سلفات البوتاسيوم 48%</td><td>'+fmt(kTotal)+' كجم</td><td>بعد نحو شهر من الزراعة، أو وفق طريقة الإضافة الموصى بها</td></tr></tbody></table></div>'+
+ '<div class="calc-warning"><strong>تنبيهات مهمة:</strong><br>• المعدلات محسوبة على أساس التوصيات الإرشادية للأراضي القديمة بالمنيا: 45/60/70 كجم تقاوي قمح الخبز، و60/70/85 كجم للديورم حسب طريقة الزراعة.<br>• السماد الآزوتي المختار بديل للنوعين الآخرين، وليس إضافة إليهما. لا تجمع أنواع اليوريا والنترات والسلفات معًا على أنها الكمية المطلوبة كاملة.<br>• المعدلات الأساسية للأسمدة: 75 كجم آزوت للفدان، و15 كجم فو₂أ₅ للفدان، و24 كجم بو₂أ للفدان. راعِ تحليل التربة والتوصية المعتمدة للموسم وحالة الحقل.<br>• هذه الحاسبة للأراضي القديمة، ولا تستبدل توصية مهندس الإرشاد عند اختلاف ظروف الأرض.</div>'+
+ '<button class="calc-reset" type="button" id="resetWheatCalculator">↻ تعديل المدخلات وإعادة الحساب</button>';
+ out.hidden=false;$("resetWheatCalculator").addEventListener("click",()=>{out.hidden=true;out.innerHTML="";$("calcFeddan").focus();});out.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function openWheatCalculator(){$("home").classList.add("hidden");$("detail").classList.add("hidden");$("journey").classList.add("hidden");$("wheatCalculator").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function closeWheatCalculator(){$("wheatCalculator").classList.add("hidden");$("home").classList.remove("hidden");$("wheatCalcResults").hidden=true;$("wheatCalcResults").innerHTML="";window.scrollTo({top:0,behavior:"smooth"});}
+$("openWheatCalculator").addEventListener("click",openWheatCalculator);
+$("backCalculator").addEventListener("click",closeWheatCalculator);
+$("calculateWheatNeeds").addEventListener("click",calculateWheatNeeds);
 
 /* طقس مراكز محافظة المنيا - بيانات مباشرة من Open-Meteo */
 const minyaWeatherCodes={
