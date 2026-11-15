@@ -811,7 +811,7 @@ function openSection(section){
 }
 function openJourney(){$("home").classList.add("hidden");$("detail").classList.add("hidden");$("fieldToday").classList.add("hidden");$("journey").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
 function openFieldToday(){$("home").classList.add("hidden");$("detail").classList.add("hidden");$("journey").classList.add("hidden");$("fieldToday").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
-function goHome(){stopVoice(false);$("detail").classList.add("hidden");$("journey").classList.add("hidden");$("fieldToday").classList.add("hidden");$("home").classList.remove("hidden");$("answerBox").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth");}
+function goHome(){stopVoice(false);$("detail").classList.add("hidden");$("journey").classList.add("hidden");$("fieldToday").classList.add("hidden");$("home").classList.remove("hidden");$("answerBox").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth"});}
 function stopVoice(update=true){
  if("speechSynthesis" in window)window.speechSynthesis.cancel();
  if(update)$("voiceStatus").textContent="تم إيقاف الصوت.";
