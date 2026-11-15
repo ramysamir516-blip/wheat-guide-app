@@ -655,7 +655,12 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
    <div class="profit-field"><label for="profitPrice">سعر بيع الأردب (جنيه)</label><input id="profitPrice" type="number" min="0" step="1" placeholder="اكتب سعر البيع المتوقع" inputmode="decimal"></div>
    <div class="profit-field full"><span class="profit-hint">اكتب إنتاجية تقديرية واقعية لحقلِك وسعر البيع الذي تريد الحساب على أساسه. لا توجد قيمة افتراضية مفروضة.</span></div>
   </div></div>
-  <div class="profit-card"><h3>🧾 ثالثًا: تكاليف زراعة الفدان الواحد</h3><div class="profit-fields">
+  <div class="profit-card"><h3>🌾 ثالثًا: إيراد بيع التبن</h3><div class="profit-fields">
+   <div class="profit-field"><label for="profitStrawLoads">عدد حمولات التبن</label><input id="profitStrawLoads" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="اكتب عدد الحمولات"></div>
+   <div class="profit-field"><label for="profitStrawPrice">سعر الحمولة (جنيه)</label><input id="profitStrawPrice" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="اكتب سعر الحمولة"></div>
+   <div class="profit-field full"><span class="profit-hint">إيراد التبن = عدد الحمولات × سعر الحمولة، ويُضاف تلقائيًا إلى إيراد بيع حبوب القمح.</span></div>
+  </div></div>
+  <div class="profit-card"><h3>🧾 رابعًا: تكاليف زراعة الفدان الواحد</h3><div class="profit-fields">
    <div class="profit-field"><label for="profitSeedCost">التقاوي (جنيه/فدان)</label><input id="profitSeedCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
    <div class="profit-field"><label for="profitFertilizerCost">الأسمدة (جنيه/فدان)</label><input id="profitFertilizerCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
    <div class="profit-field"><label for="profitLandCost">تجهيز الأرض والزراعة (جنيه/فدان)</label><input id="profitLandCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
@@ -1049,34 +1054,39 @@ $("calculateWheatNeeds").addEventListener("click",calculateWheatNeeds);
 function calculateProfit(){
  const get=id=>Number($(id).value||0),areaFeddan=get("profitFeddan"),qirat=get("profitQirat"),area=areaFeddan+qirat/24,out=$("profitResults");
  const yieldPerFeddan=get("profitYield"),pricePerArdab=get("profitPrice");
+ const strawLoads=get("profitStrawLoads"),strawPrice=get("profitStrawPrice");
  const costFields=[
   ["التقاوي","profitSeedCost"],["الأسمدة","profitFertilizerCost"],["تجهيز الأرض والزراعة","profitLandCost"],
   ["الري والطاقة","profitIrrigationCost"],["العمالة والخدمة","profitLaborCost"],["مقاومة الحشائش والآفات","profitWeedCost"],
   ["الحصاد والدراس","profitHarvestCost"],["النقل ومصاريف أخرى","profitOtherCost"]
  ];
  const invalidArea=!Number.isFinite(area)||area<=0||!Number.isFinite(qirat)||qirat<0||qirat>=24||areaFeddan<0;
- const invalidNumbers=["profitYield","profitPrice",...costFields.map(x=>x[1])].some(id=>!Number.isFinite(get(id))||get(id)<0);
+ const invalidNumbers=["profitYield","profitPrice","profitStrawLoads","profitStrawPrice",...costFields.map(x=>x[1])].some(id=>!Number.isFinite(get(id))||get(id)<0)||!Number.isInteger(strawLoads);
  if(invalidArea||invalidNumbers||yieldPerFeddan<=0||pricePerArdab<=0){
   out.hidden=false;out.innerHTML='<div class="profit-warning">من فضلك راجع البيانات: أدخل مساحة صحيحة، وإنتاجًا متوقعًا وسعر بيع أكبر من صفر، وتأكد أن جميع التكاليف أرقام غير سالبة.</div>';return;
  }
  const fmt=n=>Number(n.toFixed(2)).toLocaleString("ar-EG",{maximumFractionDigits:2});
  const costPerFeddan=costFields.reduce((sum,item)=>sum+get(item[1]),0);
  const totalCost=costPerFeddan*area,totalProduction=yieldPerFeddan*area;
- const revenue=totalProduction*pricePerArdab,net=revenue-totalCost;
+ const grainRevenue=totalProduction*pricePerArdab;
+ const strawRevenue=strawLoads*strawPrice;
+ const totalRevenue=grainRevenue+strawRevenue,net=totalRevenue-totalCost;
  const costPerArdab=totalProduction>0?totalCost/totalProduction:0;
  const rows=costFields.map(item=>'<tr><td>'+item[0]+'</td><td>'+fmt(get(item[1]))+'</td><td>'+fmt(get(item[1])*area)+'</td></tr>').join("");
  out.innerHTML=
   '<div class="profit-result-head"><strong>🌾 تقدير حسابات مساحة '+fmt(area)+' فدان</strong><br>بناءً على بيانات الإنتاج والأسعار والتكاليف التي أدخلتها</div>'+
   '<div class="profit-result-grid">'+
    '<div class="profit-result-item"><small>إجمالي الإنتاج المتوقع</small><strong>'+fmt(totalProduction)+' أردب</strong></div>'+
-   '<div class="profit-result-item"><small>إجمالي قيمة المحصول</small><strong>'+fmt(revenue)+' جنيه</strong></div>'+
+   '<div class="profit-result-item"><small>إيراد بيع حبوب القمح</small><strong>'+fmt(grainRevenue)+' جنيه</strong></div>'+
+   '<div class="profit-result-item"><small>إيراد بيع التبن ('+fmt(strawLoads)+' حمولة)</small><strong>'+fmt(strawRevenue)+' جنيه</strong></div>'+
+   '<div class="profit-result-item"><small>إجمالي الإيرادات (الحبوب + التبن)</small><strong>'+fmt(totalRevenue)+' جنيه</strong></div>'+
    '<div class="profit-result-item"><small>إجمالي تكاليف الزراعة</small><strong>'+fmt(totalCost)+' جنيه</strong></div>'+
    '<div class="profit-result-item '+(net>=0?'net-positive':'net-negative')+'"><small>'+(net>=0?'صافي العائد المتوقع':'العجز التقديري')+'</small><strong>'+fmt(Math.abs(net))+' جنيه</strong></div>'+
    '<div class="profit-result-item"><small>صافي العائد للفدان</small><strong>'+fmt(net/area)+' جنيه</strong></div>'+
    '<div class="profit-result-item"><small>متوسط تكلفة إنتاج الأردب</small><strong>'+fmt(costPerArdab)+' جنيه</strong></div>'+
   '</div>'+
   '<div class="profit-card"><h3>📋 تفصيل تكاليف الزراعة</h3><table class="profit-table"><thead><tr><th>بند التكلفة</th><th>للفدان (جنيه)</th><th>للمساحة كلها (جنيه)</th></tr></thead><tbody>'+rows+'<tr><th>الإجمالي</th><th>'+fmt(costPerFeddan)+'</th><th>'+fmt(totalCost)+'</th></tr></tbody></table></div>'+
-  '<div class="profit-warning"><strong>مهم قبل اتخاذ القرار:</strong><br>• النتائج تقديرية وتعتمد بالكامل على الأرقام التي أدخلتها، وليست ضمانًا للإنتاج أو الربح.<br>• الحساب لا يضيف أسعارًا أو تكاليف من عنده. أدخل أسعار السوق الفعلية وتكاليف أرضك، وحدّثها عند تغيرها.<br>• لم تُدرج أي تكاليف غير مكتوبة في البنود أعلاه؛ أضفها في خانة «نقل ومصاريف أخرى».<br>• قيمة المحصول = الإنتاج المتوقع × سعر الأردب، وصافي العائد = قيمة المحصول − إجمالي التكاليف. لم يُحتسب ثمن إيجار الأرض أو تكلفة التمويل إلا إذا أضفتهما ضمن المصاريف الأخرى.</div>'+
+  '<div class="profit-warning"><strong>مهم قبل اتخاذ القرار:</strong><br>• النتائج تقديرية وتعتمد بالكامل على الأرقام التي أدخلتها، وليست ضمانًا للإنتاج أو الربح.<br>• إيراد الحبوب = إجمالي الإنتاج المتوقع × سعر الأردب.<br>• إيراد التبن = عدد الحمولات × سعر الحمولة. إذا لم تبع التبن اترك العدد أو السعر صفرًا.<br>• إجمالي الإيرادات = إيراد الحبوب + إيراد التبن، وصافي العائد = إجمالي الإيرادات − إجمالي التكاليف.<br>• الحساب لا يضيف أسعارًا أو تكاليف من عنده. أدخل أسعار السوق الفعلية وتكاليف أرضك، وحدّثها عند تغيرها.<br>• لم تُدرج أي تكاليف غير مكتوبة في البنود أعلاه؛ أضفها في خانة «نقل ومصاريف أخرى». لم يُحتسب ثمن إيجار الأرض أو تكلفة التمويل إلا إذا أضفتهما ضمن المصاريف الأخرى.</div>'+
   '<button class="profit-reset" type="button" id="resetProfitCalculator">↻ تعديل البيانات وإعادة الحساب</button>';
  out.hidden=false;
  $("resetProfitCalculator").addEventListener("click",()=>{out.hidden=true;out.innerHTML="";$("profitYield").focus();});
