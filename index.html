@@ -420,6 +420,43 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
 }
 @media(prefers-reduced-motion:reduce){#home .section-card{transition:none}}
 
+
+/* ماذا تفعل في حقلك اليوم؟ */
+.daily-home-card{grid-column:1/-1;display:flex;align-items:center;gap:14px;text-align:right;min-height:96px;padding:14px 17px;background:linear-gradient(115deg,#fff8e6,#e2f3e7);border:1px solid #e7d7a7}
+.daily-home-card .ico{flex:0 0 60px;margin:0!important;background:linear-gradient(145deg,#278052,#d8aa3b)!important;color:#fff}
+.daily-home-card .daily-card-copy{flex:1}
+.daily-home-card strong{display:block;color:#205f3e}
+.daily-home-card small{display:block;line-height:1.7}
+#fieldToday{padding:16px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(240,248,238,.94)),url("https://images.unsplash.com/photo-1758573728869-d25eb4bafb67?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800") center/cover fixed}
+.field-today-intro{text-align:center;padding:12px 8px 20px}
+.field-today-icon{font-size:48px;filter:drop-shadow(0 4px 6px #94712d44)}
+.field-today-intro h2{margin:5px 0 8px;color:#205f3e;font-size:clamp(21px,5vw,27px)}
+.field-today-intro p{margin:0;color:#5c7062;line-height:1.9}
+.field-stage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;max-width:760px;margin:0 auto 16px}
+.field-stage-option{display:flex;align-items:center;gap:10px;min-height:76px;padding:12px;text-align:right;border:1px solid #dce8d9;border-radius:16px;background:rgba(255,255,255,.94);color:#28553a;font:700 14px/1.65 Tahoma,Arial,sans-serif;box-shadow:0 4px 12px #173d2010;cursor:pointer;transition:transform .18s,border-color .18s,background .18s}
+.field-stage-option span{flex:0 0 42px;width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#eaf4e8;font-size:24px}
+.field-stage-option.is-selected{border:2px solid #278052;background:linear-gradient(120deg,#f2faef,#fff8e4);box-shadow:0 5px 16px #176b4520}
+.field-stage-option:active{transform:scale(.98)}
+.field-stage-option strong{font-size:13px}
+.field-today-result{max-width:760px;margin:0 auto;padding:18px;border:1px solid #dce8d9;border-radius:20px;background:rgba(255,255,255,.97);box-shadow:0 7px 22px #173d2015}
+.field-result-heading{display:flex;align-items:center;gap:12px;padding-bottom:13px;border-bottom:1px solid #e7eee5}
+.field-result-emoji{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#e2f2df,#fff0c7);font-size:29px}
+.field-result-heading small{color:#77877a;font-size:12px}
+.field-result-heading h3{margin:3px 0 0;color:#205f3e;font-size:20px}
+.field-result-block{margin-top:16px;color:#405344;line-height:1.9}
+.field-result-block h4{margin:0 0 7px;color:#23754a;font-size:16px}
+.field-result-block ul{margin:0;padding-right:22px}
+.field-result-block li{margin:5px 0}
+.field-warning{padding:12px 14px;border-radius:13px;background:#fff8e8;border:1px solid #f0e1bd}
+.field-warning h4{color:#9a6a1d}
+.field-result-note{margin-top:15px;padding:14px;border-radius:14px;background:linear-gradient(120deg,#e8f5e9,#f7fbef);border-right:5px solid #278052;color:#31563b}
+.field-result-note strong{color:#205f3e}
+.field-result-note p{margin:5px 0 0;line-height:1.85}
+.field-more-button{width:100%;margin-top:14px;padding:13px;border:0;border-radius:12px;background:linear-gradient(120deg,#176b45,#2d8158);color:#fff;font:700 15px Tahoma,Arial,sans-serif;cursor:pointer}
+.field-today-caution{max-width:760px;margin:14px auto 0;padding:12px 14px;border:1px solid #efdfb5;border-radius:13px;background:#fff8e5;color:#6d5b31;font-size:12px;line-height:1.9}
+@media(max-width:480px){#fieldToday{padding:12px;background-attachment:scroll}.field-stage-grid{gap:8px}.field-stage-option{min-height:72px;padding:9px;gap:7px}.field-stage-option span{flex-basis:36px;width:36px;height:36px;font-size:21px}.field-stage-option strong{font-size:12px}.field-today-result{padding:14px}}
+@media(prefers-reduced-motion:reduce){.field-stage-option{transition:none}}
+
 </style>
 </head>
 <body>
@@ -477,6 +514,11 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
    <span class="journey-card-copy"><strong>رحلة القمح</strong><small>تابع مراحل نمو القمح من الزراعة حتى الحصاد خطوة بخطوة</small></span>
    <span aria-hidden="true" style="font-size:24px;color:#b58a2d">←</span>
   </button>
+  <button class="section-card daily-home-card" id="openFieldToday" type="button">
+   <span class="ico">📅</span>
+   <span class="daily-card-copy"><strong>ماذا تفعل في حقلك اليوم؟</strong><small>اختار مرحلة القمح واعرف أهم العمليات والتحذيرات</small></span>
+   <span aria-hidden="true" style="font-size:24px;color:#b58a2d">←</span>
+  </button>
  </div>
 </section>
 
@@ -514,6 +556,28 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
   </details>
  </div>
  <div class="journey-caution"><strong>معلومة مهمة:</strong> المراحل دي بتتتابع حسب ميعاد الزراعة والصنف والطقس وحالة الحقل؛ مش مواعيد ثابتة بالأيام لكل الأراضي. اتبع توصيات الإرشاد الزراعي بالمنيا للموسم وظروف أرضك.</div>
+
+</section>
+
+<section id="fieldToday" class="hidden">
+ <div class="toolbar"><button class="back" id="backFieldToday" type="button">↩ رجوع</button><div class="current-title">📅 ماذا تفعل في حقلك اليوم؟</div></div>
+ <div class="field-today-intro"><div class="field-today-icon">🌾</div><h2>خطوتك الإرشادية في الوقت المناسب</h2><p>اختار المرحلة اللي وصل لها محصولك، واعرف أهم ما تتابعه في الحقل اليوم.</p></div>
+ <div class="field-stage-grid" aria-label="اختار مرحلة محصول القمح">
+  <button class="field-stage-option is-selected" type="button" data-field-stage="prepare"><span>🚜</span><strong>تجهيز الأرض والزراعة</strong></button>
+  <button class="field-stage-option" type="button" data-field-stage="emergence"><span>🌱</span><strong>الإنبات وظهور البادرات</strong></button>
+  <button class="field-stage-option" type="button" data-field-stage="tillering"><span>🌿</span><strong>مرحلة التفريع</strong></button>
+  <button class="field-stage-option" type="button" data-field-stage="heading"><span>🌾</span><strong>الاستطالة وطرد السنابل</strong></button>
+  <button class="field-stage-option" type="button" data-field-stage="filling"><span>🌼</span><strong>التزهير وامتلاء الحبوب</strong></button>
+  <button class="field-stage-option" type="button" data-field-stage="harvest"><span>🌅</span><strong>النضج والحصاد</strong></button>
+ </div>
+ <div class="field-today-result" id="fieldTodayResult" aria-live="polite">
+  <div class="field-result-heading"><span class="field-result-emoji">🚜</span><div><small>المرحلة المختارة</small><h3>تجهيز الأرض والزراعة</h3></div></div>
+  <div class="field-result-block"><h4>✅ أهم ما تتابعه</h4><ul><li>اختيار تقاوي معتمدة والصنف الموصى به للمنطقة.</li><li>تجهيز الأرض والتأكد من جودة التسوية وتنعيم سطح التربة.</li><li>الالتزام بميعاد الزراعة وطريقة الزراعة ومعدل التقاوي الموصى به.</li><li>ضبط رية الزراعة بما يناسب طبيعة الأرض دون تغريق.</li></ul></div>
+  <div class="field-result-block field-warning"><h4>⚠️ خلي بالك من</h4><ul><li>استخدام تقاوي مجهولة المصدر أو غير مناسبة للمنطقة.</li><li>عدم انتظام التسوية أو زيادة عمق الزراعة.</li><li>تحديد معدلات التقاوي أو الأسمدة دون الرجوع للتوصيات المعتمدة.</li></ul></div>
+  <div class="field-result-note"><strong>رسالة الإرشاد الزراعي بالمنيا</strong><p>بداية الموسم السليمة بتبدأ من أرض مجهزة وتقاوي معتمدة والتزام بالتوصيات الفنية.</p></div>
+  <button class="field-more-button" id="fieldTodayJourney" type="button">📖 اعرف تفاصيل رحلة القمح كاملة</button>
+ </div>
+ <div class="field-today-caution">ملحوظة: اختار المرحلة حسب حالة النبات الفعلية في حقلك، وليس حسب عدد الأيام فقط؛ لأن النمو بيتأثر بميعاد الزراعة والصنف والطقس وظروف الأرض. وتُراجع التوصيات الفنية المعتمدة للموسم قبل تنفيذ معاملات الري أو التسميد أو المكافحة.</div>
 </section>
 
 
@@ -745,8 +809,9 @@ function openSection(section){
  renderQuestions(data[section].map((item,index)=>({...item,section,index})),$("questionList"));
  window.scrollTo({top:0,behavior:"smooth"});
 }
-function openJourney(){$("home").classList.add("hidden");$("detail").classList.add("hidden");$("journey").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
-function goHome(){stopVoice(false);$("detail").classList.add("hidden");$("journey").classList.add("hidden");$("home").classList.remove("hidden");$("answerBox").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function openJourney(){$("home").classList.add("hidden");$("detail").classList.add("hidden");$("fieldToday").classList.add("hidden");$("journey").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function openFieldToday(){$("home").classList.add("hidden");$("detail").classList.add("hidden");$("journey").classList.add("hidden");$("fieldToday").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function goHome(){stopVoice(false);$("detail").classList.add("hidden");$("journey").classList.add("hidden");$("fieldToday").classList.add("hidden");$("home").classList.remove("hidden");$("answerBox").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth");}
 function stopVoice(update=true){
  if("speechSynthesis" in window)window.speechSynthesis.cancel();
  if(update)$("voiceStatus").textContent="تم إيقاف الصوت.";
@@ -830,6 +895,31 @@ document.querySelectorAll("[data-atlas-filter]").forEach(btn=>btn.addEventListen
 
 
 document.querySelectorAll("[data-section]").forEach(b=>b.addEventListener("click",()=>openSection(b.dataset.section)));
+
+const fieldStageGuidance={
+ prepare:{title:"تجهيز الأرض والزراعة",emoji:"🚜",tasks:["اختيار تقاوي معتمدة والصنف الموصى به للمنطقة.","تجهيز الأرض والتأكد من جودة التسوية وتنعيم سطح التربة.","الالتزام بميعاد الزراعة وطريقة الزراعة ومعدل التقاوي الموصى به.","ضبط رية الزراعة بما يناسب طبيعة الأرض دون تغريق."],warnings:["استخدام تقاوي مجهولة المصدر أو غير مناسبة للمنطقة.","عدم انتظام التسوية أو زيادة عمق الزراعة.","تحديد معدلات التقاوي أو الأسمدة دون الرجوع للتوصيات المعتمدة."],message:"بداية الموسم السليمة بتبدأ من أرض مجهزة وتقاوي معتمدة والتزام بالتوصيات الفنية."},
+ emergence:{title:"الإنبات وظهور البادرات",emoji:"🌱",tasks:["متابعة ظهور النباتات وانتظام توزيعها في الحقل.","فحص الأماكن الخالية أو ضعيفة الإنبات ومحاولة تحديد السبب.","متابعة رطوبة التربة وتجنب التغريق أو التعطيش.","ملاحظة بداية ظهور الحشائش والتعامل معها وفق التوصيات."],warnings:["إهمال البقع الضعيفة أو الخالية من النباتات.","زيادة مياه الري بما يضر البادرات.","التسرع في استخدام مبيدات دون تحديد المشكلة."],message:"الفحص المبكر للحقل يساعدك تكتشف أي مشكلة في الإنبات قبل ما تتسع."},
+ tillering:{title:"مرحلة التفريع",emoji:"🌿",tasks:["متابعة التفريع وقوة نمو النباتات وانتظام الكثافة.","تنفيذ الري في التوقيت المناسب حسب نوع التربة وحالة النبات.","تنفيذ التسميد الآزوتي على دفعات طبقًا للتوصية الفنية المعتمدة.","فحص الحقل ومتابعة الحشائش وأي أعراض إصابة."],warnings:["تأخير الري عند احتياج النبات للمياه أو التغريق.","المغالاة في التسميد الآزوتي.","إهمال متابعة الحشائش والإصابات."],message:"التفريع الجيد يحتاج متابعة منتظمة للري والتسميد والحشائش دون إفراط."},
+ heading:{title:"الاستطالة وطرد السنابل",emoji:"🌾",tasks:["متابعة نمو الساق وظهور السنابل بانتظام.","الحفاظ على انتظام الري وفق احتياج النبات وظروف التربة.","فحص النباتات لاكتشاف الأصداء والآفات مبكرًا.","الرجوع للمهندس المختص عند الاشتباه في إصابة."],warnings:["تعريض النبات للعطش أو التغريق.","إهمال الفحص الحقلي الدوري.","استخدام مبيد دون التأكد من الإصابة واتباع التوصية المسجلة."],message:"الفحص المنتظم في هذه المرحلة يساعد على اكتشاف الإصابات مبكرًا وحماية المحصول."},
+ filling:{title:"التزهير وامتلاء الحبوب",emoji:"🌼",tasks:["متابعة التزهير وامتلاء الحبوب وتطور لون السنابل.","الحفاظ على انتظام الري حسب احتياج النبات وظروف التربة والجو.","مراقبة أي إصابات مرضية أو حشرية.","تجنب أي معاملة غير موصى بها خلال هذه المرحلة."],warnings:["تعريض النباتات لإجهاد مائي.","إجراء معاملات رش دون داعٍ أو دون توصية فنية.","إهمال متابعة الحقل حتى قرب النضج."],message:"المتابعة الجيدة والري المناسب يساعدان النبات على استكمال تكوين وامتلاء الحبوب."},
+ harvest:{title:"النضج والحصاد",emoji:"🌅",tasks:["متابعة علامات النضج والاستعداد للحصاد في الموعد المناسب.","تنظيم عملية الحصاد والنقل لتقليل الفاقد.","تجفيف الحبوب وتخزينها بطريقة سليمة بعد الحصاد.","تنظيف المعدات والتخطيط للدورة الزراعية القادمة."],warnings:["الحصاد قبل اكتمال النضج أو التأخير بما يزيد الفاقد.","إهمال نظافة مكان التخزين وجفاف الحبوب.","ترك بقايا المحصول المصابة دون إدارة مناسبة."],message:"الحصاد في الموعد المناسب والتداول والتخزين السليم يحافظوا على تعب الموسم."}
+};
+function showFieldStage(key){
+ const item=fieldStageGuidance[key];if(!item)return;
+ document.querySelectorAll("[data-field-stage]").forEach(btn=>btn.classList.toggle("is-selected",btn.dataset.fieldStage===key));
+ const result=$("fieldTodayResult");
+ result.innerHTML='<div class="field-result-heading"><span class="field-result-emoji">'+item.emoji+'</span><div><small>المرحلة المختارة</small><h3></h3></div></div><div class="field-result-block"><h4>✅ أهم ما تتابعه</h4><ul class="field-task-list"></ul></div><div class="field-result-block field-warning"><h4>⚠️ خلي بالك من</h4><ul class="field-warning-list"></ul></div><div class="field-result-note"><strong>رسالة الإرشاد الزراعي بالمنيا</strong><p></p></div><button class="field-more-button" id="fieldTodayJourney" type="button">📖 اعرف تفاصيل رحلة القمح كاملة</button>';
+ result.querySelector("h3").textContent=item.title;
+ item.tasks.forEach(t=>{const li=document.createElement("li");li.textContent=t;result.querySelector(".field-task-list").appendChild(li);});
+ item.warnings.forEach(t=>{const li=document.createElement("li");li.textContent=t;result.querySelector(".field-warning-list").appendChild(li);});
+ result.querySelector(".field-result-note p").textContent=item.message;
+ $("fieldTodayJourney").addEventListener("click",openJourney);
+}
+document.querySelectorAll("[data-field-stage]").forEach(btn=>btn.addEventListener("click",()=>showFieldStage(btn.dataset.fieldStage)));
+
+$("openFieldToday").addEventListener("click",openFieldToday);
+$("backFieldToday").addEventListener("click",goHome);
+$("fieldTodayJourney").addEventListener("click",openJourney);
 $("openJourney").addEventListener("click",openJourney);
 $("backJourney").addEventListener("click",goHome);
 document.querySelectorAll("[data-journey-section]").forEach(b=>b.addEventListener("click",()=>openSection(b.dataset.journeySection)));
