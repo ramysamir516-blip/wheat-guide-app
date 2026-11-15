@@ -211,6 +211,35 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 .calculator-home-card small{line-height:1.7}
 @media(max-width:520px){.calc-fields{grid-template-columns:1fr}.calc-field.full{grid-column:auto}.calc-result-grid{grid-template-columns:1fr 1fr}.calc-table{font-size:12px}.calc-table th,.calc-table td{padding:9px 6px}}
 
+
+/* تحسين وضوح وتناسق حاسبة القمح */
+#wheatCalculator .current-title{font-size:22px;font-weight:800;color:#1c633f}
+#wheatCalculator .calc-intro{font-size:17px;font-weight:600;background:linear-gradient(120deg,#e4f3e8 0%,#fff6dc 100%);border:1px solid #c9dfce;color:#24563a;padding:19px}
+#wheatCalculator .calc-card{border:1px solid #d4e6d8;border-top:4px solid #36865a;background:linear-gradient(155deg,#fff 0%,#f8fcf8 100%);padding:19px}
+#wheatCalculator .calc-card h3{font-size:21px;color:#17633f;margin-bottom:16px}
+#wheatCalculator .calc-field label{font-size:17px;color:#254f38}
+#wheatCalculator .calc-field input,#wheatCalculator .calc-field select{font-size:18px;font-weight:600;padding:14px;border:1.5px solid #b9d5c1;background:#fff}
+#wheatCalculator .calc-hint{font-size:15px;color:#526d5a}
+#wheatCalculator .calc-submit{font-size:20px;padding:17px;background:linear-gradient(110deg,#145b3a,#368b5d)}
+#wheatCalculator .calc-result-head{font-size:19px;background:linear-gradient(115deg,#145b3a,#31865a);padding:19px;box-shadow:0 5px 15px #145b3a22}
+#wheatCalculator .calc-result-item{background:linear-gradient(150deg,#fff,#f0f8f1);border:1px solid #cfe2d3;padding:17px}
+#wheatCalculator .calc-result-item small{font-size:16px;color:#466b53;font-weight:700}
+#wheatCalculator .calc-result-item strong{font-size:25px;color:#17633f}
+#wheatCalculator .calc-table{font-size:16px}
+#wheatCalculator .calc-table th{background:#dcefe1;color:#174f34;font-size:16px}
+#wheatCalculator .calc-table td{font-size:16px;color:#344d3b}
+#wheatCalculator .calc-warning{font-size:15px;background:linear-gradient(120deg,#fff8e4,#fffdf5);border-color:#ead69d;color:#62512a;padding:16px}
+#wheatCalculator .calc-reset{font-size:16px;padding:13px 17px}
+@media(max-width:520px){
+ #wheatCalculator .calc-intro{font-size:16px}
+ #wheatCalculator .calc-card h3{font-size:19px}
+ #wheatCalculator .calc-field label{font-size:16px}
+ #wheatCalculator .calc-field input,#wheatCalculator .calc-field select{font-size:17px}
+ #wheatCalculator .calc-table,#wheatCalculator .calc-table th,#wheatCalculator .calc-table td{font-size:14px}
+ #wheatCalculator .calc-result-item strong{font-size:22px}
+ #wheatCalculator .calc-result-item small{font-size:14px}
+}
+
 </style>
 </head>
 <body>
@@ -323,8 +352,7 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
   </div></div>
   <div class="calc-card"><h3>🧪 ثالثًا: اختيار نوع السماد</h3><div class="calc-fields">
    <div class="calc-field"><label for="calcNitrogen">السماد الآزوتي (اختار نوعًا واحدًا)</label><select id="calcNitrogen"><option value="urea">يوريا 46%</option><option value="nitrate">نترات نشادر 33.5%</option><option value="sulfate">سلفات نشادر 20.6%</option></select></div>
-   <div class="calc-field"><label for="calcPhosphate">السماد الفوسفاتي</label><select id="calcPhosphate"><option value="single">سوبر فوسفات أحادي 15%</option><option value="double">فوسفات ثنائي 37%</option><option value="triple">فوسفات ثلاثي 45%</option></select></div>
-   <div class="calc-field full"><span class="calc-hint">اختيار نوع واحد من السماد الآزوتي أو الفوسفاتي يمنع جمع بدائل السماد معًا واحتسابها كأنها مطلوبة كلها.</span></div>
+   <div class="calc-field full"><span class="calc-hint">اختار نوعًا واحدًا من الأسمدة الآزوتية لحساب الكمية الإجمالية وتوزيعها على دفعات.</span></div>
   </div></div>
   <button class="calc-submit" id="calculateWheatNeeds" type="button">احسب احتياجات أرضي 🌾</button>
   <div class="calc-results" id="wheatCalcResults" hidden aria-live="polite"></div>
@@ -647,18 +675,18 @@ $("searchHome").addEventListener("input",e=>{
 function calculateWheatNeeds(){
  const feddan=Number($("calcFeddan").value||0),qirat=Number($("calcQirat").value||0),area=feddan+qirat/24,out=$("wheatCalcResults");
  if(!Number.isFinite(area)||area<=0||!Number.isFinite(qirat)||qirat<0||qirat>=24||feddan<0){out.hidden=false;out.innerHTML='<div class="calc-warning">من فضلك أدخل مساحة صحيحة، وعدد القراريط من صفر إلى أقل من 24.</div>';return;}
- const wheat=$("calcWheatType").value,sowing=$("calcSowing").value,nType=$("calcNitrogen").value,pType=$("calcPhosphate").value;
+ const wheat=$("calcWheatType").value,sowing=$("calcSowing").value,nType=$("calcNitrogen").value;
  const seedRates={bread:{line:45,broadcast:60,harathi:70},durum:{line:60,broadcast:70,harathi:85}},seed=seedRates[wheat][sowing]*area;
  const nRates={urea:163,nitrate:224,sulfate:364},nNames={urea:"يوريا 46%",nitrate:"نترات نشادر 33.5%",sulfate:"سلفات نشادر 20.6%"},nTotal=nRates[nType]*area;
- const pRates={single:100,double:40,triple:33},pNames={single:"سوبر فوسفات أحادي 15%",double:"فوسفات ثنائي 37%",triple:"فوسفات ثلاثي 45%"},pTotal=pRates[pType]*area,kTotal=50*area;
+  const kTotal=50*area;
  const fmt=n=>Number(n.toFixed(1)).toLocaleString("ar-EG",{maximumFractionDigits:1}),n1=nTotal*.20,n2=nTotal*.40,n3=nTotal*.40;
  const sowingName=sowing==="line"?"عفير بالتسطير":sowing==="broadcast"?"عفير بدار":"حراتي",wheatName=wheat==="bread"?"قمح خبز":"قمح ديورم (مكرونة)";
  out.innerHTML=
  '<div class="calc-result-head"><strong>🌾 احتياجات مساحة '+fmt(area)+' فدان</strong><br>'+wheatName+' — '+sowingName+'</div>'+
- '<div class="calc-result-grid"><div class="calc-result-item"><small>التقاوي المطلوبة</small><strong>'+fmt(seed)+' كجم</strong></div><div class="calc-result-item"><small>'+nNames[nType]+' (إجمالي)</small><strong>'+fmt(nTotal)+' كجم</strong></div><div class="calc-result-item"><small>'+pNames[pType]+'</small><strong>'+fmt(pTotal)+' كجم</strong></div><div class="calc-result-item"><small>سلفات البوتاسيوم 48%</small><strong>'+fmt(kTotal)+' كجم</strong></div></div>'+
+  '<div class="calc-result-grid"><div class="calc-result-item"><small>التقاوي المطلوبة</small><strong>'+fmt(seed)+' كجم</strong></div><div class="calc-result-item"><small>'+nNames[nType]+' (إجمالي)</small><strong>'+fmt(nTotal)+' كجم</strong></div><div class="calc-result-item"><small>سلفات البوتاسيوم 48%</small><strong>'+fmt(kTotal)+' كجم</strong></div></div>'+
  '<div class="calc-card"><h3>📅 جدول توزيع السماد الآزوتي</h3><table class="calc-table"><thead><tr><th>موعد الإضافة</th><th>النسبة</th><th>الكمية</th></tr></thead><tbody><tr><td>مع الزراعة وقبل رية الزراعة</td><td>20%</td><td>'+fmt(n1)+' كجم</td></tr><tr><td>عند رية المحاياة (في حدود 21–25 يومًا)</td><td>40%</td><td>'+fmt(n2)+' كجم</td></tr><tr><td>عند الرية الثانية بعد المحاياة</td><td>40%</td><td>'+fmt(n3)+' كجم</td></tr></tbody></table></div>'+
- '<div class="calc-card"><h3>🗓️ مواعيد إضافة باقي الأسمدة</h3><table class="calc-table"><tbody><tr><td>'+pNames[pType]+'</td><td>'+fmt(pTotal)+' كجم</td><td>قبل آخر حرثة ويُقلب في التربة</td></tr><tr><td>سلفات البوتاسيوم 48%</td><td>'+fmt(kTotal)+' كجم</td><td>بعد نحو شهر من الزراعة، أو وفق طريقة الإضافة الموصى بها</td></tr></tbody></table></div>'+
- '<div class="calc-warning"><strong>تنبيهات مهمة:</strong><br>• المعدلات محسوبة على أساس التوصيات الإرشادية للأراضي القديمة بالمنيا: 45/60/70 كجم تقاوي قمح الخبز، و60/70/85 كجم للديورم حسب طريقة الزراعة.<br>• السماد الآزوتي المختار بديل للنوعين الآخرين، وليس إضافة إليهما. لا تجمع أنواع اليوريا والنترات والسلفات معًا على أنها الكمية المطلوبة كاملة.<br>• المعدلات الأساسية للأسمدة: 75 كجم آزوت للفدان، و15 كجم فو₂أ₅ للفدان، و24 كجم بو₂أ للفدان. راعِ تحليل التربة والتوصية المعتمدة للموسم وحالة الحقل.<br>• هذه الحاسبة للأراضي القديمة، ولا تستبدل توصية مهندس الإرشاد عند اختلاف ظروف الأرض.</div>'+
+  '<div class="calc-card"><h3>🗓️ موعد إضافة السماد البوتاسي</h3><table class="calc-table"><tbody><tr><td>سلفات البوتاسيوم 48%</td><td>'+fmt(kTotal)+' كجم</td><td>وفق طريقة الإضافة والتوصية الفنية المعتمدة للحقل</td></tr></tbody></table></div>'+
+ '<div class="calc-warning"><strong>تنبيهات مهمة:</strong><br>• المعدلات محسوبة على أساس التوصيات الإرشادية للأراضي القديمة بالمنيا: 45/60/70 كجم تقاوي قمح الخبز، و60/70/85 كجم للديورم حسب طريقة الزراعة.<br>• السماد الآزوتي المختار بديل للنوعين الآخرين، وليس إضافة إليهما. لا تجمع أنواع اليوريا والنترات والسلفات معًا على أنها الكمية المطلوبة كاملة.<br>• المعدل الآزوتي المستخدم في الحساب يعادل 75 كجم آزوت للفدان. راعِ تحليل التربة والتوصية المعتمدة للموسم وحالة الحقل.<br>• هذه الحاسبة للأراضي القديمة، ولا تستبدل توصية مهندس الإرشاد عند اختلاف ظروف الأرض.</div>'+
  '<button class="calc-reset" type="button" id="resetWheatCalculator">↻ تعديل المدخلات وإعادة الحساب</button>';
  out.hidden=false;$("resetWheatCalculator").addEventListener("click",()=>{out.hidden=true;out.innerHTML="";$("calcFeddan").focus();});out.scrollIntoView({behavior:"smooth",block:"start"});
 }
