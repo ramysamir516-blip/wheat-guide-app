@@ -102,7 +102,7 @@ footer{text-align:center;color:#758278;font-size:12px;line-height:1.8;padding:20
 #welcomeScreen.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
 .welcome-top{display:flex;flex-direction:column;align-items:center;gap:9px}
 .welcome-ministry{font-size:14px;font-weight:700;letter-spacing:.3px;text-shadow:0 2px 8px #0008}
-.welcome-logo{width:92px;height:92px;object-fit:contain;padding:10px;background:rgba(255,255,255,.96);border:2px solid rgba(255,255,255,.8);border-radius:26px;box-shadow:0 8px 26px #0004}
+.welcome-logo{width:clamp(132px,34vw,168px);height:clamp(132px,34vw,168px);object-fit:contain;padding:5px;background:rgba(255,255,255,.97);border:2px solid rgba(255,255,255,.9);border-radius:22px;box-shadow:0 8px 26px #0004}
 .welcome-title{margin:8px 0 0;font-size:clamp(29px,7vw,43px);font-weight:900;text-shadow:0 3px 12px #0008}
 .welcome-tagline{margin:0;color:#ffe39a;font-size:clamp(18px,4.5vw,23px);font-weight:800;text-shadow:0 2px 8px #0009}
 .welcome-bottom{width:min(100%,440px);display:flex;flex-direction:column;align-items:center;gap:14px}
@@ -535,7 +535,7 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
 <div id="welcomeScreen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
  <div class="welcome-top">
   <div class="welcome-ministry">الإرشاد الزراعي بمحافظة المنيا</div>
-  <img class="welcome-logo" src="./icon.svg" alt="أيقونة قمح إرشاد المنيا">
+  <img class="welcome-logo" src="./minya-extension-logo.svg" alt="شعار مديرية الزراعة وإدارة الإرشاد الزراعي بمحافظة المنيا">
   <h1 class="welcome-title" id="welcomeTitle">قمح إرشاد المنيا</h1>
   <p class="welcome-tagline">معًا نحو زراعة أفضل</p>
  </div>

@@ -1,5 +1,5 @@
-const CACHE_NAME = "qamh-ershad-minya-v35";
-const APP_SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg"];
+const CACHE_NAME = "qamh-ershad-minya-v36";
+const APP_SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./minya-extension-logo.svg"];
 
 self.addEventListener("install", event => {
   event.waitUntil(
