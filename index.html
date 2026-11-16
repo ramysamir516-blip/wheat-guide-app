@@ -45,7 +45,7 @@ main{max-width:940px;margin:auto;padding:18px 14px 36px}
 .weather-refresh{border:0;border-radius:10px;background:#dceee1;color:#205f3e;padding:9px 12px;font:bold 14px Tahoma;cursor:pointer}
 @media(max-width:420px){.weather-current{align-items:flex-start}.weather-meta{gap:6px}.weather-stat{font-size:12px}.weather-days{gap:5px}.weather-day{font-size:12px}}
 
-.intro{text-align:center;padding:12px 8px 18px}
+.intro{text-align:center;padding:12px 8px 18px} .home-extension-logo{display:block;width:clamp(82px,22vw,112px);height:clamp(82px,22vw,112px);object-fit:contain;margin:0 auto 12px;padding:5px;background:rgba(255,255,255,.96);border:1px solid #dce9dc;border-radius:20px;box-shadow:0 5px 16px #18351c18}
 .intro h2{margin:5px 0 8px;color:#205f3e;font-size:23px}
 .intro p{margin:0;color:var(--muted);line-height:1.8}
 .search-wrap{background:#fff;border-radius:17px;padding:12px;box-shadow:0 4px 14px #18351c12;margin:0 0 18px}
@@ -549,7 +549,7 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
 <header><div class="wheat">🌾</div><h1>قمح إرشاد المنيا</h1><p>معًا نحو زراعة أفضل</p></header>
 <main>
 <section id="home">
- <div class="intro"><h2>أهلاً بك يا مزارع القمح</h2><p>اسأل عن زراعة القمح، أو اختار الموضوع اللي عايز تعرف عنه.<br>معلومة إرشادية مبسطة تساعدك في خدمة محصول القمح.</p></div>
+ <div class="intro"><img class="home-extension-logo" src="./minya-extension-logo.svg" alt="شعار الإرشاد الزراعي بمحافظة المنيا"><h2>أهلاً بك يا مزارع القمح</h2><p>اسأل عن زراعة القمح، أو اختار الموضوع اللي عايز تعرف عنه.<br>معلومة إرشادية مبسطة تساعدك في خدمة محصول القمح.</p></div>
  <div class="weather-panel" id="weatherPanel" dir="rtl">
   <div class="weather-top"><div class="weather-title">🌤️ طقس مراكز محافظة المنيا</div><button class="weather-refresh" id="weatherRefresh" type="button">↻ تحديث الطقس</button></div>
   <label for="weatherCenter" style="display:block;font-weight:bold;margin:0 3px 7px">اختار المركز</label>
