@@ -699,6 +699,7 @@ header .wheat{display:grid;place-items:center;width:66px;height:66px;margin:0 au
    <div class="profit-field"><label for="profitSeedCost">التقاوي (جنيه/فدان)</label><input id="profitSeedCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
    <div class="profit-field"><label for="profitFertilizerCost">الأسمدة (جنيه/فدان)</label><input id="profitFertilizerCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
    <div class="profit-field"><label for="profitLandCost">تجهيز الأرض والزراعة (جنيه/فدان)</label><input id="profitLandCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
+   <div class="profit-field"><label for="profitRentCost">إيجار الفدان (جنيه/فدان)</label><input id="profitRentCost" type="number" min="0" step="1" placeholder="اكتب قيمة الإيجار" inputmode="decimal"></div>
    <div class="profit-field"><label for="profitIrrigationCost">الري والطاقة (جنيه/فدان)</label><input id="profitIrrigationCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
    <div class="profit-field"><label for="profitLaborCost">العمالة والخدمة (جنيه/فدان)</label><input id="profitLaborCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
    <div class="profit-field"><label for="profitWeedCost">مقاومة الحشائش والآفات (جنيه/فدان)</label><input id="profitWeedCost" type="number" min="0" step="1" placeholder="0" inputmode="decimal"></div>
@@ -1089,7 +1090,7 @@ function calculateProfit(){
  const yieldPerFeddan=get("profitYield"),pricePerArdab=get("profitPrice");
  const strawLoads=get("profitStrawLoads"),strawPrice=get("profitStrawPrice");
  const costFields=[
-  ["التقاوي","profitSeedCost"],["الأسمدة","profitFertilizerCost"],["تجهيز الأرض والزراعة","profitLandCost"],
+  ["التقاوي","profitSeedCost"],["الأسمدة","profitFertilizerCost"],["تجهيز الأرض والزراعة","profitLandCost"],["إيجار الفدان","profitRentCost"],
   ["الري والطاقة","profitIrrigationCost"],["العمالة والخدمة","profitLaborCost"],["مقاومة الحشائش والآفات","profitWeedCost"],
   ["الحصاد والدراس","profitHarvestCost"],["النقل ومصاريف أخرى","profitOtherCost"]
  ];
@@ -1135,7 +1136,7 @@ function calculateProfit(){
    '<div class="profit-warning">نقطة التعادل محسوبة بعد خصم إيراد التبن من التكاليف المطلوب تغطيتها. سعر التعادل هو أقل سعر للأردب عند الإنتاج الذي أدخلته، وإنتاج التعادل هو أقل إنتاج للفدان عند سعر الأردب الذي أدخلته. '+(grainRevenueNeeded===0?'إيراد التبن وحده يغطي تكاليف الزراعة المدخلة؛ لذلك تظهر نقطة التعادل للحبوب بصفر.':'')+'</div>'+
   '</div>'+
   '<div class="profit-card"><h3>📋 تفصيل تكاليف الزراعة</h3><table class="profit-table"><thead><tr><th>بند التكلفة</th><th>للفدان (جنيه)</th><th>للمساحة كلها (جنيه)</th></tr></thead><tbody>'+rows+'<tr><th>الإجمالي</th><th>'+fmt(costPerFeddan)+'</th><th>'+fmt(totalCost)+'</th></tr></tbody></table></div>'+
-  '<div class="profit-warning"><strong>مهم قبل اتخاذ القرار:</strong><br>• النتائج تقديرية وتعتمد بالكامل على الأرقام التي أدخلتها، وليست ضمانًا للإنتاج أو الربح.<br>• إيراد الحبوب = إجمالي الإنتاج المتوقع × سعر الأردب.<br>• إيراد التبن = عدد الحمولات × سعر الحمولة. إذا لم تبع التبن اترك العدد أو السعر صفرًا.<br>• إجمالي الإيرادات = إيراد الحبوب + إيراد التبن، وصافي العائد = إجمالي الإيرادات − إجمالي التكاليف.<br>• الحساب لا يضيف أسعارًا أو تكاليف من عنده. أدخل أسعار السوق الفعلية وتكاليف أرضك، وحدّثها عند تغيرها.<br>• لم تُدرج أي تكاليف غير مكتوبة في البنود أعلاه؛ أضفها في خانة «نقل ومصاريف أخرى». لم يُحتسب ثمن إيجار الأرض أو تكلفة التمويل إلا إذا أضفتهما ضمن المصاريف الأخرى.</div>'+
+  '<div class="profit-warning"><strong>مهم قبل اتخاذ القرار:</strong><br>• النتائج تقديرية وتعتمد بالكامل على الأرقام التي أدخلتها، وليست ضمانًا للإنتاج أو الربح.<br>• إيراد الحبوب = إجمالي الإنتاج المتوقع × سعر الأردب.<br>• إيراد التبن = عدد الحمولات × سعر الحمولة. إذا لم تبع التبن اترك العدد أو السعر صفرًا.<br>• إجمالي الإيرادات = إيراد الحبوب + إيراد التبن، وصافي العائد = إجمالي الإيرادات − إجمالي التكاليف.<br>• الحساب لا يضيف أسعارًا أو تكاليف من عنده. أدخل أسعار السوق الفعلية وتكاليف أرضك، وحدّثها عند تغيرها.<br>• تم إدراج إيجار الفدان كبند مستقل ضمن التكاليف، ويُحسب على مساحة الأرض. أضف أي مصاريف أخرى غير مدرجة في خانة «نقل ومصاريف أخرى».</div>'+
   '<button class="profit-reset" type="button" id="resetProfitCalculator">↻ تعديل البيانات وإعادة الحساب</button>';
  out.hidden=false;
  $("resetProfitCalculator").addEventListener("click",()=>{out.hidden=true;out.innerHTML="";$("profitYield").focus();});
